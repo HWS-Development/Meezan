@@ -6,7 +6,7 @@ const exactPages = {
     height: 12229,
     hotspots: [
       { label: "Accueil", action: "home", x: 215, y: 0, w: 255, h: 128 },
-      { label: "Experiences", action: "experiences", x: 1085, y: 22, w: 150, h: 50 },
+      { label: "Experiences", action: "experiences", x: 1015, y: 0, w: 310, h: 190 },
       { label: "Book now", href: "mailto:hello@meezane.ma?subject=Reservation Meezane", x: 1586, y: 24, w: 190, h: 62 },
       { label: "Verifier la disponibilite", href: "mailto:hello@meezane.ma?subject=Disponibilite Meezane", x: 1284, y: 792, w: 292, h: 89 },
       { label: "Explorer les espaces", action: "experiences", x: 1302, y: 8545, w: 285, h: 78 },
@@ -20,7 +20,7 @@ const exactPages = {
     height: 16004,
     hotspots: [
       { label: "Accueil", action: "home", x: 215, y: 0, w: 255, h: 128 },
-      { label: "Experiences", action: "experiences", x: 1085, y: 22, w: 150, h: 50 },
+      { label: "Experiences", action: "experiences", x: 1015, y: 0, w: 310, h: 190 },
       { label: "Book now", href: "mailto:hello@meezane.ma?subject=Reservation Meezane", x: 1586, y: 24, w: 190, h: 62 },
       { label: "Reserver votre sejour", href: "mailto:hello@meezane.ma?subject=Tourisme et sejour Meezane", x: 490, y: 2925, w: 266, h: 70 },
       { label: "Organiser une retraite", href: "mailto:hello@meezane.ma?subject=Retraite bien-etre Meezane", x: 1192, y: 4130, w: 305, h: 70 },
