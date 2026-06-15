@@ -1,7 +1,9 @@
 const exactPages = {
   home: {
     title: "Meezane - L'art de l'equilibre",
-    image: "/assets/images/reference-home-preview.png",
+    image: "/assets/images/illustrator-home.jpg",
+    imageWidth: 4000,
+    imageHeight: 25477,
     width: 1920,
     height: 12229,
     hotspots: [
@@ -15,7 +17,9 @@ const exactPages = {
   },
   experiences: {
     title: "Meezane - Experiences",
-    image: "/assets/images/reference-experiences-preview.png",
+    image: "/assets/images/illustrator-experiences.jpg",
+    imageWidth: 4000,
+    imageHeight: 33342,
     width: 1920,
     height: 16004,
     hotspots: [
@@ -66,8 +70,15 @@ export default function ExactIllustratorPage({ page, onNavigate }) {
       <p className="sr-only">
         Version React basee directement sur l'export Illustrator pour conserver le rendu visuel exact de la maquette.
       </p>
-      <div className="exact-canvas" style={{ aspectRatio: `${config.width} / ${config.height}` }}>
-        <img src={config.image} alt={config.title} className="exact-image" draggable="false" />
+      <div className="exact-canvas">
+        <img
+          src={config.image}
+          alt={config.title}
+          className="exact-image"
+          width={config.imageWidth}
+          height={config.imageHeight}
+          draggable="false"
+        />
         {config.hotspots.map((hotspot) => (
           <Hotspot
             key={`${hotspot.label}-${hotspot.x}-${hotspot.y}`}
