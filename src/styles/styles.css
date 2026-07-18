@@ -16,6 +16,70 @@
   --font-arabic: "AALMAGHRIBI", Georgia, serif;
 }
 
+@font-face {
+  font-family: "Roboto-Light";
+  src: url("/assets/fonts/Roboto-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Roboto-Regular";
+  src: url("/assets/fonts/Roboto-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Roboto-Medium";
+  src: url("/assets/fonts/Roboto-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Roboto-Bold";
+  src: url("/assets/fonts/Roboto-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "BreathingPersonalUseOnly-Reg";
+  src: url("/assets/fonts/BreathingPersonalUseOnly.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Erstoria-Regular";
+  src: url("/assets/fonts/Erstoria.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "AALMAGHRIBI";
+  src: url("/assets/fonts/AALMAGHRIBI_v4.9.6.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "SignPainter-HouseScript";
+  src: url("/assets/fonts/SignPainter.ttc") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -30,7 +94,22 @@
 
 .exact-shell {
   min-height: 100dvh;
-  background: #f6f1e8;
+  background: #fff;
+}
+
+.seo-article {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .exact-canvas {
@@ -39,13 +118,745 @@
   max-width: 1920px;
   margin: 0 auto;
   overflow: hidden;
-  background: #f6f1e8;
+  background: #fff;
+  line-height: 0;
+  container-type: inline-size;
+}
+
+.editable-artboard {
+  position: absolute;
+  inset: 0 auto auto 0;
+  transform-origin: top left;
+}
+
+.editable-background-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: block;
+  max-width: none;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
+}
+
+.illustrator-text-raster-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
 }
 
 .exact-image {
   width: 100%;
   height: auto;
   user-select: none;
+}
+
+.editable-media-layer,
+.editable-exact-overlay-layer,
+.editable-text-layer {
+  position: absolute;
+  display: block;
+}
+
+.editable-media-layer {
+  z-index: 10;
+  max-width: none;
+  object-fit: fill;
+  pointer-events: none;
+  opacity: 1;
+  visibility: visible;
+  user-select: none;
+}
+
+.editable-media-layer.is-backdrop-media {
+  z-index: 0;
+}
+
+.editable-media-layer.is-hero-media {
+  z-index: 2;
+  object-fit: cover;
+}
+
+.editable-media-layer.is-carousel-active {
+  z-index: 29;
+}
+
+.editable-text-layer {
+  z-index: 20;
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  overflow: visible;
+  pointer-events: none;
+  font-kerning: normal;
+  font-synthesis: none;
+  font-variant-ligatures: common-ligatures contextual;
+  font-feature-settings: "kern" 1, "liga" 1, "clig" 1;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.editable-exact-overlay-layer {
+  z-index: 25;
+  max-width: none;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
+}
+
+.editable-text-layer.is-ui-text,
+.editable-text-layer.is-nav-text {
+  font-variant-ligatures: none;
+  font-feature-settings: "kern" 1, "liga" 0, "clig" 0;
+}
+
+.editable-text-layer.is-display-text {
+  text-rendering: optimizeLegibility;
+}
+
+.editable-text-layer.is-blog-article-title {
+  transform: translateY(calc(-0.42cqw)) scaleX(0.92);
+  transform-origin: top left;
+  -webkit-text-stroke: 0.7px currentColor;
+}
+
+.editable-text-layer.is-reservation-price-amount {
+  display: flex;
+  align-items: baseline;
+  gap: calc(0.08cqw);
+  font-family: "Erstoria-Regular", Georgia, serif;
+  line-height: 0.95;
+  white-space: nowrap;
+}
+
+.reservation-price-number {
+  font-size: calc(2.96cqw);
+}
+
+.reservation-price-currency {
+  font-size: calc(1.58cqw);
+  line-height: 1;
+}
+
+.reservation-booking-widget {
+  position: absolute;
+  inset: 0;
+  z-index: 35;
+  color: #55565a;
+  font-family: "Roboto-Regular", Arial, sans-serif;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.reservation-interaction-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 35;
+  pointer-events: none;
+}
+
+.reservation-hit-area {
+  position: absolute;
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  color: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.reservation-hit-area:focus-visible {
+  outline: 2px solid rgba(174, 87, 60, 0.85);
+  outline-offset: 2px;
+  background: rgba(174, 87, 60, 0.08);
+}
+
+.reservation-popover-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 36;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: default;
+  pointer-events: auto;
+}
+
+.reservation-cursor-mask {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  background: #fff;
+  pointer-events: none;
+}
+
+.reservation-live-values {
+  position: absolute;
+  inset: 0;
+  z-index: 37;
+  pointer-events: none;
+}
+
+.reservation-live-card-date,
+.reservation-live-adults,
+.reservation-live-price-total,
+.reservation-live-nightly-rate {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  color: #55565a;
+  background: #fff;
+  font-family: "Roboto-Regular", Arial, sans-serif;
+  font-size: calc(0.72cqw);
+  line-height: 1;
+}
+
+.reservation-live-price-row-mask {
+  position: absolute;
+  display: block;
+  background: #fff;
+}
+
+.reservation-live-price-total {
+  align-items: baseline;
+  gap: calc(0.08cqw);
+  background: transparent;
+  font-family: "Erstoria-Regular", Georgia, serif;
+  white-space: nowrap;
+}
+
+.reservation-live-price {
+  display: inline-flex;
+  font-family: "Erstoria-Regular", Georgia, serif;
+  font-size: calc(2.95cqw);
+  line-height: 0.9;
+}
+
+.reservation-live-price-currency {
+  display: inline-flex;
+  font-family: "Erstoria-Regular", Georgia, serif;
+  font-size: calc(1.35cqw);
+  line-height: 1;
+}
+
+.reservation-live-nightly-rate {
+  align-items: baseline;
+  color: #9c9ca0;
+  background: transparent;
+  font-family: "Erstoria-Regular", Georgia, serif;
+  font-size: calc(0.82cqw);
+}
+
+.reservation-live-adults {
+  justify-content: center;
+  font-family: "Roboto-Medium", Arial, sans-serif;
+}
+
+.reservation-adults-popover {
+  position: absolute;
+  z-index: 38;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  padding: calc(0.35cqw);
+  border: 1px solid #dedede;
+  border-radius: calc(0.45cqw);
+  background: #fff;
+  box-shadow: 0 calc(0.15cqw) calc(0.55cqw) rgba(0, 0, 0, 0.12);
+  pointer-events: auto;
+}
+
+.reservation-adults-popover button {
+  height: calc(1.85cqw);
+  border: 0;
+  color: #b85e42;
+  background: transparent;
+  font-family: "Roboto-Medium", Arial, sans-serif;
+  font-size: calc(1.05cqw);
+  cursor: pointer;
+}
+
+.reservation-adults-popover strong {
+  color: #55565a;
+  font-family: "Roboto-Medium", Arial, sans-serif;
+  font-size: calc(0.82cqw);
+  text-align: center;
+}
+
+.reservation-live-picker {
+  position: absolute;
+  z-index: 37;
+  padding: calc(1.2cqw) calc(1.35cqw);
+  overflow: hidden;
+  color: #55565a;
+  background: #fff;
+  box-shadow: 0 calc(0.15cqw) calc(0.75cqw) rgba(0, 0, 0, 0.12);
+  font-family: "Roboto-Regular", Arial, sans-serif;
+  line-height: 1;
+  pointer-events: auto;
+}
+
+.reservation-live-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: calc(1cqw);
+  margin-bottom: calc(0.95cqw);
+}
+
+.reservation-live-header > div:first-child strong {
+  display: block;
+  margin-bottom: calc(0.45cqw);
+  font-family: "Roboto-Medium", Arial, sans-serif;
+  font-size: calc(0.92cqw);
+}
+
+.reservation-live-header > div:first-child span {
+  font-size: calc(0.62cqw);
+}
+
+.reservation-live-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: calc(14.5cqw);
+  overflow: hidden;
+  border: 1px solid #dedede;
+  border-radius: calc(0.42cqw);
+}
+
+.reservation-live-fields button {
+  min-width: 0;
+  padding: calc(0.48cqw) calc(0.82cqw);
+  border: 0;
+  color: #55565a;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+}
+
+.reservation-live-fields button + button {
+  border-left: 1px solid #dedede;
+}
+
+.reservation-live-fields button.is-active {
+  box-shadow: inset 0 0 0 2px rgba(174, 87, 60, 0.18);
+}
+
+.reservation-live-fields strong,
+.reservation-live-fields span {
+  display: block;
+  font-size: calc(0.66cqw);
+  line-height: 1.2;
+}
+
+.reservation-live-fields strong {
+  margin-bottom: calc(0.18cqw);
+  font-family: "Roboto-Medium", Arial, sans-serif;
+}
+
+.reservation-live-close {
+  width: calc(1.35cqw);
+  height: calc(1.35cqw);
+  border: 0;
+  color: #9d9d9d;
+  background: transparent;
+  font-size: calc(1.2cqw);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.reservation-live-nav {
+  position: absolute;
+  left: calc(1.15cqw);
+  right: calc(1.15cqw);
+  top: calc(6.55cqw);
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.reservation-live-nav button {
+  width: calc(1.4cqw);
+  height: calc(1.4cqw);
+  border: 0;
+  color: #9d9d9d;
+  background: transparent;
+  font-size: calc(1.25cqw);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.reservation-live-months {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(1.5cqw);
+}
+
+.reservation-live-month h3 {
+  margin: 0 0 calc(0.9cqw);
+  font-family: "Roboto-Medium", Arial, sans-serif;
+  font-size: calc(0.86cqw);
+  text-align: center;
+}
+
+.reservation-live-weekdays,
+.reservation-live-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  align-items: center;
+  text-align: center;
+}
+
+.reservation-live-weekdays {
+  margin-bottom: calc(0.52cqw);
+  font-size: calc(0.62cqw);
+}
+
+.reservation-live-grid {
+  row-gap: calc(0.34cqw);
+}
+
+.reservation-live-day,
+.reservation-live-grid span {
+  display: grid;
+  place-items: center;
+  height: calc(1.45cqw);
+  border: 0;
+  border-radius: 999px;
+  font-family: "Roboto-Medium", Arial, sans-serif;
+  font-size: calc(0.62cqw);
+}
+
+.reservation-live-day {
+  color: #44484c;
+  background: transparent;
+  cursor: pointer;
+}
+
+.reservation-live-day.is-in-range {
+  border-radius: 0;
+  background: #ededed;
+}
+
+.reservation-live-day.is-selected {
+  color: #fff;
+  background: #b96045;
+}
+
+.reservation-live-day.is-disabled:not(.is-selected) {
+  color: #b9b9b9;
+  cursor: not-allowed;
+}
+
+.reservation-live-day:focus-visible,
+.reservation-live-fields button:focus-visible,
+.reservation-live-close:focus-visible,
+.reservation-live-nav button:focus-visible,
+.reservation-adults-popover button:focus-visible {
+  outline: 2px solid #ae573c;
+  outline-offset: 2px;
+}
+
+.reservation-price-card,
+.reservation-calendar-panel {
+  position: absolute;
+  background: #fff;
+  pointer-events: auto;
+}
+
+.reservation-price-card {
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  padding: calc(2.55cqw) calc(2.25cqw);
+}
+
+.reservation-card-eyebrow {
+  margin: 0 0 calc(1.65cqw);
+  color: #c9c9c9;
+  font-family: "Roboto-Medium", Arial, sans-serif;
+  font-size: calc(0.96cqw);
+  line-height: 1;
+}
+
+.reservation-card-price {
+  display: flex;
+  align-items: baseline;
+  gap: calc(0.28cqw);
+  margin-bottom: calc(2.25cqw);
+  color: #55565a;
+  white-space: nowrap;
+}
+
+.reservation-card-price span {
+  font-family: "Erstoria-Regular", Georgia, serif;
+  font-size: calc(2.95cqw);
+  line-height: 0.9;
+}
+
+.reservation-card-price small {
+  font-family: "Erstoria-Regular", Georgia, serif;
+  font-size: calc(1.58cqw);
+}
+
+.reservation-card-price em {
+  margin-left: calc(0.5cqw);
+  color: #9c9ca0;
+  font-family: "Erstoria-Regular", Georgia, serif;
+  font-size: calc(1.28cqw);
+  font-style: normal;
+}
+
+.reservation-card-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: calc(14.3cqw);
+  overflow: hidden;
+  border: 1px solid #dedede;
+  border-radius: calc(0.62cqw);
+}
+
+.reservation-card-fields button,
+.reservation-calendar-fields button {
+  min-width: 0;
+  padding: calc(0.72cqw) calc(1.03cqw);
+  border: 0;
+  color: #5d5d60;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+}
+
+.reservation-card-fields button + button,
+.reservation-calendar-fields button + button {
+  border-left: 1px solid #dedede;
+}
+
+.reservation-card-fields button.is-active,
+.reservation-calendar-fields button.is-active {
+  box-shadow: inset 0 0 0 2px rgba(174, 87, 60, 0.22);
+}
+
+.reservation-card-fields strong,
+.reservation-calendar-fields strong {
+  display: block;
+  margin-bottom: calc(0.18cqw);
+  font-family: "Roboto-Medium", Arial, sans-serif;
+  font-size: calc(0.75cqw);
+  line-height: 1.15;
+}
+
+.reservation-card-fields span,
+.reservation-calendar-fields span {
+  display: block;
+  font-size: calc(0.75cqw);
+  line-height: 1.1;
+}
+
+.reservation-adults-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  width: calc(14.3cqw);
+  min-height: calc(2.6cqw);
+  margin-bottom: calc(1.42cqw);
+  padding: 0 calc(0.95cqw);
+  border: 1px solid #dedede;
+  border-top: 0;
+  border-radius: 0 0 calc(0.62cqw) calc(0.62cqw);
+  color: #58585b;
+  font-family: "Roboto-Medium", Arial, sans-serif;
+  font-size: calc(0.75cqw);
+}
+
+.reservation-adults-value {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: calc(0.58cqw);
+  min-width: calc(3.2cqw);
+  height: calc(2cqw);
+  padding: 0;
+  border: 0;
+  color: #5d5d60;
+  background: transparent;
+  cursor: pointer;
+}
+
+.reservation-adults-value strong {
+  min-width: calc(0.8cqw);
+  text-align: center;
+}
+
+.reservation-adults-value span {
+  color: #b85e42;
+  font-family: "Roboto-Medium", Arial, sans-serif;
+  font-size: calc(1.15cqw);
+  line-height: 0.6;
+}
+
+.reservation-book-button {
+  display: grid;
+  place-items: center;
+  width: calc(13.35cqw);
+  min-height: calc(3.0cqw);
+  margin-top: calc(1.2cqw);
+  color: #fff;
+  background: #b65b3d;
+  font-family: "Erstoria-Regular", Georgia, serif;
+  font-size: calc(1.25cqw);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.reservation-calendar-panel {
+  z-index: 1;
+  padding: calc(1.65cqw) calc(1.75cqw) calc(1.45cqw);
+  box-shadow: 0 0 calc(0.8cqw) rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.reservation-calendar-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: calc(1.4cqw);
+  margin-bottom: calc(1.25cqw);
+}
+
+.reservation-calendar-header > div:first-child strong {
+  display: block;
+  margin-bottom: calc(0.5cqw);
+  color: #57575a;
+  font-family: "Roboto-Medium", Arial, sans-serif;
+  font-size: calc(1.05cqw);
+}
+
+.reservation-calendar-header > div:first-child span {
+  color: #656568;
+  font-family: "Roboto-Regular", Arial, sans-serif;
+  font-size: calc(0.72cqw);
+}
+
+.reservation-calendar-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: calc(16cqw);
+  overflow: hidden;
+  border: 1px solid #dedede;
+  border-radius: calc(0.5cqw);
+}
+
+.reservation-calendar-nav {
+  position: absolute;
+  left: calc(1.7cqw);
+  right: calc(1.7cqw);
+  top: calc(7.15cqw);
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.reservation-calendar-nav button {
+  width: calc(1.4cqw);
+  height: calc(1.4cqw);
+  border: 0;
+  color: #9a9a9d;
+  background: transparent;
+  font-size: calc(1.35cqw);
+  line-height: 1;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.reservation-calendar-months {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(1.82cqw);
+}
+
+.reservation-calendar-month h3 {
+  margin: 0 0 calc(1.05cqw);
+  color: #5f5f62;
+  font-family: "Roboto-Medium", Arial, sans-serif;
+  font-size: calc(0.96cqw);
+  line-height: 1.1;
+  text-align: center;
+}
+
+.reservation-calendar-weekdays,
+.reservation-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  align-items: center;
+  text-align: center;
+}
+
+.reservation-calendar-weekdays {
+  margin-bottom: calc(0.55cqw);
+  color: #68686b;
+  font-family: "Roboto-Regular", Arial, sans-serif;
+  font-size: calc(0.68cqw);
+}
+
+.reservation-calendar-grid {
+  row-gap: calc(0.42cqw);
+}
+
+.reservation-calendar-day,
+.reservation-calendar-blank {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  height: calc(1.65cqw);
+  border: 0;
+  border-radius: 999px;
+  font-family: "Roboto-Medium", Arial, sans-serif;
+  font-size: calc(0.68cqw);
+  line-height: 1;
+}
+
+.reservation-calendar-day {
+  color: #5a5a5d;
+  background: transparent;
+  cursor: pointer;
+}
+
+.reservation-calendar-day.is-in-range {
+  border-radius: 0;
+  background: #ededed;
+}
+
+.reservation-calendar-day.is-selected {
+  color: #fff;
+  background: #b96045;
+}
+
+.reservation-calendar-day:focus-visible,
+.reservation-card-fields button:focus-visible,
+.reservation-calendar-fields button:focus-visible,
+.reservation-adults-row button:focus-visible,
+.reservation-calendar-nav button:focus-visible,
+.reservation-book-button:focus-visible {
+  outline: 2px solid #ae573c;
+  outline-offset: 2px;
+}
+
+.editable-path-text {
+  overflow: visible;
 }
 
 .exact-hotspot {
@@ -55,6 +866,108 @@
   border: 0;
   background: transparent;
   cursor: pointer;
+  z-index: 30;
+  touch-action: manipulation;
+}
+
+.exact-header-overlay {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 45;
+  height: calc(9.84375cqw);
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.exact-canonical-header {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
+}
+
+.exact-header-logo {
+  position: absolute;
+  left: calc(7.55cqw);
+  top: calc(1.3cqw);
+  width: calc(17.7cqw);
+  height: calc(5.75cqw);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.exact-header-nav {
+  position: absolute;
+  left: 0;
+  top: calc(4.45cqw);
+  width: 100%;
+  height: calc(2.2cqw);
+  color: #ae573c;
+  font-family: "Roboto-Medium", Arial, sans-serif;
+  font-size: calc(0.72cqw);
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.exact-header-link {
+  position: absolute;
+  top: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: calc(2.2cqw);
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  text-transform: uppercase;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.exact-header-link.is-active {
+  color: #ae573c;
+}
+
+.exact-header-link,
+.exact-header-link.is-active,
+.exact-header-book {
+  color: transparent;
+}
+
+.exact-header-book {
+  position: absolute;
+  left: calc(81.55cqw);
+  top: calc(3.07cqw);
+  width: calc(10.42cqw);
+  height: calc(3.75cqw);
+  display: grid;
+  place-items: center;
+  border: 0;
+  color: #fff;
+  background: transparent;
+  font-family: "Roboto-Medium", Arial, sans-serif;
+  font-size: calc(1.05cqw);
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.exact-header-book {
+  color: transparent;
 }
 
 .exact-hotspot:focus-visible {
@@ -63,12 +976,38 @@
   background: rgba(174, 87, 60, 0.12);
 }
 
+.exact-carousel-hotspot:focus,
+.exact-arrow-hotspot:focus,
+.exact-carousel-hotspot:focus-visible,
+.exact-arrow-hotspot:focus-visible {
+  outline: 0;
+  background: transparent;
+}
+
+.exact-carousel-hotspot.is-carousel-active,
+.exact-arrow-hotspot.is-carousel-active {
+  display: block;
+  background: transparent;
+}
+
+.exact-arrow-sprite {
+  position: absolute;
+  z-index: 31;
+  display: block;
+  max-width: none;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
+}
+
 * {
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {

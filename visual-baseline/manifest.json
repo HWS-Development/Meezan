@@ -1,0 +1,44 @@
+{
+    "schemaVersion":  1,
+    "approvedAt":  "2026-07-18T10:49:05.4457003Z",
+    "approval":  "Explicit developer approval of Illustrator and browser golden images",
+    "siteContentSha256":  "85d916816f31618c2951a33bddfb7cf98194042ccfbd3bd34ec8c05feebc33ac",
+    "pages":  {
+                  "home":  {
+                               "width":  1920,
+                               "height":  12229,
+                               "illustratorSha256":  "b81faf14fd9104f3ecb709f6bb0af2758f40914bc536944ff162c8b490d7c6a2",
+                               "browserSha256":  "1718003ef566a87bdb6bb53b7c64a1356bdeda5745c7edf21a56a3378576a6b2"
+                           },
+                  "experiences":  {
+                                      "width":  1920,
+                                      "height":  16004,
+                                      "illustratorSha256":  "81d0bcb7407fcbff45d505b2e39a28128ea3473b6600fc16f6afe06e27a95e0d",
+                                      "browserSha256":  "13f7c2c0b45dfe002278599583e51b07f2230b1bc03e47c4839d5efe89b15aeb"
+                                  },
+                  "reservation":  {
+                                      "width":  1920,
+                                      "height":  4074,
+                                      "illustratorSha256":  "3497369c174cc65d6e77ad343b436c33f6bcda33a4bf1ac6fed2794f9fc83236",
+                                      "browserSha256":  "91731798fbaf299cec35c7e3d749878df3a15ca3da4b4a62d691cee74d0fc723"
+                                  },
+                  "blog":  {
+                               "width":  1920,
+                               "height":  9235,
+                               "illustratorSha256":  "2bcd279ddc0cedee7f7eaa4e708b476a098948f52e469c515ce32615c4dc6afb",
+                               "browserSha256":  "eb64e02d330d3bd0656847884bb56b715badf60b5f8062cfafe0895f51cdd2b8"
+                           },
+                  "chambres":  {
+                                   "width":  1920,
+                                   "height":  11568,
+                                   "illustratorSha256":  "e480ada829eea99aededd6cd83fd895e8257e903427590b4d318d238d7e31920",
+                                   "browserSha256":  "abfac4ff19b5b6da6d95e34d1bd98671e0f721f5bd01287f3ef0092172f2095f"
+                               },
+                  "galerie":  {
+                                  "width":  1920,
+                                  "height":  6098,
+                                  "illustratorSha256":  "4f90444d9faedb3151de850982db98032a120df0033ffd24d6333ab2332ad185",
+                                  "browserSha256":  "2e8fce401775ac58d2e07ef0c663b23b8309201d753b42ab56d9a1ef3c2d87d3"
+                              }
+              }
+}
