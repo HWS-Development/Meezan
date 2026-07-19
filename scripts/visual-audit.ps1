@@ -64,7 +64,16 @@ function To-Metrics($comparison) {
   }
 }
 
-$contentHash = (Get-FileHash -LiteralPath $contentPath -Algorithm SHA256).Hash.ToLowerInvariant()
+$contentText = [System.IO.File]::ReadAllText($contentPath)
+$normalizedContent = $contentText.Replace("`r`n", "`n").Replace("`r", "`n")
+$contentBytes = [System.Text.UTF8Encoding]::new($false).GetBytes($normalizedContent)
+$contentHasher = [System.Security.Cryptography.SHA256]::Create()
+try {
+  $contentHash = ([System.BitConverter]::ToString($contentHasher.ComputeHash($contentBytes))).Replace("-", "").ToLowerInvariant()
+}
+finally {
+  $contentHasher.Dispose()
+}
 $siteContent = Get-Content -LiteralPath $contentPath -Raw | ConvertFrom-Json
 if ($Candidate) {
   $candidatePages = [ordered]@{}
