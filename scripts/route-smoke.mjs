@@ -160,7 +160,12 @@ async function main() {
       const ready = await evaluate(`Promise.race([
         (async () => {
           await document.fonts.ready;
-          await Promise.all([...document.images].map(async (image) => {
+          const images = [...document.images].filter((image) => {
+            if (image.loading !== 'lazy') return true;
+            const rect = image.getBoundingClientRect();
+            return rect.bottom >= -1000 && rect.top <= window.innerHeight + 1000;
+          });
+          await Promise.all(images.map(async (image) => {
             if (!image.complete) {
               await new Promise((resolve, reject) => {
                 image.addEventListener('load', resolve, { once: true });
@@ -171,7 +176,7 @@ async function main() {
           }));
           return {
             ok: true,
-            broken: [...document.images].filter((image) => image.complete && image.naturalWidth === 0).map((image) => image.currentSrc || image.src),
+            broken: images.filter((image) => image.complete && image.naturalWidth === 0).map((image) => image.currentSrc || image.src),
           };
         })(),
         new Promise((resolve) => setTimeout(() => resolve({ ok: false, broken: [], reason: 'asset readiness timeout' }), 15000)),
@@ -180,12 +185,38 @@ async function main() {
       if (ready.broken.length) throw new Error(`${pathname}: broken images ${ready.broken.join(", ")}`);
     }
 
+    async function waitForSpaPath(expectedPath) {
+      const expectedPage = expectedPath === "/" ? "home" : expectedPath.replace(/^\//, "");
+      const ready = await evaluate(`new Promise((resolve) => {
+        const deadline = Date.now() + 30000;
+        const check = () => {
+          const app = document.querySelector('.site-app');
+          const state = {
+            path: window.location.pathname,
+            page: app?.dataset.activePage,
+            busy: app?.getAttribute('aria-busy'),
+          };
+          if (state.path === ${JSON.stringify(expectedPath)} && state.page === ${JSON.stringify(expectedPage)} && state.busy !== 'true') {
+            resolve({ ok: true, ...state });
+            return;
+          }
+          if (Date.now() >= deadline) {
+            resolve({ ok: false, ...state });
+            return;
+          }
+          setTimeout(check, 50);
+        };
+        check();
+      })`);
+      if (!ready.ok) throw new Error(`SPA navigation timeout for ${expectedPath}: ${JSON.stringify(ready)}`);
+      return ready;
+    }
+
     async function clickAndAssert(selectorExpression, expectedPath) {
       await go("/");
       const clicked = await evaluate(`(() => { const el = ${selectorExpression}; if (!el) return false; el.click(); return true; })()`);
       if (!clicked) throw new Error(`Missing clickable target for ${expectedPath}`);
-      await wait(500);
-      const path = await evaluate("window.location.pathname");
+      const { path } = await waitForSpaPath(expectedPath);
       if (path !== expectedPath) throw new Error(`Expected ${expectedPath}, got ${path}`);
       return { expectedPath, path };
     }
@@ -200,8 +231,7 @@ async function main() {
         return result;
       })()`);
       if (!target) throw new Error(`Missing clickable target at ${x},${y} on ${fromPath}`);
-      await wait(500);
-      const path = await evaluate("window.location.pathname");
+      const { path } = await waitForSpaPath(expectedPath);
       if (path !== expectedPath) throw new Error(`Click at ${x},${y} on ${fromPath} hit ${target.label || target.tag}: expected ${expectedPath}, got ${path}`);
       return { expectedPath: `${fromPath} @ ${x},${y}`, path };
     }
@@ -224,7 +254,7 @@ async function main() {
       return true;
     })()`);
     if (!blogClicked) throw new Error("Missing Blog link for SPA regression");
-    await wait(500);
+    await waitForSpaPath("/blog");
     const spaBlog = await evaluate(`(() => {
       const image = document.querySelector('.illustrator-text-raster-layer');
       const canvas = document.querySelector('.exact-canvas');
@@ -502,7 +532,7 @@ async function main() {
             canvasHeight: canvasRect?.height || 0,
             headerLeft: headerRect?.left || 0,
             headerRight: headerRect?.right || 0,
-            brokenImages: [...document.images].filter((image) => image.complete && image.naturalWidth === 0).length,
+            brokenImages: [...document.images].filter((image) => image.loading !== 'lazy' && image.complete && image.naturalWidth === 0).length,
           };
         })()`);
         if (layout.scrollWidth > layout.clientWidth + 1) throw new Error(`${viewport.label} ${route}: horizontal overflow ${layout.scrollWidth}/${layout.clientWidth}`);

@@ -148,7 +148,7 @@ try {
       $output = Join-Path $rendered "$page.png"
       if (Test-Path -LiteralPath $output) { Remove-Item -LiteralPath $output -Force }
 
-      $url = "http://127.0.0.1:$previewPort" + $routes[$page]
+      $url = "http://127.0.0.1:$previewPort" + $routes[$page] + "?visual-audit=1"
       & $chrome "--headless=new" "--disable-gpu" "--disable-background-networking" "--disable-extensions" "--disable-sync" "--no-first-run" "--hide-scrollbars" "--run-all-compositor-stages-before-draw" "--virtual-time-budget=8000" "--force-device-scale-factor=1" "--user-data-dir=$chromeProfile" "--window-size=$($approved.width),$($approved.height)" "--screenshot=$output" $url | Out-Null
       if ($LASTEXITCODE -ne 0) { throw "Chrome screenshot failed for $page with exit code $LASTEXITCODE." }
       if (!(Test-Path -LiteralPath $output)) { throw "Chrome did not create a fresh screenshot for $page." }

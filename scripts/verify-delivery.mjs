@@ -1,5 +1,7 @@
+import { execFile } from "node:child_process";
 import { readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
+import { promisify } from "node:util";
 import siteContent from "../src/data/siteContent.json" with { type: "json" };
 import {
   pageConfigs,
@@ -27,6 +29,7 @@ import {
 const failures = [];
 const assert = (condition, message) => { if (!condition) failures.push(message); };
 const sameValues = (left, right) => JSON.stringify([...left].sort()) === JSON.stringify([...right].sort());
+const execFileAsync = promisify(execFile);
 
 assert(sameValues(pageKeys, configuredPageKeys), "Configured page keys differ from the delivery page set.");
 assert(sameValues(pageKeys, Object.keys(pageConfigs)), "pageConfigs does not define exactly six delivery pages.");
@@ -117,6 +120,17 @@ try {
 const currentAssets = await collectRuntimeAssets();
 const lockedAssets = (lock.assets || []).map((item) => item.path);
 assert(sameValues(currentAssets, lockedAssets), "Runtime asset inventory changed without explicit approval.");
+
+try {
+  const { stdout } = await execFileAsync("git", ["ls-files", "-z", "--", "public/assets"], { cwd: root, encoding: "utf8" });
+  const trackedAssets = new Set(stdout.split("\0").filter(Boolean));
+  for (const assetPath of currentAssets) {
+    assert(trackedAssets.has(`public${assetPath}`), `${assetPath}: runtime asset is not tracked by Git and will be missing after deployment.`);
+  }
+} catch (error) {
+  failures.push(`Cannot verify Git-tracked runtime assets: ${error.message}`);
+}
+
 const lockByPath = new Map((lock.assets || []).map((item) => [item.path, item]));
 for (const assetPath of currentAssets) {
   try {

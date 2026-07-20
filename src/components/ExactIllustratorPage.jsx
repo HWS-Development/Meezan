@@ -36,6 +36,14 @@ function cqw(value, artboardWidth) {
   return `calc(${(Number(value || 0) / Number(artboardWidth || 1920)) * 100}cqw)`;
 }
 
+function pageImageLoading(artboard) {
+  if (new URLSearchParams(window.location.search).has("visual-audit")) return "eager";
+  const artboardWidth = Number(artboard?.width || 1920);
+  const renderedWidth = Math.min(window.innerWidth, artboardWidth);
+  const renderedHeight = Number(artboard?.height || 0) * (renderedWidth / artboardWidth);
+  return window.innerHeight + 1 >= renderedHeight ? "eager" : "lazy";
+}
+
 function mediaSrc(item, fallbackSrc = item.src) {
   const replacement = String(item.replacementFile || "").trim().replace(/\\/g, "/");
   if (replacement.startsWith("/")) return replacement;
@@ -166,7 +174,7 @@ function isHeaderText(item) {
   return /book now|farmhouse|la ferme|nos chambres|dar errouh|gall[ée]rie|gallerie|galerie|experiences|expériences|blog|contact|reservation/i.test(text);
 }
 
-function HeaderOverlay({ page, onNavigate }) {
+function HeaderOverlay({ page, onNavigate, onPrefetch }) {
   return (
     <div className="exact-header-overlay" aria-label="Navigation principale">
       <img
@@ -175,10 +183,11 @@ function HeaderOverlay({ page, onNavigate }) {
         alt=""
         width="1920"
         height="189"
+        loading="eager"
         aria-hidden="true"
         draggable="false"
       />
-      <button className="exact-header-logo" type="button" aria-label="Retour a l'accueil" onClick={() => onNavigate("home")} />
+      <button className="exact-header-logo" type="button" aria-label="Retour a l'accueil" onPointerEnter={() => onPrefetch("home")} onFocus={() => onPrefetch("home")} onClick={() => onNavigate("home")} />
       <nav className="exact-header-nav">
         {headerNavItems.map((item) => item.href ? (
           <a key={item.label} className="exact-header-link" href={item.href} style={{ left: `${item.left}cqw`, width: `${item.width}cqw` }}>{item.label}</a>
@@ -188,13 +197,15 @@ function HeaderOverlay({ page, onNavigate }) {
             type="button"
             className={`exact-header-link${page === item.action ? " is-active" : ""}`}
             style={{ left: `${item.left}cqw`, width: `${item.width}cqw` }}
+            onPointerEnter={() => onPrefetch(item.action)}
+            onFocus={() => onPrefetch(item.action)}
             onClick={() => onNavigate(item.action)}
           >
             {item.label}
           </button>
         ))}
       </nav>
-      <button className="exact-header-book" type="button" onClick={() => onNavigate(headerBookAction.action)}>{headerBookAction.label}</button>
+      <button className="exact-header-book" type="button" onPointerEnter={() => onPrefetch(headerBookAction.action)} onFocus={() => onPrefetch(headerBookAction.action)} onClick={() => onNavigate(headerBookAction.action)}>{headerBookAction.label}</button>
     </div>
   );
 }
@@ -312,6 +323,8 @@ function BackgroundLayer({ src, title, artboard }) {
       className="editable-background-layer"
       width={artboard.width}
       height={artboard.height}
+      loading="eager"
+      fetchPriority="high"
       draggable="false"
     />
   );
@@ -327,6 +340,7 @@ function IllustratorTextLayer({ page, artboard }) {
       className="illustrator-text-raster-layer"
       width={artboard.width}
       height={artboard.height}
+      loading="eager"
       draggable="false"
     />
   );
@@ -366,6 +380,7 @@ function MediaLayer({ item, artboard, page, carouselIndexes }) {
   const src = carouselSources?.[carouselIndex] || defaultSrc;
   const className = `${mediaClassName(item, artboard)}${carouselSources && carouselIndex ? " is-carousel-active" : ""}`;
   const bounds = override || item.bounds;
+  const loading = pageImageLoading(artboard);
 
   return (
     <img
@@ -382,6 +397,8 @@ function MediaLayer({ item, artboard, page, carouselIndexes }) {
       }}
       width={bounds.width}
       height={bounds.height}
+      loading={loading}
+      decoding={loading === "lazy" ? "async" : "auto"}
       aria-hidden="true"
       draggable="false"
     />
@@ -389,6 +406,8 @@ function MediaLayer({ item, artboard, page, carouselIndexes }) {
 }
 
 function ExactOverlayLayer({ overlay, artboard }) {
+  const loading = pageImageLoading(artboard);
+
   return (
     <img
       className="editable-exact-overlay-layer"
@@ -402,6 +421,8 @@ function ExactOverlayLayer({ overlay, artboard }) {
       }}
       width={overlay.width}
       height={overlay.height}
+      loading={loading}
+      decoding={loading === "lazy" ? "async" : "auto"}
       aria-hidden="true"
       draggable="false"
     />
@@ -671,7 +692,7 @@ function TextLayer({ item, artboard, page }) {
   );
 }
 
-function Hotspot({ hotspot, pageWidth, pageHeight, onNavigate }) {
+function Hotspot({ hotspot, pageWidth, pageHeight, onNavigate, onPrefetch }) {
   const style = {
     left: `${(hotspot.x / pageWidth) * 100}%`,
     top: `${(hotspot.y / pageHeight) * 100}%`,
@@ -689,6 +710,8 @@ function Hotspot({ hotspot, pageWidth, pageHeight, onNavigate }) {
       type="button"
       style={style}
       aria-label={hotspot.label}
+      onPointerEnter={() => onPrefetch(hotspot.action)}
+      onFocus={() => onPrefetch(hotspot.action)}
       onClick={() => onNavigate(hotspot.action)}
     />
   );
@@ -698,7 +721,7 @@ function textActionFor(page, item) {
   return textActions[page]?.[item.id] || null;
 }
 
-function TextActionLayer({ page, item, artboard, onNavigate }) {
+function TextActionLayer({ page, item, artboard, onNavigate, onPrefetch }) {
   if (isHeaderText(item)) return null;
   const action = textActionFor(page, item);
   if (!action) return null;
@@ -718,7 +741,7 @@ function TextActionLayer({ page, item, artboard, onNavigate }) {
   const label = cleanText(item.content);
 
   if (action.href) return <a className="exact-hotspot exact-text-action" href={action.href} style={style} aria-label={label} />;
-  return <button className="exact-hotspot exact-text-action" type="button" style={style} aria-label={label} onClick={() => onNavigate(action.action)} />;
+  return <button className="exact-hotspot exact-text-action" type="button" style={style} aria-label={label} onPointerEnter={() => onPrefetch(action.action)} onFocus={() => onPrefetch(action.action)} onClick={() => onNavigate(action.action)} />;
 }
 
 function carouselSourcesFor(page, item, currentSrc) {
@@ -818,7 +841,7 @@ function CustomArrowHotspots({ page, artboard, carouselIndexes, onCarouselStep }
   });
 }
 
-export default function ExactIllustratorPage({ page, onNavigate }) {
+export default function ExactIllustratorPage({ page, onNavigate, onPrefetch }) {
   const [carouselIndexes, setCarouselIndexes] = useState({});
   const fallback = getPageConfig(page);
 
@@ -870,7 +893,7 @@ export default function ExactIllustratorPage({ page, onNavigate }) {
       >
         <BackgroundLayer src={background} title={fallback.title} artboard={artboard} />
         {mediaItems.map((item) => (
-          <MediaLayer key={item.id} item={item} artboard={artboard} page={page} carouselIndexes={carouselIndexes} />
+          <MediaLayer key={`${page}:${item.id}`} item={item} artboard={artboard} page={page} carouselIndexes={carouselIndexes} />
         ))}
         <IllustratorTextLayer page={page} artboard={artboard} />
         {(exactOverlays[page] || []).map((overlay) => (
@@ -878,11 +901,11 @@ export default function ExactIllustratorPage({ page, onNavigate }) {
         ))}
         {page === "reservation" ? <ReservationBookingWidget artboard={artboard} /> : null}
         {textFrames.map((item) => (
-          <TextActionLayer key={`action-${item.id}`} page={page} item={item} artboard={artboard} onNavigate={onNavigate} />
+          <TextActionLayer key={`action-${item.id}`} page={page} item={item} artboard={artboard} onNavigate={onNavigate} onPrefetch={onPrefetch} />
         ))}
         <CarouselHitZones page={page} mediaItems={mediaItems} artboard={artboard} carouselIndexes={carouselIndexes} onCarouselStep={stepCarousel} />
         <CustomArrowHotspots page={page} artboard={artboard} carouselIndexes={carouselIndexes} onCarouselStep={stepCarousel} />
-        <HeaderOverlay page={page} onNavigate={onNavigate} />
+        <HeaderOverlay page={page} onNavigate={onNavigate} onPrefetch={onPrefetch} />
         {fallback.hotspots.map((hotspot) => (
           <Hotspot
             key={`${hotspot.label}-${hotspot.x}-${hotspot.y}`}
@@ -890,6 +913,7 @@ export default function ExactIllustratorPage({ page, onNavigate }) {
             pageWidth={artboard.width}
             pageHeight={artboard.height}
             onNavigate={onNavigate}
+            onPrefetch={onPrefetch}
           />
         ))}
       </div>
