@@ -153,16 +153,6 @@ export default function App() {
   return (
     <div className="site-app" data-active-page={page} aria-busy={isNavigating}>
       <ExactIllustratorPage key={page} page={page} onNavigate={navigate} onPrefetch={prefetch} />
-      <div
-        className={`route-loading-overlay${isNavigating ? " is-visible" : ""}`}
-        role="status"
-        aria-live="polite"
-        aria-hidden={!isNavigating}
-      >
-        <span className="route-loading-wordmark">Meezane</span>
-        <span className="route-loading-label">Chargement de la page</span>
-        <span className="route-loading-bar" aria-hidden="true" />
-      </div>
     </div>
   );
 }
