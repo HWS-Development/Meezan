@@ -16,6 +16,10 @@
     "social:generate": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/generate-social-assets.ps1",
     "content:template": "node scripts/generate-editable-content.mjs",
     "illustrator:assets": "node scripts/build-illustrator-assets.mjs",
+    "illustrator:manifest": "node scripts/sync-illustrator-manifest.mjs",
+    "illustrator:sync": "npm run illustrator:text:promote && npm run illustrator:text:sync && npm run illustrator:manifest",
+    "illustrator:text:sync": "node scripts/sync-illustrator-text-metrics.mjs",
+    "illustrator:text:promote": "node scripts/promote-illustrator-text-vectors.mjs",
     "illustrator:export": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/export-illustrator-source.ps1",
     "visual:reference": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/export-visual-reference.ps1",
     "visual:reference:promote": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/export-visual-reference.ps1 -PromoteExactCrops",
@@ -25,9 +29,10 @@
     "visual:approve": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/approve-visual-baseline.ps1 -Confirm APPROVE",
     "assets:approve": "node scripts/approve-runtime-assets.mjs --approve",
     "verify:assets": "node scripts/verify-delivery.mjs",
+    "verify:provenance": "node scripts/verify-delivery.mjs --provenance",
     "route:smoke": "node scripts/route-smoke.mjs",
     "test:delivery": "npm run route:smoke && npm run visual:audit",
-    "delivery:strict": "npm run verify:assets && npm run build:strict && npm run test:delivery"
+    "delivery:strict": "npm run verify:provenance && npm run build:strict && npm run test:delivery"
   },
   "dependencies": {
     "@vitejs/plugin-react": "6.0.2",

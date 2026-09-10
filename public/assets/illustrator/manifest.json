@@ -1,35 +1,39 @@
 {
-  "schemaVersion": 1,
-  "generatedAt": "2026-07-17T11:17:33.210Z",
-  "geometryAuthority": "SVG exported directly by Adobe Illustrator with outlined text and coordinatePrecision=6; live text PNGs preserve Illustrator rasterization",
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-09T21:57:50.000Z",
+  "illustratorVersion": "30.8.1",
+  "geometryAuthority": "Text SVGs exported directly by Adobe Illustrator with all text converted to outlined paths.",
   "pages": {
     "home": {
       "page": "home",
-      "source": "C:\\Users\\adnan\\Downloads\\Meezan\\Meezan Website\\Meezan Website.ai",
-      "sourceSha256": "3741bbe55ffe675e2e83bdd674ca45da081639922a73a43ae62f5fdd7a2574f2",
-      "sourceModifiedAt": "2026-06-15T13:27:50.971Z",
+      "sourceFile": "Meezan Website.ai",
+      "sourceSha256": "af383e24b3d253ca1a8efa84fb0059d5e0c426bdb86c8ef92de8b703b13ca2fe",
+      "sourceModifiedAt": "2026-09-09T15:56:30.000Z",
       "artboard": {
         "width": 1920,
         "height": 12229
       },
-      "objectCount": 20516,
+      "auditSha256": "ad72b2dc216412cf7109ffebddeadf58d18f06157d77284b810db556d0971d4a",
       "objectCountsByType": {
-        "PathItem": 15564,
-        "GroupItem": 4245,
-        "CompoundPathItem": 650,
-        "TextFrame": 45,
+        "TextFrame": 85,
+        "PlacedItem": 10,
         "RasterItem": 12
       },
       "fonts": [
         {
           "name": "AALMAGHRIBI",
           "family": "AALMAGHRIBI",
-          "style": ""
+          "style": "Medium"
         },
         {
           "name": "BreathingPersonalUseOnly-Reg",
-          "family": "BreathingPersonalUseOnly Reg",
-          "style": "Reg"
+          "family": "Breathing Personal Use Only",
+          "style": "Regular"
+        },
+        {
+          "name": "Erstoria-Regular",
+          "family": "Erstoria",
+          "style": "Regular"
         },
         {
           "name": "Roboto-Bold",
@@ -53,101 +57,49 @@
         },
         {
           "name": "SignPainter-HouseScript",
-          "family": "SignPainter HouseScript",
+          "family": "SignPainter",
           "style": "HouseScript"
         }
       ],
-      "spec": "/assets/illustrator-spec/home.json",
-      "svg": "/assets/illustrator/home-outline.svg",
-      "svgDetails": {
-        "viewBox": "0 0 1920 12229",
-        "byteSize": 10000723,
-        "sha256": "e629462231db22084f00da0a6c456da130115a76a3683a96c5925f34eff633e9",
-        "embeddedImagesExternalized": 12,
-        "externalImages": [
-          "/assets/illustrator-raster/0ba27f1fe80145466225b168608d972f3d542e50bd94ea505ad38570b59c5b6f.jpg",
-          "/assets/illustrator-raster/9c803932c6e01cc93cae9b426eae9389ab2b3425ae23ec083ecfaf467a1a227d.jpg",
-          "/assets/illustrator-raster/4940ceb196d0fb9ffbf1730ad2e0a647dadcb19a804016abc5f43a9782f4231e.jpg",
-          "/assets/illustrator-raster/264cfcb21f5dca6eaf025b5acf4482e910bef648f893ccec51cfd99963dd95c2.jpg",
-          "/assets/illustrator-raster/96d27a73394a00de6a9cb6c13e629730b4f748530791561e6943f0b2954920c6.jpg",
-          "/assets/illustrator-raster/f83b8211bc850cb526ba73d8b23e52032717533d61b0ac12bb41f9efd9418c43.jpg",
-          "/assets/illustrator-raster/60ec40853ceab574084237461b0f7485d91a903eff89b26a1095fdb605acb44c.jpg",
-          "/assets/illustrator-raster/49590b2465160deb75c268aad0328567640438217ca6bf29b4da63bfec1235f5.jpg",
-          "/assets/illustrator-raster/7813a09c312bfe0a01092b074b5e3207069395c2302ab16103de2f58d24a6d18.jpg",
-          "/assets/illustrator-raster/e97315ea6a9d3677505395576bc569bc50278a72cef2cb8b95389e837778ef52.jpg",
-          "/assets/illustrator-raster/f34b117a16863c0fd448d71bcc752e4b1cba29ab76d11c67647ae2609f99f9d8.png",
-          "/assets/illustrator-raster/39c024ab8294796108d43277014b3bb7267feadf9ee2431972cce1f996623ccc.jpg"
-        ],
-        "elementCounts": {
-          "path": 15087,
-          "g": 4372,
-          "image": 12,
-          "clipPath": 13,
-          "use": 15,
-          "rect": 23,
-          "circle": 1,
-          "ellipse": 0,
-          "polygon": 58,
-          "polyline": 0,
-          "line": 6,
-          "text": 0
-        },
-        "textOutlined": true
-      },
       "textSvg": "/assets/illustrator-text/home-text.svg",
       "textSvgDetails": {
         "viewBox": "0 0 1920 12229",
-        "byteSize": 2659806,
-        "sha256": "0b68246e4e66fc720d90c2e8d145b55bce1f5253fa12ce7b0dfea4bc7c90c9f0",
-        "embeddedImagesExternalized": 0,
-        "externalImages": [],
-        "elementCounts": {
-          "path": 2321,
-          "g": 89,
-          "image": 0,
-          "clipPath": 0,
-          "use": 0,
-          "rect": 0,
-          "circle": 0,
-          "ellipse": 0,
-          "polygon": 0,
-          "polyline": 0,
-          "line": 0,
-          "text": 0
-        },
+        "byteSize": 5016167,
+        "sha256": "9b525a48fc88cb47e2483d93b64aa0da4b2681567a01f4428b3ad4a9e7e4b729",
+        "pathCount": 2306,
         "textOutlined": true
-      },
-      "textPng": "/assets/illustrator-text/home-text.png",
-      "textPngDetails": {
-        "width": 1920,
-        "height": 12229,
-        "byteSize": 367266,
-        "sha256": "14d44691e45bd1ae10a0f08db4dd891badcab4789e1f879c1008606217ee0517"
       }
     },
     "experiences": {
       "page": "experiences",
-      "source": "C:\\Users\\adnan\\Downloads\\Meezan\\Meezan Website\\Meezan Website EXPE╠üRIENCES.ai",
-      "sourceSha256": "9df54a5be6781b39ced5b70fb6ced922168f6e8ccf3b33da359ec3a801891659",
-      "sourceModifiedAt": "2026-06-15T13:27:48.267Z",
+      "sourceFile": "Meezan Website EXPE╠üRIENCES.ai",
+      "sourceSha256": "93bd80fdc3f58d54dfec4f7b2e248c1553597410652d7ac404eb62b0dde22ac2",
+      "sourceModifiedAt": "2026-09-09T15:56:24.000Z",
       "artboard": {
         "width": 1920,
         "height": 16004
       },
-      "objectCount": 16833,
+      "auditSha256": "758091b68f2d5b901c64f33060dc6d16695d64785625f8daef6f532d44bc0471",
       "objectCountsByType": {
-        "GroupItem": 4241,
-        "PathItem": 12358,
-        "TextFrame": 61,
-        "CompoundPathItem": 159,
-        "RasterItem": 13,
-        "PlacedItem": 1
+        "TextFrame": 104,
+        "PlacedItem": 9,
+        "RasterItem": 14
       },
       "fonts": [
         {
+          "name": "AALMAGHRIBI",
+          "family": "AALMAGHRIBI",
+          "style": "Medium"
+        },
+        {
           "name": "BreathingPersonalUseOnly-Reg",
-          "family": "BreathingPersonalUseOnly Reg",
-          "style": "Reg"
+          "family": "Breathing Personal Use Only",
+          "style": "Regular"
+        },
+        {
+          "name": "Erstoria-Regular",
+          "family": "Erstoria",
+          "style": "Regular"
         },
         {
           "name": "Roboto-Bold",
@@ -161,8 +113,8 @@
         },
         {
           "name": "Roboto-LightItalic",
-          "family": "Roboto",
-          "style": "Light Italic"
+          "family": "FJFNQN+Roboto-LightItalic",
+          "style": "Regular"
         },
         {
           "name": "Roboto-Medium",
@@ -175,89 +127,26 @@
           "style": "Regular"
         }
       ],
-      "spec": "/assets/illustrator-spec/experiences.json",
-      "svg": "/assets/illustrator/experiences-outline.svg",
-      "svgDetails": {
-        "viewBox": "0 0 1920 16004",
-        "byteSize": 113711744,
-        "sha256": "4f37941b27d7d07d0ba9abbe9d36bdad75328540328f5bbb53c8a64e81d57298",
-        "embeddedImagesExternalized": 13,
-        "externalImages": [
-          "/assets/illustrator-raster/e3350f6ec64d2830cdc2a27c1260ace495b854d55fa09eef93e50c16a08d28cb.jpg",
-          "/assets/illustrator-raster/5cda34c00078ef52397ea4c1319280d7ca46d52bc9c48282e5f7701e71096973.jpg",
-          "/assets/illustrator-raster/f8cc6b8bfa90a0f85875d6bdb3cf1541116e28a9de0db20fba452d11a7e1e6b0.jpg",
-          "/assets/illustrator-raster/05218dfe225c414eebf6780a1fd4f56a130aecf728ef5928ca85bb8309b17e6b.jpg",
-          "/assets/illustrator-raster/d4a814f7f7accc63bcc0fe795f6318e7b977b2ce2d0e75c0b4cf1a687850a7f4.jpg",
-          "/assets/illustrator-raster/618ba3235f8e6b56d028001a627c099beb4c604f7b069060020ba541148e52f5.jpg",
-          "/assets/illustrator-raster/c52ff3a649b250f22a22dca1db3e7b570327c5adc246109c4ffb4d353e143d1e.jpg",
-          "/assets/illustrator-raster/17d9f648027e941f9cc755bcca4e37316bd5a6e8e9bdc4e3217aacdd186aaebf.jpg",
-          "/assets/illustrator-raster/486c5828f501e87043d9bf66ef59805e609424ad319082033af6bb980be3589d.jpg",
-          "/assets/illustrator-raster/372bfc66e3a7be7c67492ff68f5d12abf229bbdf63a563f00cfd789fa3780cb8.jpg",
-          "/assets/illustrator-raster/b6fe24ee11a9e620ebd4c2489d1f850c7259ca97d1f4bb50601288b709edbcef.jpg",
-          "/assets/illustrator-raster/48cad01952e502ae687ca584a783b4751cab1a44a74c7f038a1442a507349465.jpg",
-          "/assets/illustrator-raster/f094c857bf2b69279acd567c55ecab38e1ae7934ed55132c8bd4123960944c7c.jpg"
-        ],
-        "elementCounts": {
-          "path": 153695,
-          "g": 20524,
-          "image": 13,
-          "clipPath": 14,
-          "use": 15,
-          "rect": 43,
-          "circle": 3,
-          "ellipse": 0,
-          "polygon": 22154,
-          "polyline": 0,
-          "line": 15,
-          "text": 0
-        },
-        "textOutlined": true
-      },
       "textSvg": "/assets/illustrator-text/experiences-text.svg",
       "textSvgDetails": {
         "viewBox": "0 0 1920 16004",
-        "byteSize": 3752212,
-        "sha256": "943cfd560cf29ef5b075fa053be3e88c5c99d1ec1b905d1704c388bd30c6a9a8",
-        "embeddedImagesExternalized": 0,
-        "externalImages": [],
-        "elementCounts": {
-          "path": 3224,
-          "g": 122,
-          "image": 0,
-          "clipPath": 0,
-          "use": 0,
-          "rect": 0,
-          "circle": 0,
-          "ellipse": 0,
-          "polygon": 0,
-          "polyline": 0,
-          "line": 0,
-          "text": 0
-        },
+        "byteSize": 7539534,
+        "sha256": "3b6f3864f3d4dbb711f0dbd1e2109f00d41ca304f1b52c20098c01ec9a291b10",
+        "pathCount": 3205,
         "textOutlined": true
-      },
-      "textPng": "/assets/illustrator-text/experiences-text.png",
-      "textPngDetails": {
-        "width": 1920,
-        "height": 16004,
-        "byteSize": 543096,
-        "sha256": "93ced385dfa81100bd24fc0ce97fa19eb194356bdbe309753e1d179d7a774de2"
       }
     },
     "reservation": {
       "page": "reservation",
-      "source": "C:\\Users\\adnan\\Downloads\\Meezan\\Meezan Website Reservation_Dossier\\Meezan Website Reservation.ai",
+      "sourceFile": "Meezan Website Reservation.ai",
       "sourceSha256": "c7974001c3573f4e0913c0e91c1e1b424c188c36eaa1b4b0966e3af6e7a2aec3",
-      "sourceModifiedAt": "2026-07-14T11:18:10.142Z",
+      "sourceModifiedAt": "2026-07-14T11:18:10.000Z",
       "artboard": {
         "width": 1920,
         "height": 4074
       },
-      "objectCount": 342,
+      "auditSha256": "49966d88e5feb99166d925aa2861c179b8497ef3f14b19e0f413cbd4641dbeb2",
       "objectCountsByType": {
-        "GroupItem": 52,
-        "PathItem": 168,
-        "CompoundPathItem": 20,
         "TextFrame": 98,
         "PlacedItem": 2,
         "RasterItem": 2
@@ -265,8 +154,13 @@
       "fonts": [
         {
           "name": "BreathingPersonalUseOnly-Reg",
-          "family": "BreathingPersonalUseOnly Reg",
-          "style": "Reg"
+          "family": "Breathing Personal Use Only",
+          "style": "Regular"
+        },
+        {
+          "name": "Erstoria-Regular",
+          "family": "Erstoria",
+          "style": "Regular"
         },
         {
           "name": "Roboto-Bold",
@@ -289,90 +183,40 @@
           "style": "Regular"
         }
       ],
-      "spec": "/assets/illustrator-spec/reservation.json",
-      "svg": "/assets/illustrator/reservation-outline.svg",
-      "svgDetails": {
-        "viewBox": "0 0 1920 4074",
-        "byteSize": 1001733,
-        "sha256": "102ab012e13d588a96bc5ec13ba46d31bbd3addd166280a59f2519b0e5a5d4e5",
-        "embeddedImagesExternalized": 5,
-        "externalImages": [
-          "/assets/illustrator-raster/687e12c46602bbc7109f42cd92074fc54fb0f1ee0f4e021e56c07fbd6230b071.jpg",
-          "/assets/illustrator-raster/4875b157a69e9c88dcdf169bdd2bb2e27e0bcefac6c930579d48e598932be2d8.jpg",
-          "/assets/illustrator-raster/ea184673a4916406e393c17b0190824bfaf4d1c215990c37615c7273194c72af.jpg",
-          "/assets/illustrator-raster/436c634c4489a0cb5051a493ade46993986fa8d05f26ad56fc85d230742fac8f.jpg",
-          "/assets/illustrator-raster/063bb1a498bab1cb620158f4395f25fc89b4a3a3dd626ee2fb2164f94fc33c56.png"
-        ],
-        "elementCounts": {
-          "path": 938,
-          "g": 294,
-          "image": 5,
-          "clipPath": 3,
-          "use": 3,
-          "rect": 16,
-          "circle": 5,
-          "ellipse": 0,
-          "polygon": 0,
-          "polyline": 0,
-          "line": 4,
-          "text": 0
-        },
-        "textOutlined": true
-      },
       "textSvg": "/assets/illustrator-text/reservation-text.svg",
       "textSvgDetails": {
         "viewBox": "0 0 1920 4074",
-        "byteSize": 855452,
-        "sha256": "90a8b27b7c1bb060159656240fbdb3114b24c13786bdeb41b84e51200f9c9fee",
-        "embeddedImagesExternalized": 0,
-        "externalImages": [],
-        "elementCounts": {
-          "path": 820,
-          "g": 202,
-          "image": 0,
-          "clipPath": 0,
-          "use": 0,
-          "rect": 0,
-          "circle": 0,
-          "ellipse": 0,
-          "polygon": 0,
-          "polyline": 0,
-          "line": 0,
-          "text": 0
-        },
+        "byteSize": 2254039,
+        "sha256": "bd230a9dc9bfc3cbb386b70991bddfa5abb2ee215515b9aa5e0aebf5b23416df",
+        "pathCount": 813,
         "textOutlined": true
-      },
-      "textPng": "/assets/illustrator-text/reservation-text.png",
-      "textPngDetails": {
-        "width": 1920,
-        "height": 4074,
-        "byteSize": 127679,
-        "sha256": "f4a8500aaadda5607dc9f655b4748c56d7e9a0ba86d9f7cbdded6da5c5e4ca3e"
       }
     },
     "blog": {
       "page": "blog",
-      "source": "C:\\Users\\adnan\\Downloads\\Meezan\\Meezan Website Blog_Dossier\\Meezan Website Blog.ai",
+      "sourceFile": "Meezan Website Blog.ai",
       "sourceSha256": "17f75185edb1d3d63c71bbf12b19f0fd21433ae76b059b571149cf7b7ca28d28",
-      "sourceModifiedAt": "2026-07-14T11:18:08.934Z",
+      "sourceModifiedAt": "2026-07-14T11:18:08.000Z",
       "artboard": {
         "width": 1920,
         "height": 9235
       },
-      "objectCount": 186,
+      "auditSha256": "da57d68cfb29a510d88931fac24258a228ee3323e493d23036131efceb4b8c0b",
       "objectCountsByType": {
-        "GroupItem": 28,
-        "CompoundPathItem": 13,
-        "PathItem": 106,
-        "PlacedItem": 5,
         "TextFrame": 29,
+        "PlacedItem": 5,
         "RasterItem": 5
       },
       "fonts": [
         {
           "name": "BreathingPersonalUseOnly-Reg",
-          "family": "BreathingPersonalUseOnly Reg",
-          "style": "Reg"
+          "family": "Breathing Personal Use Only",
+          "style": "Regular"
+        },
+        {
+          "name": "Erstoria-Regular",
+          "family": "Erstoria",
+          "style": "Regular"
         },
         {
           "name": "Roboto-Light",
@@ -380,94 +224,40 @@
           "style": "Light"
         }
       ],
-      "spec": "/assets/illustrator-spec/blog.json",
-      "svg": "/assets/illustrator/blog-outline.svg",
-      "svgDetails": {
-        "viewBox": "0 0 1920 9235",
-        "byteSize": 1938730,
-        "sha256": "386194fb7bd852ad504671102eeca37e50670f586d6c33c77927edc75b17f231",
-        "embeddedImagesExternalized": 9,
-        "externalImages": [
-          "/assets/illustrator-raster/580fca944524bd7c1a4e3814a08a1e2e5a751b0ec9612cd23584f093a9c2f85d.jpg",
-          "/assets/illustrator-raster/4e96acc1d450600a84e4f5a4e31b30a68573e12bbfe0fc96dfd54a65915cd094.jpg",
-          "/assets/illustrator-raster/72cbc340a9f86fc6de7435056b46bae209b1e8d35fc47182e729a78159369a2b.jpg",
-          "/assets/illustrator-raster/fc9eb13e52c30d45ac5f89b20756e8480a9de4548b19c1307525daa68b3a85d0.jpg",
-          "/assets/illustrator-raster/75cb7d3604df11933d1897d78aebb88a61ab3cb69dde029c8bd80e5d2950e7d5.jpg",
-          "/assets/illustrator-raster/436c634c4489a0cb5051a493ade46993986fa8d05f26ad56fc85d230742fac8f.jpg",
-          "/assets/illustrator-raster/70e11234a37307c99c432a23e92f61fb4861161ddc008a29114a65a072de7187.jpg",
-          "/assets/illustrator-raster/2db7f953fa7a8843893c5296e58a64d0d1d14f98c8f07da0a341ca43d91d9f9f.jpg",
-          "/assets/illustrator-raster/3bf1fe80863b879bd683f0054c920c8b70eb06dd623526d7be74923c26ff40db.jpg"
-        ],
-        "elementCounts": {
-          "path": 1561,
-          "g": 115,
-          "image": 9,
-          "clipPath": 7,
-          "use": 7,
-          "rect": 16,
-          "circle": 1,
-          "ellipse": 0,
-          "polygon": 0,
-          "polyline": 0,
-          "line": 12,
-          "text": 0
-        },
-        "textOutlined": true
-      },
       "textSvg": "/assets/illustrator-text/blog-text.svg",
       "textSvgDetails": {
         "viewBox": "0 0 1920 9235",
-        "byteSize": 1831038,
-        "sha256": "0e249b4a4888e66df071c05e6ca88a87ecf721f362d6697c04a849b65756cfb1",
-        "embeddedImagesExternalized": 0,
-        "externalImages": [],
-        "elementCounts": {
-          "path": 1495,
-          "g": 68,
-          "image": 0,
-          "clipPath": 0,
-          "use": 0,
-          "rect": 0,
-          "circle": 0,
-          "ellipse": 0,
-          "polygon": 0,
-          "polyline": 0,
-          "line": 0,
-          "text": 0
-        },
+        "byteSize": 3310254,
+        "sha256": "44f379d5e2c606680231ff1e2fc8028ea4b67e86bcffc9c46605ef6a67525ed7",
+        "pathCount": 1489,
         "textOutlined": true
-      },
-      "textPng": "/assets/illustrator-text/blog-text.png",
-      "textPngDetails": {
-        "width": 1920,
-        "height": 9235,
-        "byteSize": 221150,
-        "sha256": "41ba76d92a956cde9307765f967e69d484a8861505b112f6061d620683e0a9bc"
       }
     },
     "chambres": {
       "page": "chambres",
-      "source": "C:\\Users\\adnan\\Downloads\\Meezan\\Meezan Website Chambres_Dossier\\Meezan Website Chambres.ai",
+      "sourceFile": "Meezan Website Chambres.ai",
       "sourceSha256": "fd58abb04edd101773e2fb383d592ff78f18a5cd75155c5a4335a86c6eccaca8",
-      "sourceModifiedAt": "2026-07-14T11:18:06.871Z",
+      "sourceModifiedAt": "2026-07-14T11:18:06.000Z",
       "artboard": {
         "width": 1920,
         "height": 11568
       },
-      "objectCount": 219,
+      "auditSha256": "be4b565e6518e3147ca7bc7e3c1c5168d776b7bf358ec01d67e56549e5def96d",
       "objectCountsByType": {
-        "GroupItem": 50,
-        "PathItem": 126,
-        "PlacedItem": 8,
         "TextFrame": 23,
-        "CompoundPathItem": 8,
+        "PlacedItem": 8,
         "RasterItem": 4
       },
       "fonts": [
         {
           "name": "BreathingPersonalUseOnly-Reg",
-          "family": "BreathingPersonalUseOnly Reg",
-          "style": "Reg"
+          "family": "Breathing Personal Use Only",
+          "style": "Regular"
+        },
+        {
+          "name": "Erstoria-Regular",
+          "family": "Erstoria",
+          "style": "Regular"
         },
         {
           "name": "Roboto-Light",
@@ -475,97 +265,40 @@
           "style": "Light"
         }
       ],
-      "spec": "/assets/illustrator-spec/chambres.json",
-      "svg": "/assets/illustrator/chambres-outline.svg",
-      "svgDetails": {
-        "viewBox": "0 0 1920 11568",
-        "byteSize": 570394,
-        "sha256": "dd2238c7dd7fa3dfb3a8b7dc0e28873350fa552f245de164bb10568934bc0c5d",
-        "embeddedImagesExternalized": 12,
-        "externalImages": [
-          "/assets/illustrator-raster/51e65f8068c498ed44d79efb6be55b02c4e4e3c0352cfd6b42ae60748d56ed52.jpg",
-          "/assets/illustrator-raster/02fa16bb45d235b7f74393786aa481d7ebbe6caf84940f5c20c3635d8f36b709.jpg",
-          "/assets/illustrator-raster/dc82273a46f3dfada122bb3e6db81397f191bc92c1a735861d8c4158b15e5f65.jpg",
-          "/assets/illustrator-raster/139c85800099480936f3f12911bcb5686d52151753ac9829cf3c70a1de84a9b1.jpg",
-          "/assets/illustrator-raster/75cb7d3604df11933d1897d78aebb88a61ab3cb69dde029c8bd80e5d2950e7d5.jpg",
-          "/assets/illustrator-raster/436c634c4489a0cb5051a493ade46993986fa8d05f26ad56fc85d230742fac8f.jpg",
-          "/assets/illustrator-raster/5e3e95f63683bcea46b42a204c5b249a276af5ebf54f336b593b31df7207c553.jpg",
-          "/assets/illustrator-raster/89d2020e87da404d3083f5f97258ec1db7b7761c991240b50f2e9113a2045577.jpg",
-          "/assets/illustrator-raster/1278f4cfcc12f6a13e7889c9531ca23cd0db2ce8ac7fdbb2a76084c905a8758e.jpg",
-          "/assets/illustrator-raster/7827104e6c9cc21e9f5aee4bea9f482d237141676706f21d6bfb6ba10450f7e2.jpg",
-          "/assets/illustrator-raster/b6a2a97e03f34ba69fecb44732afdf69c2f54b27b9c9f2db44f35feed3fe1e85.jpg",
-          "/assets/illustrator-raster/2d8e7e5ebf597d8c601b4c660503ec8a9a14f009d8856970b24828392872352a.jpg"
-        ],
-        "elementCounts": {
-          "path": 559,
-          "g": 124,
-          "image": 12,
-          "clipPath": 9,
-          "use": 9,
-          "rect": 20,
-          "circle": 1,
-          "ellipse": 0,
-          "polygon": 0,
-          "polyline": 0,
-          "line": 9,
-          "text": 0
-        },
-        "textOutlined": true
-      },
       "textSvg": "/assets/illustrator-text/chambres-text.svg",
       "textSvgDetails": {
         "viewBox": "0 0 1920 11568",
-        "byteSize": 461161,
-        "sha256": "fa270bd43aee8b4ed9a25e88a699c13651f70c33108e13d44c4cb221355904a4",
-        "embeddedImagesExternalized": 0,
-        "externalImages": [],
-        "elementCounts": {
-          "path": 471,
-          "g": 56,
-          "image": 0,
-          "clipPath": 0,
-          "use": 0,
-          "rect": 0,
-          "circle": 0,
-          "ellipse": 0,
-          "polygon": 0,
-          "polyline": 0,
-          "line": 0,
-          "text": 0
-        },
+        "byteSize": 1876746,
+        "sha256": "d5212b14bc1df7d8ebb656fc67c3504167ce21ee0d83d850c137c3f9ce923284",
+        "pathCount": 465,
         "textOutlined": true
-      },
-      "textPng": "/assets/illustrator-text/chambres-text.png",
-      "textPngDetails": {
-        "width": 1920,
-        "height": 11568,
-        "byteSize": 157079,
-        "sha256": "fe48807e36f747f035a8648075ff7d9df832fbc4042425a17acc0fd647a14314"
       }
     },
     "galerie": {
       "page": "galerie",
-      "source": "C:\\Users\\adnan\\Downloads\\Meezan\\Meezan Website Gallerie_Dossier\\Meezan Website Gallerie.ai",
+      "sourceFile": "Meezan Website Gallerie.ai",
       "sourceSha256": "6d5bff645547ea453f9430b69f1f69e4d69d997ad40eaaed8019af3912a7e2e1",
-      "sourceModifiedAt": "2026-07-14T11:18:11.649Z",
+      "sourceModifiedAt": "2026-07-14T11:18:11.000Z",
       "artboard": {
         "width": 1920,
         "height": 6098
       },
-      "objectCount": 151,
+      "auditSha256": "e505371c576bf17e286d66bc655ecdea85096260c0caccac26c3a657240beb95",
       "objectCountsByType": {
-        "GroupItem": 29,
-        "PathItem": 96,
-        "PlacedItem": 4,
         "TextFrame": 12,
-        "CompoundPathItem": 8,
+        "PlacedItem": 4,
         "RasterItem": 2
       },
       "fonts": [
         {
           "name": "BreathingPersonalUseOnly-Reg",
-          "family": "BreathingPersonalUseOnly Reg",
-          "style": "Reg"
+          "family": "Breathing Personal Use Only",
+          "style": "Regular"
+        },
+        {
+          "name": "Erstoria-Regular",
+          "family": "Erstoria",
+          "style": "Regular"
         },
         {
           "name": "Roboto-Light",
@@ -573,110 +306,14 @@
           "style": "Light"
         }
       ],
-      "spec": "/assets/illustrator-spec/galerie.json",
-      "svg": "/assets/illustrator/galerie-outline.svg",
-      "svgDetails": {
-        "viewBox": "0 0 1920 6098",
-        "byteSize": 413514,
-        "sha256": "637a72792f39c609e25bea9f51b8e88ba892c72957add4e929cc3164ffe41317",
-        "embeddedImagesExternalized": 6,
-        "externalImages": [
-          "/assets/illustrator-raster/137a3e7b8402ffad46aa8fb3c2c058e7e6db6eea0cd3317ebb5897cfb5a2448e.jpg",
-          "/assets/illustrator-raster/83b6d2b2eea3a7677f937e4e77b205b628740aa8ed869044bb91bd8fc36fae09.jpg",
-          "/assets/illustrator-raster/ea184673a4916406e393c17b0190824bfaf4d1c215990c37615c7273194c72af.jpg",
-          "/assets/illustrator-raster/14747a5566f45ffd4a5a85ad4d119e2ca97bc623c12acab59f783c84df9c2ff8.jpg",
-          "/assets/illustrator-raster/daf8ddf8db320657ad57641e25389889aa73df36e96630e61ed366a7ef34da37.jpg",
-          "/assets/illustrator-raster/58fd2ab3c754643ff0b6dcbeb747b43124d70b0cf67fb4e8a16556fbb4be0f8c.jpg"
-        ],
-        "elementCounts": {
-          "path": 398,
-          "g": 75,
-          "image": 6,
-          "clipPath": 5,
-          "use": 5,
-          "rect": 12,
-          "circle": 1,
-          "ellipse": 0,
-          "polygon": 0,
-          "polyline": 0,
-          "line": 5,
-          "text": 0
-        },
-        "textOutlined": true
-      },
       "textSvg": "/assets/illustrator-text/galerie-text.svg",
       "textSvgDetails": {
         "viewBox": "0 0 1920 6098",
-        "byteSize": 319596,
-        "sha256": "d1b7d3b5bb0fffeb238a01e3ac713b65f432bdc8001259ed997c6d4a0b63aa5a",
-        "embeddedImagesExternalized": 0,
-        "externalImages": [],
-        "elementCounts": {
-          "path": 328,
-          "g": 34,
-          "image": 0,
-          "clipPath": 0,
-          "use": 0,
-          "rect": 0,
-          "circle": 0,
-          "ellipse": 0,
-          "polygon": 0,
-          "polyline": 0,
-          "line": 0,
-          "text": 0
-        },
+        "byteSize": 1639525,
+        "sha256": "584c601b8a3b15f478432a65744612a7cf633a6552bd47f188e112974ad95869",
+        "pathCount": 321,
         "textOutlined": true
-      },
-      "textPng": "/assets/illustrator-text/galerie-text.png",
-      "textPngDetails": {
-        "width": 1920,
-        "height": 6098,
-        "byteSize": 106227,
-        "sha256": "670b260f334d75a0c28f59211f83adb7eb078004fd947adc4a44f0938b0ecef9"
       }
-    }
-  },
-  "header": {
-    "sourcePage": "home",
-    "artboard": {
-      "width": 1920,
-      "height": 189
-    },
-    "svg": "/assets/illustrator/header-outline.svg",
-    "svgDetails": {
-      "viewBox": "0 0 1920 189",
-      "byteSize": 10000719,
-      "sha256": "c34b8b6b40e5602800f02cec7854b79be12d6e3aa28255347bb8f4a7611a160f",
-      "embeddedImagesExternalized": 12,
-      "externalImages": [
-        "/assets/illustrator-raster/3466658ec7525c705eeec50bbbafe73765d052db8dcbd2d028674e3392697afe.jpg",
-        "/assets/illustrator-raster/cfba62ca29be11055b0ba987965c8ed4d66c2db975032a9f77ee7ead834c9dee.jpg",
-        "/assets/illustrator-raster/a6d307c43b3b83445faeb0b0002af4fef092655b4503cb13ae967af9f06fe629.jpg",
-        "/assets/illustrator-raster/f7911de734557ad0e4452748a1ad2ad0477633c4c2a4d7106153f63582c756f9.jpg",
-        "/assets/illustrator-raster/941a19f510178db593447e288cc5251f1173ec0ef39a05fa511d17d7d3d5a550.jpg",
-        "/assets/illustrator-raster/e8a532ed5c8b7a322914ade581d4de79dc84a1b555c50b23b7f1575fb77b8bae.jpg",
-        "/assets/illustrator-raster/7c60174f4622e9ec49e074657326b3c07c857292b27ec2ff1d3f58ce95f9fbc1.jpg",
-        "/assets/illustrator-raster/dc4f98433f4b030aae96078f19776eb5e4254b4cd2979c119e8cfc430e31e9f6.jpg",
-        "/assets/illustrator-raster/87d0377de7e11698859728d24d69f92deb5f4bc92db9eceb1f838bf3a420476d.jpg",
-        "/assets/illustrator-raster/33529bd8c216388778540ee1d920b9fcb0db24a4b064d16e8ac02dcdae482ac7.jpg",
-        "/assets/illustrator-raster/f34b117a16863c0fd448d71bcc752e4b1cba29ab76d11c67647ae2609f99f9d8.png",
-        "/assets/illustrator-raster/0d92e3c985f1500fb2e9d486e64fe4a1ebe1c83538b7384ba5a6b564a772ecc5.jpg"
-      ],
-      "elementCounts": {
-        "path": 15087,
-        "g": 4372,
-        "image": 12,
-        "clipPath": 13,
-        "use": 15,
-        "rect": 23,
-        "circle": 1,
-        "ellipse": 0,
-        "polygon": 58,
-        "polyline": 0,
-        "line": 6,
-        "text": 0
-      },
-      "textOutlined": true
     }
   }
 }

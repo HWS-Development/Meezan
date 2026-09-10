@@ -1,7 +1,7 @@
 import { startTransition, useEffect, useRef, useState } from "react";
 import ExactIllustratorPage from "./components/ExactIllustratorPage.jsx";
 import { exactOverlays } from "./data/exactOverlays.js";
-import { exactMediaOverrides } from "./data/mediaConfig.js";
+import { exactMediaOverrides, heroMediaBoxes } from "./data/mediaConfig.js";
 import { pagePaths, pathPages } from "./data/pageConfig.js";
 import siteContent from "./data/siteContent.json";
 
@@ -45,8 +45,9 @@ function criticalPageAssets(page) {
   const assets = new Set([
     headerAsset,
     pageData.background,
-    `/assets/illustrator-text/${page}-text.png`,
+    `/assets/illustrator-text/${page}-text.svg`,
   ]);
+  if (heroMediaBoxes[page]?.src) assets.add(heroMediaBoxes[page].src);
   const preloadLimit = initialArtboardLimit(pageData.artboard);
 
   for (const item of pageData.media || []) {

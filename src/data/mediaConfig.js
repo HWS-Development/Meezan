@@ -1,6 +1,10 @@
 export const heroMediaBoxes = {
-  reservation: { x: 0, y: 190, width: 1920, height: 760, objectPosition: "center 53%" },
-  galerie: { x: 0, y: 190, width: 1920, height: 774, objectPosition: "center 53%" },
+  home: { x: 0, y: 190, width: 1920, height: 1130, src: "/assets/illustrator-driven/home-hero-exact.png" },
+  experiences: { x: 0, y: 190, width: 1920, height: 774, src: "/assets/illustrator-driven/experiences-hero-exact.png" },
+  reservation: { x: 0, y: 190, width: 1920, height: 774, src: "/assets/illustrator-driven/reservation-hero-exact.png" },
+  blog: { x: 0, y: 190, width: 1920, height: 774, src: "/assets/illustrator-driven/blog-hero-exact.png" },
+  chambres: { x: 0, y: 190, width: 1920, height: 774, src: "/assets/illustrator-driven/chambres-hero-exact.png" },
+  galerie: { x: 0, y: 190, width: 1920, height: 774, src: "/assets/illustrator-driven/galerie-hero-exact.png" },
 };
 
 export const exactMediaOverrides = {
@@ -28,6 +32,7 @@ export const exactMediaOverrides = {
     "raster-01": { x: 378, y: 3416, width: 1199, height: 701, src: "/assets/illustrator-driven/blog-media-01-exact.png" },
     "placed-06": { x: 378, y: 7663, width: 1200, height: 709, src: "/assets/illustrator-driven/blog-media-06-exact.png" },
     "placed-07": { x: 378, y: 6211, width: 1199, height: 709, src: "/assets/illustrator-driven/blog-media-07-exact.png" },
+    "placed-08": { x: 378, y: 4842, width: 1199, height: 709, src: "/assets/illustrator-driven/galerie-media-05-exact.png" },
     "placed-09": { x: 378, y: 1982, width: 1199, height: 709, src: "/assets/illustrator-driven/blog-media-09-exact.png" },
   },
   chambres: {
@@ -52,20 +57,14 @@ export const carouselSourcePools = {
       "/assets/illustrator-driven/home-media-01-exact.png",
       "/assets/illustrator-driven/home-media-02-exact.png",
       "/assets/illustrator-driven/home-media-03-exact.png",
-      "/assets/illustrator-driven/home-media-04-exact.png",
-      "/assets/illustrator-driven/home-media-06-exact.png",
     ],
     "raster-02": [
       "/assets/illustrator-driven/home-media-02-exact.png",
       "/assets/illustrator-driven/home-media-03-exact.png",
-      "/assets/illustrator-driven/home-media-04-exact.png",
-      "/assets/illustrator-driven/home-media-06-exact.png",
       "/assets/illustrator-driven/home-media-01-exact.png",
     ],
     "raster-03": [
       "/assets/illustrator-driven/home-media-03-exact.png",
-      "/assets/illustrator-driven/home-media-04-exact.png",
-      "/assets/illustrator-driven/home-media-06-exact.png",
       "/assets/illustrator-driven/home-media-01-exact.png",
       "/assets/illustrator-driven/home-media-02-exact.png",
     ],
@@ -103,8 +102,8 @@ export const carouselSourcePools = {
 export const customArrowHotspots = {
   home: [
     { label: "Defiler vers le contenu", x: 915, y: 920, w: 90, h: 90, type: "scroll", targetY: 1320 },
-    { label: "Galerie precedente", x: 305, y: 9145, w: 90, h: 90, type: "carouselGroup", ids: ["raster-01", "raster-02", "raster-03"], direction: -1, restoreSprite: false },
-    { label: "Galerie suivante", x: 1525, y: 9145, w: 90, h: 90, type: "carouselGroup", ids: ["raster-01", "raster-02", "raster-03"], direction: 1, restoreSprite: false },
+    { label: "Galerie precedente", x: 294, y: 9178, w: 90, h: 90, type: "carouselGroup", ids: ["raster-01", "raster-02", "raster-03"], direction: -1 },
+    { label: "Galerie suivante", x: 1554, y: 9178, w: 90, h: 90, type: "carouselGroup", ids: ["raster-01", "raster-02", "raster-03"], direction: 1 },
     { label: "Image precedente", x: 953, y: 11054, w: 90, h: 90, type: "carousel", id: "raster-04", direction: -1, variant: "light" },
     { label: "Image suivante", x: 1491, y: 11054, w: 90, h: 90, type: "carousel", id: "raster-04", direction: 1, variant: "light" },
   ],

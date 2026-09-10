@@ -8,7 +8,17 @@ const svgDirectory = path.join(root, "public", "assets", "illustrator");
 const rasterDirectory = path.join(root, "public", "assets", "illustrator-raster");
 const specDirectory = path.join(root, "public", "assets", "illustrator-spec");
 const textDirectory = path.join(root, "public", "assets", "illustrator-text");
+const assetReportPath = path.join(specDirectory, "asset-build-report.json");
 const pages = ["home", "experiences", "reservation", "blog", "chambres", "galerie"];
+
+function portableFileName(filePath) {
+  return path.posix.basename(String(filePath).replaceAll("\\", "/"));
+}
+
+function resolveSource(filePath) {
+  const sourceDirectory = process.env.MEEZAN_SOURCE_DIR;
+  return sourceDirectory ? path.join(path.resolve(sourceDirectory), portableFileName(filePath)) : filePath;
+}
 
 await mkdir(rasterDirectory, { recursive: true });
 
@@ -85,9 +95,10 @@ async function inspectPng(filePath) {
 }
 
 const manifest = {
+  reportType: "legacy-illustrator-asset-build",
   schemaVersion: 1,
   generatedAt: new Date().toISOString(),
-  geometryAuthority: "SVG exported directly by Adobe Illustrator with outlined text and coordinatePrecision=6; live text PNGs preserve Illustrator rasterization",
+  geometryAuthority: "SVG exported directly by Adobe Illustrator with outlined text and coordinatePrecision=6.",
   pages: {},
 };
 const specSummary = {
@@ -120,11 +131,12 @@ for (const page of pages) {
     throw new Error(`${page}: expected text PNG ${artboard.width}x${artboard.height}, received ${textPng.width}x${textPng.height}`);
   }
 
-  const sourceStats = await stat(spec.source);
-  const sourceSha256 = await hashFile(spec.source);
+  const sourcePath = resolveSource(spec.source);
+  const sourceStats = await stat(sourcePath);
+  const sourceSha256 = await hashFile(sourcePath);
   const pageEntry = {
     page,
-    source: spec.source,
+    sourceFile: portableFileName(spec.source),
     sourceSha256,
     sourceModifiedAt: sourceStats.mtime.toISOString(),
     artboard: { width: artboard.width, height: artboard.height },
@@ -153,10 +165,11 @@ manifest.header = {
   svgDetails: header,
 };
 
-await writeFile(path.join(svgDirectory, "manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
+await writeFile(assetReportPath, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
 await writeFile(path.join(specDirectory, "summary.json"), `${JSON.stringify(specSummary, null, 2)}\n`, "utf8");
 
 console.log(JSON.stringify({
+  report: path.relative(root, assetReportPath),
   pages: pages.length,
   objects: specSummary.totalObjectCount,
   uniqueRasterAssets: new Set([

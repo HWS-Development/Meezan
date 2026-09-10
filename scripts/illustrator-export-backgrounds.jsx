@@ -1,0 +1,90 @@
+#target illustrator
+
+(function () {
+  var sourceDirectory = new Folder($.getenv("MEEZAN_SOURCE_DIR"));
+  var outputDirectory = new Folder($.getenv("MEEZAN_OUTPUT_DIR"));
+  if (!sourceDirectory.exists) throw new Error("Missing Illustrator source directory");
+  if (!outputDirectory.exists && !outputDirectory.create()) throw new Error("Unable to create output directory");
+
+  function pageFromName(name) {
+    var normalized = String(name).toLowerCase();
+    if (normalized.indexOf("blog") >= 0) return "blog";
+    if (normalized.indexOf("chambres") >= 0) return "chambres";
+    if (normalized.indexOf("gallerie") >= 0) return "galerie";
+    if (normalized.indexOf("reservation") >= 0) return "reservation";
+    if (normalized.indexOf("expe") >= 0) return "experiences";
+    return "home";
+  }
+
+  function metrics(item, artboardRect) {
+    var bounds = item.geometricBounds;
+    return {
+      x: bounds[0] - artboardRect[0],
+      y: artboardRect[1] - bounds[1],
+      width: bounds[2] - bounds[0],
+      height: bounds[1] - bounds[3]
+    };
+  }
+
+  function keepInBackground(item, artboardRect, artboardWidth) {
+    var box = metrics(item, artboardRect);
+    var fullWidth = box.width >= artboardWidth * 0.9;
+    var placed = item.typename === "PlacedItem";
+    var backdrop = !placed && fullWidth && box.height >= artboardWidth;
+    var hero = box.y < 0 && fullWidth && (placed || box.height < artboardWidth);
+    return backdrop || hero;
+  }
+
+  function exportBackground(document, page) {
+    document.artboards.setActiveArtboardIndex(0);
+    var artboardRect = document.artboards[0].artboardRect;
+    var artboardWidth = artboardRect[2] - artboardRect[0];
+    var index;
+
+    for (index = 0; index < document.textFrames.length; index += 1) {
+      try { document.textFrames[index].hidden = true; } catch (textError) {}
+    }
+    for (index = 0; index < document.placedItems.length; index += 1) {
+      try {
+        if (!keepInBackground(document.placedItems[index], artboardRect, artboardWidth)) document.placedItems[index].hidden = true;
+      } catch (placedError) {}
+    }
+    for (index = 0; index < document.rasterItems.length; index += 1) {
+      try {
+        if (!keepInBackground(document.rasterItems[index], artboardRect, artboardWidth)) document.rasterItems[index].hidden = true;
+      } catch (rasterError) {}
+    }
+
+    var options = new ImageCaptureOptions();
+    options.antiAliasing = true;
+    options.matte = false;
+    options.resolution = 72;
+    options.transparency = true;
+    document.imageCapture(new File(outputDirectory.fsName + "/" + page + "-background.png"), artboardRect, options);
+  }
+
+  var files = sourceDirectory.getFiles(function (entry) {
+    return entry instanceof File && /\.ai$/i.test(entry.name);
+  });
+  var previousInteractionLevel = app.userInteractionLevel;
+  var exported = [];
+  app.userInteractionLevel = UserInteractionLevel.DONTDISPLAYALERTS;
+  try {
+    for (var fileIndex = 0; fileIndex < files.length; fileIndex += 1) {
+      var document = null;
+      var page = pageFromName(files[fileIndex].name);
+      try {
+        document = app.open(files[fileIndex]);
+        exportBackground(document, page);
+        exported.push(page);
+      } catch (error) {
+        exported.push(page + ":ERROR:" + error.message + ":line " + error.line);
+      } finally {
+        try { if (document) document.close(SaveOptions.DONOTSAVECHANGES); } catch (closeError) {}
+      }
+    }
+  } finally {
+    try { app.userInteractionLevel = previousInteractionLevel; } catch (interactionError) {}
+  }
+  return exported.join("\n");
+}());

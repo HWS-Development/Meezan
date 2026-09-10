@@ -1,15 +1,13 @@
 import { spawn } from "node:child_process";
-import { mkdtemp, rm } from "node:fs/promises";
-import { readFile } from "node:fs/promises";
+import { access, mkdtemp, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { createServer } from "node:http";
 import os from "node:os";
 import path from "node:path";
 
 const root = path.resolve(import.meta.dirname, "..");
 const distRoot = path.join(root, "dist");
-const chrome = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
-const port = 4177;
-const debugPort = 9337;
+const port = 4187;
+const debugPort = 9347;
 const baseUrl = `http://127.0.0.1:${port}`;
 
 const contentTypes = {
@@ -30,6 +28,36 @@ const contentTypes = {
 
 function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function chromeExecutable() {
+  const candidates = [
+    process.env.CHROME_PATH,
+    "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "/Applications/Chromium.app/Contents/MacOS/Chromium",
+    "/usr/bin/google-chrome",
+    "/usr/bin/chromium",
+    "/usr/bin/chromium-browser",
+  ].filter(Boolean);
+
+  if (process.platform === "darwin") {
+    const cache = path.join(os.homedir(), "Library", "Caches", "ms-playwright");
+    const versions = await readdir(cache).catch(() => []);
+    versions
+      .filter((entry) => entry.startsWith("chromium-"))
+      .sort()
+      .reverse()
+      .forEach((entry) => candidates.push(path.join(cache, entry, "chrome-mac-arm64", "Google Chrome for Testing.app", "Contents", "MacOS", "Google Chrome for Testing")));
+  }
+
+  for (const candidate of candidates) {
+    try {
+      await access(candidate);
+      return candidate;
+    } catch {}
+  }
+  throw new Error("Chrome executable not found. Set CHROME_PATH to run route:smoke.");
 }
 
 async function waitFor(url, attempts = 80) {
@@ -127,6 +155,7 @@ async function cdpConnect() {
 }
 
 async function main() {
+  const chrome = await chromeExecutable();
   const userDataDir = await mkdtemp(path.join(os.tmpdir(), "meezan-route-smoke-"));
   const server = await startStaticServer();
 
@@ -256,7 +285,7 @@ async function main() {
     if (!blogClicked) throw new Error("Missing Blog link for SPA regression");
     await waitForSpaPath("/blog");
     const spaBlog = await evaluate(`(() => {
-      const image = document.querySelector('.illustrator-text-raster-layer');
+      const image = document.querySelector('.illustrator-text-vector-layer');
       const canvas = document.querySelector('.exact-canvas');
       const title = document.querySelector('[data-source-text-id="text-21"]');
       const subtitle = document.querySelector('[data-source-text-id="text-20"]');
@@ -275,8 +304,8 @@ async function main() {
     })()`);
     if (spaBlog.path !== "/blog") throw new Error(`SPA Blog path failed: ${spaBlog.path}`);
     if (spaBlog.marker !== "chambres-to-blog") throw new Error("Chambres to Blog caused a document reload");
-    if (spaBlog.imagePage !== "blog" || spaBlog.imageSrc !== "/assets/illustrator-text/blog-text.png") {
-      throw new Error(`SPA Blog kept the wrong text raster: ${JSON.stringify(spaBlog)}`);
+    if (spaBlog.imagePage !== "blog" || spaBlog.imageSrc !== "/assets/illustrator-text/blog-text.svg") {
+      throw new Error(`SPA Blog kept the wrong text vector: ${JSON.stringify(spaBlog)}`);
     }
     if (Math.abs(spaBlog.canvasHeight - 9235) > 0.1) throw new Error(`SPA Blog kept the wrong artboard: ${spaBlog.canvasHeight}`);
     if (spaBlog.title !== "Blog") throw new Error(`SPA Blog title content failed: ${spaBlog.title}`);
@@ -284,29 +313,229 @@ async function main() {
     if (spaBlog.active !== "BLOG" || spaBlog.documentTitle !== "Blog Meezane | Inspirations et art de vivre") {
       throw new Error(`SPA Blog metadata failed: ${JSON.stringify(spaBlog)}`);
     }
-    results.push({ expectedPath: "/chambres -> /blog SPA content", path: "blog raster + editable copy" });
+    results.push({ expectedPath: "/chambres -> /blog SPA content", path: "blog vector + selectable copy" });
 
+    await evaluate(`(() => {
+      window.getSelection()?.removeAllRanges();
+      const input = document.createElement('input');
+      input.dataset.selectionProbe = 'true';
+      input.value = 'native select all';
+      document.body.append(input);
+      document.body.setAttribute('tabindex', '-1');
+      document.body.focus();
+    })()`);
+    const selectAllModifiers = process.platform === "darwin" ? 4 : 2;
+    await send("Input.dispatchKeyEvent", {
+      type: "rawKeyDown",
+      key: "a",
+      code: "KeyA",
+      windowsVirtualKeyCode: 65,
+      modifiers: selectAllModifiers,
+      commands: ["SelectAll"],
+    });
+    await send("Input.dispatchKeyEvent", {
+      type: "keyUp",
+      key: "a",
+      code: "KeyA",
+      windowsVirtualKeyCode: 65,
+      modifiers: selectAllModifiers,
+    });
     const selectionState = await evaluate(`(() => {
       const article = document.querySelector('.seo-article');
       const header = document.querySelector('.exact-header-overlay');
-      document.body.setAttribute('tabindex', '-1');
-      document.body.focus();
-      document.execCommand('selectAll');
-      const selectedText = window.getSelection()?.toString() || '';
-      window.getSelection()?.removeAllRanges();
-      return {
+       const root = document.querySelector('.selectable-text-root');
+       const canvas = document.querySelector('.exact-canvas');
+       const vector = document.querySelector('.illustrator-text-vector-layer');
+       const selectable = root.querySelector('.selectable-text-layer');
+       const selection = window.getSelection();
+      const range = selection?.rangeCount ? selection.getRangeAt(0) : null;
+      const normalize = (text) => String(text || '').replace(/\\s+/g, ' ').trim();
+      const expectedText = normalize(root.textContent);
+      const selectedText = normalize(selection?.toString());
+       const selectionForeground = getComputedStyle(selectable, '::selection').color;
+      const canvasRect = canvas.getBoundingClientRect();
+      const canvasSizedRects = range ? [...range.getClientRects()].filter((rect) => (
+        Math.abs(rect.width - canvasRect.width) < 1
+        && Math.abs(rect.height - canvasRect.height) < 1
+      )).length : -1;
+      const selectedOutsideRoot = [...canvas.children]
+        .filter((node) => node !== root && selection?.containsNode(node, true))
+        .map((node) => node.tagName + '.' + node.className);
+      const state = {
         articleUserSelect: getComputedStyle(article).userSelect,
         headerUserSelect: getComputedStyle(header).userSelect,
         selectedText,
+         selectionForeground,
+         selectableZIndex: Number(getComputedStyle(root).zIndex),
+         vectorZIndex: Number(getComputedStyle(vector).zIndex),
+        transparentSelectionForeground: selectionForeground === 'transparent' || selectionForeground === 'rgba(0, 0, 0, 0)',
+        exactText: selectedText === expectedText,
+        exactBoundaries: Boolean(range)
+          && range.startContainer === root
+          && range.startOffset === 0
+          && range.endContainer === root
+          && range.endOffset === root.childNodes.length,
+        selectedOutsideRoot,
+        canvasSizedRects,
       };
+      selection?.removeAllRanges();
+      return state;
     })()`);
     if (selectionState.articleUserSelect !== "none" || selectionState.headerUserSelect !== "none") {
       throw new Error(`Ghost text can still be selected: ${JSON.stringify(selectionState)}`);
     }
-    if (selectionState.selectedText.includes("Actualités, inspirations et art de vivre.") || selectionState.selectedText.includes("Blog Meezane | Inspirations et art de vivre")) {
-      throw new Error(`Ctrl+A selected hidden SEO content: ${selectionState.selectedText.slice(0, 180)}`);
+    if (!selectionState.exactText || !selectionState.exactBoundaries || selectionState.selectedOutsideRoot.length || selectionState.canvasSizedRects !== 0) {
+      throw new Error(`Ctrl+A escaped the visible-text scope: ${JSON.stringify(selectionState)}`);
     }
-    results.push({ expectedPath: "/blog Ctrl+A", path: "no hidden SEO/header text" });
+     if (!selectionState.transparentSelectionForeground) {
+       throw new Error(`Selection repaints HTML glyphs over Illustrator typography: ${JSON.stringify(selectionState)}`);
+     }
+     if (!(selectionState.selectableZIndex < selectionState.vectorZIndex)) {
+       throw new Error(`Selection highlight is not behind Illustrator typography: ${JSON.stringify(selectionState)}`);
+     }
+    results.push({ expectedPath: "/blog Ctrl+A", path: "exact range and highlight without repainting Illustrator glyphs" });
+
+    await evaluate(`(() => {
+      const input = document.querySelector('[data-selection-probe]');
+      input.focus();
+      input.setSelectionRange(6, 6);
+    })()`);
+    await send("Input.dispatchKeyEvent", {
+      type: "rawKeyDown",
+      key: "a",
+      code: "KeyA",
+      windowsVirtualKeyCode: 65,
+      modifiers: selectAllModifiers,
+      commands: ["SelectAll"],
+    });
+    await send("Input.dispatchKeyEvent", {
+      type: "keyUp",
+      key: "a",
+      code: "KeyA",
+      windowsVirtualKeyCode: 65,
+      modifiers: selectAllModifiers,
+    });
+    const nativeInputSelection = await evaluate(`(() => {
+      const input = document.querySelector('[data-selection-probe]');
+      const result = {
+        start: input.selectionStart,
+        end: input.selectionEnd,
+        length: input.value.length,
+      };
+      input.remove();
+      return result;
+    })()`);
+    if (nativeInputSelection.start !== 0 || nativeInputSelection.end !== nativeInputSelection.length) {
+      throw new Error(`Ctrl+A broke native input selection: ${JSON.stringify(nativeInputSelection)}`);
+    }
+    results.push({ expectedPath: "/blog input Ctrl+A", path: "native editable-control selection preserved" });
+
+    for (const route of ["/", "/experiences", "/reservation", "/blog", "/chambres", "/galerie"]) {
+      await go(route);
+      const dragProbe = await evaluate(`(async () => {
+        window.getSelection()?.removeAllRanges();
+        const candidates = [...document.querySelectorAll('.selectable-text-layer')]
+          .filter((element) => element.textContent.trim().length >= 20)
+          .sort((a, b) => b.getBoundingClientRect().width - a.getBoundingClientRect().width);
+        const target = candidates.find((element) => {
+          element.scrollIntoView({ block: 'center' });
+          const rect = element.getBoundingClientRect();
+          const x = Math.max(rect.left + 2, Math.min(rect.right - 2, rect.left + rect.width / 2));
+          const y = Math.max(rect.top + 2, Math.min(rect.bottom - 2, rect.top + Math.min(rect.height / 2, parseFloat(getComputedStyle(element).fontSize))));
+          return document.elementFromPoint(x, y) === element;
+        });
+        if (!target) return { error: 'no unobstructed selectable text' };
+        target.scrollIntoView({ block: 'center' });
+        await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+        const rect = target.getBoundingClientRect();
+        const y = Math.max(rect.top + 2, Math.min(rect.bottom - 2, rect.top + Math.min(rect.height / 2, parseFloat(getComputedStyle(target).fontSize))));
+        return {
+          id: target.dataset.textId,
+          startX: rect.left + Math.max(2, rect.width * 0.15),
+          endX: rect.left + Math.min(rect.width - 2, rect.width * 0.85),
+          y,
+        };
+      })()`);
+      if (dragProbe.error) throw new Error(`${route}: ${dragProbe.error}`);
+      await send("Input.dispatchMouseEvent", { type: "mouseMoved", x: dragProbe.startX, y: dragProbe.y });
+      await send("Input.dispatchMouseEvent", { type: "mousePressed", x: dragProbe.startX, y: dragProbe.y, button: "left", buttons: 1, clickCount: 1 });
+      await send("Input.dispatchMouseEvent", { type: "mouseMoved", x: dragProbe.endX, y: dragProbe.y, button: "left", buttons: 1 });
+      await send("Input.dispatchMouseEvent", { type: "mouseReleased", x: dragProbe.endX, y: dragProbe.y, button: "left", buttons: 0, clickCount: 1 });
+      const dragSelection = await evaluate(`(() => {
+        const selection = window.getSelection();
+        const range = selection?.rangeCount ? selection.getRangeAt(0) : null;
+        const root = document.querySelector('.selectable-text-root');
+        const state = {
+          text: selection?.toString() || '',
+          insideRoot: Boolean(range && root?.contains(range.startContainer) && root.contains(range.endContainer)),
+        };
+        selection?.removeAllRanges();
+        return state;
+      })()`);
+      if (!dragSelection.insideRoot || !dragSelection.text.trim()) {
+        throw new Error(`${route}: pointer text selection failed for ${dragProbe.id}: ${JSON.stringify(dragSelection)}`);
+      }
+    }
+    results.push({ expectedPath: "6 routes pointer selection", path: "mouse drag selects Illustrator-backed text" });
+
+    for (const route of ["/", "/experiences", "/reservation", "/blog", "/chambres", "/galerie"]) {
+      await go(route);
+      await evaluate(`(() => {
+        window.getSelection()?.removeAllRanges();
+        document.body.setAttribute('tabindex', '-1');
+        document.body.focus();
+      })()`);
+      await send("Input.dispatchKeyEvent", {
+        type: "rawKeyDown",
+        key: "a",
+        code: "KeyA",
+        windowsVirtualKeyCode: 65,
+        modifiers: selectAllModifiers,
+        commands: ["SelectAll"],
+      });
+      await send("Input.dispatchKeyEvent", {
+        type: "keyUp",
+        key: "a",
+        code: "KeyA",
+        windowsVirtualKeyCode: 65,
+        modifiers: selectAllModifiers,
+      });
+      const allTextSelection = await evaluate(`(() => {
+        const root = document.querySelector('.selectable-text-root');
+        const layers = [...root.querySelectorAll('.selectable-text-layer')];
+        const selection = window.getSelection();
+        const range = selection?.rangeCount ? selection.getRangeAt(0) : null;
+        const normalize = (text) => String(text || '').replace(/\\s+/g, ' ').trim();
+        const selectedText = normalize(selection?.toString());
+        const expectedText = normalize(root.textContent);
+        const compact = (text) => text.replace(/\\s+/g, '');
+        let mismatch = 0;
+        while (mismatch < selectedText.length && mismatch < expectedText.length && selectedText[mismatch] === expectedText[mismatch]) mismatch += 1;
+        const state = {
+          rootHidden: root.hasAttribute('aria-hidden'),
+          complete: compact(selectedText) === compact(expectedText),
+          selectedLength: selectedText.length,
+          expectedLength: expectedText.length,
+          selectedMismatch: selectedText.slice(Math.max(0, mismatch - 30), mismatch + 70),
+          expectedMismatch: expectedText.slice(Math.max(0, mismatch - 30), mismatch + 70),
+          exactBoundaries: Boolean(range)
+            && range.startContainer === root
+            && range.startOffset === 0
+            && range.endContainer === root
+            && range.endOffset === root.childNodes.length,
+          invalidLayers: layers.filter((layer) => {
+            const rect = layer.getBoundingClientRect();
+            return getComputedStyle(layer).userSelect !== 'text' || rect.width <= 0 || rect.height <= 0;
+          }).map((layer) => layer.dataset.textId),
+        };
+        selection?.removeAllRanges();
+        return state;
+      })()`);
+      if (allTextSelection.rootHidden || !allTextSelection.complete || !allTextSelection.exactBoundaries || allTextSelection.invalidLayers.length) {
+        throw new Error(`${route}: not all Illustrator text is selectable: ${JSON.stringify(allTextSelection)}`);
+      }
+    }
+    results.push({ expectedPath: "6 routes Ctrl+A", path: "all Illustrator-backed text selected" });
 
     for (const route of ["/", "/experiences", "/reservation", "/blog", "/chambres", "/galerie"]) {
       await go(route);
@@ -342,11 +571,21 @@ async function main() {
     const homeGalleryArrow = await evaluate(`(async () => {
       const next = [...document.querySelectorAll('.exact-arrow-hotspot')].find((el) => el.getAttribute('aria-label') === 'Galerie suivante');
       if (!next) return 'missing home gallery next';
+      const initialSprites = [...document.querySelectorAll('.exact-arrow-sprite')].filter((el) => el.src.includes('arrow-filled-'));
+      if (initialSprites.length !== 2) return 'home gallery arrows missing initially: ' + initialSprites.length;
+      const initialRects = initialSprites.map((el) => el.getBoundingClientRect());
+      if (initialSprites.some((el) => el.naturalWidth !== 42 || el.naturalHeight !== 42)) return 'home gallery arrow asset failed';
+      if (Math.abs(initialRects[0].left - 318) > 0.1 || Math.abs(initialRects[0].top - 9202) > 0.1) return 'left home gallery arrow misplaced';
+      if (Math.abs(initialRects[1].left - 1578) > 0.1 || Math.abs(initialRects[1].top - 9202) > 0.1) return 'right home gallery arrow misplaced';
       next.click();
       await new Promise((resolve) => setTimeout(resolve, 150));
       const filledSprites = [...document.querySelectorAll('.exact-arrow-sprite')].filter((el) => el.src.includes('arrow-filled-'));
       if (document.querySelectorAll('.editable-media-layer.is-carousel-active').length < 3) return 'home gallery did not activate';
-      if (filledSprites.length) return 'home gallery added duplicate arrow sprites';
+      if (filledSprites.length !== 2) return 'home gallery duplicated arrow sprites: ' + filledSprites.length;
+      const gallerySources = [...document.querySelectorAll('.editable-media-layer.is-carousel-active')]
+        .slice(0, 3)
+        .map((image) => image.getAttribute('src'));
+      if (gallerySources.some((src) => /home-media-0[46]-exact/.test(src))) return 'home gallery mixed unrelated media: ' + gallerySources.join(',');
       return 'ok';
     })()`);
     if (homeGalleryArrow !== "ok") throw new Error(`Home gallery arrow failed: ${homeGalleryArrow}`);
@@ -374,15 +613,84 @@ async function main() {
     if (homeImageArrowVisual !== "ok") throw new Error(`Home image arrow visual failed: ${homeImageArrowVisual}`);
     results.push({ expectedPath: "/ home image arrow exact crop", path: "adobe-crop" });
 
+    await go("/");
+    const balanceState = await evaluate(`(async () => {
+      const mask = document.querySelector('.home-balance-copy-mask');
+      const rubrics = [...document.querySelectorAll('.selectable-text-layer.is-home-balance-rubric')];
+      const copyArea = document.querySelector('.home-balance-hit-area.is-copy-area');
+      const vector = document.querySelector('.illustrator-text-vector-layer');
+      const copy = document.querySelector('.selectable-text-layer[data-text-id="text-05"]');
+      if (!mask || rubrics.length !== 5 || copyArea || !vector || !copy) return { error: 'invalid balance interaction structure' };
+      if (mask.naturalWidth !== 320 || vector.naturalWidth !== 1920) return { error: 'balance visual assets did not load' };
+      if (getComputedStyle(mask).opacity !== '1') return { error: 'balance copy visible initially' };
+      window.scrollTo(0, 4400);
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      const rubricRect = rubrics[0].getBoundingClientRect();
+      const copyRect = copy.getBoundingClientRect();
+      return {
+        rubricX: rubricRect.left + rubricRect.width / 2,
+        rubricY: rubricRect.top + rubricRect.height / 2,
+        copyX: copyRect.left + copyRect.width / 2,
+        copyY: copyRect.top + copyRect.height / 2,
+        rubricOnTop: document.elementFromPoint(rubricRect.left + rubricRect.width / 2, rubricRect.top + rubricRect.height / 2) === rubrics[0],
+      };
+    })()`);
+    if (balanceState.error || !balanceState.rubricOnTop) throw new Error(`Home balance setup failed: ${JSON.stringify(balanceState)}`);
+    await send("Input.dispatchMouseEvent", { type: "mouseMoved", x: balanceState.rubricX, y: balanceState.rubricY });
+    await wait(180);
+    const rubricOpacity = await evaluate("getComputedStyle(document.querySelector('.home-balance-copy-mask')).opacity");
+    if (rubricOpacity !== "0") throw new Error(`Home balance copy did not reveal from source rubric: ${rubricOpacity}`);
+    await send("Input.dispatchMouseEvent", { type: "mouseMoved", x: balanceState.copyX, y: balanceState.copyY });
+    await wait(180);
+    const copyOpacity = await evaluate("getComputedStyle(document.querySelector('.home-balance-copy-mask')).opacity");
+    if (copyOpacity !== "1") throw new Error(`Home balance copy area incorrectly acts as a hover trigger: ${copyOpacity}`);
+
+    await send("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
+    await go("/");
+    const mobileBalanceOpacity = await evaluate("getComputedStyle(document.querySelector('.home-balance-copy-mask')).opacity");
+    if (mobileBalanceOpacity !== "0") throw new Error(`Home balance copy remains hidden without hover on touch: ${mobileBalanceOpacity}`);
+    await send("Emulation.setDeviceMetricsOverride", { width: 1920, height: 900, deviceScaleFactor: 1, mobile: false });
+
+    const homeInteractions = await evaluate(`(async () => {
+      const checkIn = document.querySelector('[aria-label="Choisir la date d\\'arrivee"]');
+      if (!checkIn) return 'missing Home check-in';
+      if (document.querySelector('.home-live-picker')) return 'Home picker visible before click';
+      checkIn.click();
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      const picker = document.querySelector('.home-live-picker');
+      if (!picker) return 'missing Home picker';
+      const firstMonth = picker.querySelector('.reservation-live-month');
+      const day27 = [...firstMonth.querySelectorAll('.reservation-live-day')].find((el) => el.textContent.trim() === '27');
+      if (!day27) return 'missing Home day 27';
+      day27.click();
+      await new Promise((resolve) => setTimeout(resolve, 30));
+      const day30 = [...firstMonth.querySelectorAll('.reservation-live-day')].find((el) => el.textContent.trim() === '30');
+      if (!day30) return 'missing Home day 30';
+      day30.click();
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      if (document.querySelector('.home-live-picker')) return 'Home picker did not close';
+      const values = [...document.querySelectorAll('.home-booking-value')].map((el) => el.textContent.trim()).join('|');
+      if (values !== '27/Juin|30/Juin|03') return 'Home dates did not update: ' + values;
+      return 'ok';
+    })()`);
+    if (homeInteractions !== "ok") throw new Error(`Home interactions failed: ${homeInteractions}`);
+    results.push({ expectedPath: "/ Home feedback interactions", path: "source-text hover + calendar" });
+
     await go("/chambres");
     const chambresArrow = await evaluate(`(async () => {
       const next = [...document.querySelectorAll('.exact-carousel-hotspot')].find((el) => el.getAttribute('aria-label') === 'Image suivante');
       if (!next) return 'missing chambres next';
+      const initialSprites = [...next.parentElement.querySelectorAll('.exact-arrow-sprite')];
+      if (initialSprites.length !== 2 || initialSprites.some((image) => image.naturalWidth !== 42 || image.naturalHeight !== 42)) return 'missing initial chambres arrow sprites';
+      const nextRect = next.getBoundingClientRect();
+      const initialRightRect = initialSprites[1].getBoundingClientRect();
+      if (Math.abs((nextRect.left + nextRect.width / 2) - (initialRightRect.left + initialRightRect.width / 2)) > 0.1 || Math.abs((nextRect.top + nextRect.height / 2) - (initialRightRect.top + initialRightRect.height / 2)) > 0.1) return 'initial chambres arrow sprite misplaced';
       next.click();
       await new Promise((resolve) => setTimeout(resolve, 150));
       const sprite = [...document.querySelectorAll('.exact-arrow-sprite')].find((el) => el.src.includes('arrow-filled-right-exact.png'));
       if (!document.querySelector('.editable-media-layer.is-carousel-active')) return 'chambres carousel did not activate';
       if (!sprite) return 'missing exact chambres arrow sprite';
+      if (next.parentElement.querySelectorAll('.exact-arrow-sprite').length !== 2) return 'chambres carousel duplicated arrow sprites';
       return 'ok';
     })()`);
     if (chambresArrow !== "ok") throw new Error(`Chambres arrow failed: ${chambresArrow}`);
@@ -392,11 +700,14 @@ async function main() {
     const galerieArrow = await evaluate(`(async () => {
       const next = [...document.querySelectorAll('.exact-carousel-hotspot')].find((el) => el.getAttribute('aria-label') === 'Image suivante');
       if (!next) return 'missing galerie next';
+      const initialSprites = [...next.parentElement.querySelectorAll('.exact-arrow-sprite')];
+      if (initialSprites.length !== 2 || initialSprites.some((image) => image.naturalWidth !== 42 || image.naturalHeight !== 42)) return 'missing initial galerie arrow sprites';
       next.click();
       await new Promise((resolve) => setTimeout(resolve, 150));
       const sprite = [...document.querySelectorAll('.exact-arrow-sprite')].find((el) => el.src.includes('arrow-filled-right-exact.png'));
       if (!document.querySelector('.editable-media-layer.is-carousel-active')) return 'galerie carousel did not activate';
       if (!sprite) return 'missing exact galerie arrow sprite';
+      if (next.parentElement.querySelectorAll('.exact-arrow-sprite').length !== 2) return 'galerie carousel duplicated arrow sprites';
       return 'ok';
     })()`);
     if (galerieArrow !== "ok") throw new Error(`Galerie arrow failed: ${galerieArrow}`);
@@ -414,10 +725,25 @@ async function main() {
     results.push({ expectedPath: "/galerie hero arrow", path: "scrolls" });
 
     await go("/reservation");
+    const reservationInitialCalendar = await evaluate(`(() => ({
+      livePickerVisible: Boolean(document.querySelector('.reservation-live-picker')),
+      staticCalendarVisible: [...document.images].some((image) => image.src.includes('reservation-calendar-exact.png')),
+      closedMaskReady: (() => {
+        const mask = document.querySelector('.reservation-calendar-closed-mask');
+        return Boolean(mask?.complete && mask.naturalWidth === 775 && mask.naturalHeight === 413);
+      })(),
+    }))()`);
+    if (reservationInitialCalendar.livePickerVisible || reservationInitialCalendar.staticCalendarVisible || !reservationInitialCalendar.closedMaskReady) {
+      throw new Error(`Reservation calendar visible before click: ${JSON.stringify(reservationInitialCalendar)}`);
+    }
+    results.push({ expectedPath: "/reservation calendar initially hidden", path: "hidden until date-field click" });
+
     const carouselChanged = await evaluate(`(async () => {
       const image = [...document.querySelectorAll('.editable-media-layer')].find((el) => el.src.includes('reservation-media-03-exact'));
       const next = [...document.querySelectorAll('.exact-carousel-hotspot')].find((el) => el.getAttribute('aria-label') === 'Image suivante');
       if (!image || !next) return false;
+      const initialSprites = [...next.parentElement.querySelectorAll('.exact-arrow-sprite')];
+      if (initialSprites.length !== 2 || initialSprites.some((sprite) => sprite.naturalWidth !== 42 || sprite.naturalHeight !== 42)) return false;
       const before = image.src;
       next.click();
       await new Promise((resolve) => setTimeout(resolve, 150));
@@ -427,11 +753,16 @@ async function main() {
     results.push({ expectedPath: "/reservation carousel", path: "changed" });
 
     const reservationControlsWork = await evaluate(`(async () => {
-      const checkIn = document.querySelector('[aria-label="Calendrier date d\\'arrivee"]');
+      const initialDates = [...document.querySelectorAll('.reservation-live-card-date')].map((el) => el.textContent.trim()).join('|');
+      const initialPrice = document.querySelector('.reservation-live-price')?.textContent.trim();
+      if (!initialDates.includes('03/07/2026') || !initialDates.includes('07/07/2026')) return 'wrong initial dates: ' + initialDates;
+      if (initialPrice !== '3600') return 'wrong initial price: ' + initialPrice;
+      const checkIn = document.querySelector('[aria-label="Choisir la date d\\'arrivee"]');
       if (!checkIn) return 'missing checkin';
       checkIn.click();
       await new Promise((resolve) => setTimeout(resolve, 100));
       if (!document.querySelector('.reservation-live-picker')) return 'missing picker';
+      if (!document.querySelector('.reservation-calendar-closed-mask')) return 'source calendar mask missing under picker';
       const day20 = [...document.querySelectorAll('.reservation-live-day')].find((el) => el.textContent.trim() === '20');
       if (!day20) return 'missing day';
       day20.click();
@@ -441,12 +772,10 @@ async function main() {
       if (!day23) return 'missing checkout day';
       day23.click();
       await new Promise((resolve) => setTimeout(resolve, 100));
-      if (document.querySelector('.reservation-live-picker.is-editing')) return 'picker did not close after checkout';
-      if (!document.querySelector('.reservation-live-picker.is-resolved')) return 'missing resolved calendar after checkout';
+      if (document.querySelector('.reservation-live-picker')) return 'picker did not close after checkout';
+      if (!document.querySelector('.reservation-calendar-closed-mask')) return 'closed-state mask did not return';
       const dateText = [...document.querySelectorAll('.reservation-live-card-date')].map((el) => el.textContent.trim()).join('|');
       if (!dateText.includes('20/07/2026') || !dateText.includes('23/07/2026')) return 'date not updated: ' + dateText;
-      const calendarFieldText = [...document.querySelectorAll('.reservation-live-fields span')].map((el) => el.textContent.trim()).join('|');
-      if (!calendarFieldText.includes('20/07/2026') || !calendarFieldText.includes('23/07/2026')) return 'calendar fields not updated: ' + calendarFieldText;
       const priceText = document.querySelector('.reservation-live-price')?.textContent.trim();
       if (priceText !== '2700') return 'price not updated: ' + priceText;
       const adultsHit = document.querySelector('[aria-label="Changer le nombre d\\'adultes"]');
@@ -495,8 +824,8 @@ async function main() {
       if (!day26) return 'missing day 26';
       day26.click();
       await new Promise((resolve) => setTimeout(resolve, 100));
-      if (document.querySelector('.reservation-live-picker.is-editing')) return '22-26 picker did not close';
-      const finalRange = [...document.querySelectorAll('.reservation-live-fields span')].map((el) => el.textContent.trim()).join('|');
+      if (document.querySelector('.reservation-live-picker')) return '22-26 picker did not close';
+      const finalRange = [...document.querySelectorAll('.reservation-live-card-date')].map((el) => el.textContent.trim()).join('|');
       if (!finalRange.includes('22/07/2026') || !finalRange.includes('26/07/2026')) return '22-26 range not reflected: ' + finalRange;
       const finalPrice = document.querySelector('.reservation-live-price')?.textContent.trim();
       if (finalPrice !== '3600') return '22-26 price not updated: ' + finalPrice;
@@ -508,6 +837,7 @@ async function main() {
     const responsiveViewports = [
       { label: "desktop-1440", width: 1440, height: 900, deviceScaleFactor: 1, mobile: false },
       { label: "tablet-768", width: 768, height: 1024, deviceScaleFactor: 2, mobile: false },
+      { label: "client-730", width: 730, height: 1024, deviceScaleFactor: 2, mobile: false },
       { label: "mobile-390", width: 390, height: 844, deviceScaleFactor: 3, mobile: true },
     ];
     const routePaths = ["/", "/experiences", "/reservation", "/blog", "/chambres", "/galerie"];
@@ -522,25 +852,79 @@ async function main() {
         await go(route);
         const layout = await evaluate(`(() => {
           const canvas = document.querySelector('.exact-canvas');
+          const responsivePage = document.querySelector('.responsive-page');
           const header = document.querySelector('.exact-header-overlay');
+          const mobileHeader = document.querySelector('.mobile-exact-header');
           const canvasRect = canvas?.getBoundingClientRect();
+          const mobileHeaderVisible = mobileHeader && getComputedStyle(mobileHeader).display !== 'none';
           const headerRect = header?.getBoundingClientRect();
+          const densityDeficits = [...document.querySelectorAll('.editable-background-layer, .editable-media-layer, .editable-exact-overlay-layer')]
+            .filter((image) => image.complete && image.naturalWidth > 0)
+            .map((image) => {
+              const rect = image.getBoundingClientRect();
+              return {
+                src: image.getAttribute('src'),
+                requiredWidth: rect.width * devicePixelRatio,
+                naturalWidth: image.naturalWidth,
+              };
+            })
+            .filter((image) => image.naturalWidth + 1 < image.requiredWidth);
           return {
             clientWidth: document.documentElement.clientWidth,
             scrollWidth: document.documentElement.scrollWidth,
             canvasWidth: canvasRect?.width || 0,
             canvasHeight: canvasRect?.height || 0,
+            responsivePagePresent: Boolean(responsivePage),
             headerLeft: headerRect?.left || 0,
             headerRight: headerRect?.right || 0,
+            mobileHeaderVisible,
             brokenImages: [...document.images].filter((image) => image.loading !== 'lazy' && image.complete && image.naturalWidth === 0).length,
+            deferredExactMedia: [...document.querySelectorAll('.editable-media-layer')].filter((image) => image.loading !== 'eager').length,
+            densityDeficits,
           };
         })()`);
         if (layout.scrollWidth > layout.clientWidth + 1) throw new Error(`${viewport.label} ${route}: horizontal overflow ${layout.scrollWidth}/${layout.clientWidth}`);
-        if (!(layout.canvasWidth > 0 && layout.canvasWidth <= layout.clientWidth + 0.1 && layout.canvasHeight > 0)) throw new Error(`${viewport.label} ${route}: invalid canvas ${layout.canvasWidth}x${layout.canvasHeight}`);
+        if (!(layout.canvasWidth > 0 && layout.canvasWidth <= layout.clientWidth + 0.1 && layout.canvasHeight > 0)) {
+          throw new Error(`${viewport.label} ${route}: invalid canvas ${layout.canvasWidth}x${layout.canvasHeight}`);
+        }
+        if (layout.responsivePagePresent) throw new Error(`${viewport.label} ${route}: non-Illustrator responsive composition rendered`);
+        if (layout.deferredExactMedia) throw new Error(`${viewport.label} ${route}: ${layout.deferredExactMedia} exact media still deferred`);
         if (layout.headerLeft < -0.1 || layout.headerRight > layout.clientWidth + 0.1) throw new Error(`${viewport.label} ${route}: header outside viewport`);
+        if (layout.mobileHeaderVisible) throw new Error(`${viewport.label} ${route}: non-Illustrator mobile header rendered`);
         if (layout.brokenImages) throw new Error(`${viewport.label} ${route}: ${layout.brokenImages} broken images`);
+        if (layout.densityDeficits.length) throw new Error(`${viewport.label} ${route}: raster density deficit ${JSON.stringify(layout.densityDeficits)}`);
       }
-      results.push({ expectedPath: `${viewport.label} responsive matrix`, path: "6 routes without overflow or broken assets" });
+      results.push({ expectedPath: `${viewport.label} exact matrix`, path: "6 Illustrator canvases without overflow, broken assets, or raster upscaling" });
+    }
+
+    if (process.env.MEEZAN_CAPTURE_DIR) {
+      const capturePages = {
+        home: { path: "/", width: 1920, height: 12229 },
+        experiences: { path: "/experiences", width: 1920, height: 16004 },
+        reservation: { path: "/reservation", width: 1920, height: 4074 },
+        blog: { path: "/blog", width: 1920, height: 9235 },
+        chambres: { path: "/chambres", width: 1920, height: 11568 },
+        galerie: { path: "/galerie", width: 1920, height: 6098 },
+      };
+      await send("Emulation.setDeviceMetricsOverride", { width: 1920, height: 900, deviceScaleFactor: 1, mobile: false });
+      for (const [page, dimensions] of Object.entries(capturePages)) {
+        await go(`${dimensions.path}?visual-audit=1`);
+        await evaluate(`Promise.all([...document.images].map(async (image) => {
+          if (!image.complete) await new Promise((resolve, reject) => {
+            image.addEventListener('load', resolve, { once: true });
+            image.addEventListener('error', reject, { once: true });
+          });
+          if (image.decode) await image.decode().catch(() => {});
+        }))`);
+        const screenshot = await send("Page.captureScreenshot", {
+          format: "png",
+          fromSurface: true,
+          captureBeyondViewport: true,
+          clip: { x: 0, y: 0, width: dimensions.width, height: dimensions.height, scale: 1 },
+        });
+        await writeFile(path.join(process.env.MEEZAN_CAPTURE_DIR, `${page}.png`), Buffer.from(screenshot.data, "base64"));
+      }
+      results.push({ expectedPath: "desktop captures", path: process.env.MEEZAN_CAPTURE_DIR });
     }
 
     const runtimeFailures = events.flatMap((event) => {

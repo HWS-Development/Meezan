@@ -146,7 +146,7 @@
   user-select: none;
 }
 
-.illustrator-text-raster-layer {
+.illustrator-text-vector-layer {
   position: absolute;
   inset: 0;
   z-index: 20;
@@ -157,6 +157,36 @@
   object-fit: fill;
   pointer-events: none;
   user-select: none;
+}
+
+.selectable-text-root {
+  position: absolute;
+  inset: 0;
+  z-index: 19;
+  pointer-events: none;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.selectable-text-layer {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  cursor: text;
+  font-synthesis: none;
+  line-height: 1;
+  pointer-events: auto;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.selectable-text-layer::selection {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background: rgba(174, 87, 60, 0.22);
 }
 
 .exact-image {
@@ -187,7 +217,7 @@
 }
 
 .editable-media-layer.is-hero-media {
-  z-index: 2;
+  z-index: 10;
   object-fit: cover;
 }
 
@@ -268,6 +298,74 @@
   inset: 0;
   z-index: 35;
   pointer-events: none;
+}
+
+.reservation-calendar-closed-mask {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  max-width: none;
+  background: #fff;
+  pointer-events: none;
+  user-select: none;
+}
+
+.home-booking-interaction,
+.home-balance-interaction {
+  position: absolute;
+  inset: 0;
+  z-index: 35;
+  pointer-events: none;
+}
+
+.home-booking-live-values {
+  position: absolute;
+  inset: 0;
+  z-index: 37;
+  pointer-events: none;
+}
+
+.home-booking-value {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  padding-left: calc(0.75cqw);
+  color: #55565a;
+  background: #fff;
+  font-family: "Erstoria-Regular", Georgia, serif;
+  font-size: calc(2.95cqw);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.home-booking-value.is-nights {
+  justify-content: center;
+  padding-left: 0;
+}
+
+.home-live-picker {
+  z-index: 39;
+}
+
+.home-balance-copy-mask {
+  position: absolute;
+  z-index: 27;
+  display: block;
+  max-width: none;
+  opacity: 1;
+  transition: opacity 120ms ease;
+  pointer-events: none;
+  user-select: none;
+}
+
+.exact-canvas:has(.selectable-text-layer.is-home-balance-rubric:hover) .home-balance-copy-mask {
+  opacity: 0;
+}
+
+@media (hover: none), (max-width: 900px) {
+  .home-balance-copy-mask {
+    opacity: 0;
+  }
 }
 
 .reservation-hit-area {
@@ -949,6 +1047,11 @@
 .exact-header-link.is-active,
 .exact-header-book {
   color: transparent;
+}
+
+.mobile-exact-header,
+.mobile-booking-dock {
+  display: none;
 }
 
 .exact-header-book {
@@ -1839,6 +1942,391 @@ button:focus-visible {
   letter-spacing: 0.04em;
 }
 
+.responsive-page {
+  color: #5b4a44;
+  background: #f7f3ec;
+  font-family: "Roboto-Regular", Arial, sans-serif;
+  line-height: 1.65;
+}
+
+.responsive-hero {
+  position: relative;
+  display: grid;
+  min-height: clamp(390px, 68svh, 560px);
+  overflow: hidden;
+  place-items: center;
+  color: #fff;
+  background: #a9583f;
+}
+
+.responsive-hero > img,
+.responsive-hero-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.responsive-hero > img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.responsive-hero-shade {
+  background:
+    linear-gradient(180deg, rgba(80, 39, 27, 0.12), rgba(174, 87, 60, 0.68)),
+    linear-gradient(90deg, rgba(80, 39, 27, 0.18), transparent 55%);
+}
+
+.responsive-hero-copy {
+  position: relative;
+  z-index: 1;
+  width: min(680px, calc(100% - 40px));
+  padding: 48px 0 24px;
+  text-align: center;
+}
+
+.responsive-hero-copy > span {
+  display: block;
+  margin-bottom: 12px;
+  font-family: "Erstoria-Regular", Georgia, serif;
+  font-size: clamp(18px, 3vw, 24px);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.responsive-hero-copy h1 {
+  margin: 0;
+  font-family: "BreathingPersonalUseOnly-Reg", "Segoe Script", cursive;
+  font-size: clamp(48px, 9vw, 78px);
+  font-weight: 400;
+  line-height: 0.98;
+}
+
+.responsive-hero-copy p {
+  max-width: 590px;
+  margin: 24px auto 0;
+  font-size: clamp(16px, 2.4vw, 20px);
+  line-height: 1.55;
+}
+
+.responsive-hero-copy > a {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  margin: 30px auto 0;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 0;
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  place-items: center;
+}
+
+.responsive-content {
+  scroll-margin-top: 64px;
+}
+
+.responsive-brand-seal {
+  position: relative;
+  display: grid;
+  width: 116px;
+  height: 116px;
+  margin: 52px auto 8px;
+  color: #b35b40;
+  border: 1px solid rgba(179, 91, 64, 0.48);
+  border-radius: 50%;
+  font-family: "AALMAGHRIBI", Georgia, serif;
+  font-size: 54px;
+  transform: rotate(-7deg);
+  place-items: center;
+}
+
+.responsive-brand-seal::before,
+.responsive-brand-seal::after {
+  position: absolute;
+  top: 50%;
+  width: 54px;
+  height: 1px;
+  background: rgba(179, 91, 64, 0.5);
+  content: "";
+}
+
+.responsive-brand-seal::before {
+  right: calc(100% + 18px);
+}
+
+.responsive-brand-seal::after {
+  left: calc(100% + 18px);
+}
+
+.responsive-section {
+  display: grid;
+  gap: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: clamp(58px, 9vw, 92px) clamp(22px, 6vw, 56px);
+}
+
+.responsive-section:nth-of-type(even):not(.is-accent) {
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.responsive-section-copy,
+.responsive-section-heading,
+.responsive-card-copy {
+  min-width: 0;
+}
+
+.responsive-section-copy h2,
+.responsive-section-heading h2,
+.responsive-card-copy h3 {
+  color: #ad573d;
+  font-family: "Erstoria-Regular", Georgia, serif;
+  font-weight: 400;
+  line-height: 1.03;
+  text-transform: uppercase;
+}
+
+.responsive-section-copy h2,
+.responsive-section-heading h2 {
+  margin: 0 0 18px;
+  font-size: clamp(36px, 6.8vw, 58px);
+}
+
+.responsive-section-copy h3,
+.responsive-section-heading h3,
+.responsive-card-copy > strong {
+  display: block;
+  margin: 0 0 18px;
+  color: #ad573d;
+  font-family: "BreathingPersonalUseOnly-Reg", "Segoe Script", cursive;
+  font-size: clamp(26px, 4.8vw, 38px);
+  font-weight: 400;
+  line-height: 1.08;
+}
+
+.responsive-section p,
+.responsive-card p {
+  margin: 0 0 16px;
+  font-size: clamp(16px, 2.2vw, 18px);
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+.responsive-rule {
+  display: block;
+  width: 54px;
+  height: 1px;
+  margin-bottom: 22px;
+  background: #ad573d;
+}
+
+.responsive-media {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: #eadfd5;
+  box-shadow: 0 18px 46px rgba(84, 48, 36, 0.14);
+}
+
+.responsive-media > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.responsive-media-controls {
+  position: absolute;
+  inset: 50% 12px auto;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.responsive-media-controls button {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  place-items: center;
+  pointer-events: auto;
+}
+
+.responsive-media-controls img {
+  display: block;
+  width: 42px;
+  height: 42px;
+}
+
+.responsive-section-heading {
+  max-width: 720px;
+  margin: 0 auto 10px;
+  text-align: center;
+}
+
+.responsive-card-grid {
+  display: grid;
+  gap: 26px;
+}
+
+.responsive-card {
+  overflow: hidden;
+  border: 1px solid rgba(174, 87, 60, 0.1);
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 12px 32px rgba(84, 48, 36, 0.08);
+}
+
+.responsive-card:not(.has-media) {
+  padding: 28px;
+}
+
+.responsive-card.has-media .responsive-media {
+  aspect-ratio: 16 / 10;
+  box-shadow: none;
+}
+
+.responsive-page-home .is-gallery .responsive-card.has-media .responsive-media,
+.responsive-page-experiences .responsive-card.has-media .responsive-media {
+  aspect-ratio: 4 / 5;
+}
+
+.responsive-card-copy {
+  padding: 26px;
+}
+
+.responsive-card:not(.has-media) .responsive-card-copy {
+  padding: 0;
+}
+
+.responsive-card-copy h3 {
+  margin: 0 0 12px;
+  font-size: clamp(27px, 4.5vw, 38px);
+}
+
+.responsive-card-copy > strong {
+  font-size: clamp(23px, 3.8vw, 31px);
+}
+
+.responsive-meta {
+  padding-top: 8px;
+  color: #8b7067;
+  border-top: 1px solid rgba(174, 87, 60, 0.12);
+  font-size: 13px !important;
+}
+
+.responsive-action,
+.responsive-actions .responsive-action {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 0 20px;
+  border: 1px solid #ad573d;
+  color: #fff;
+  background: #ad573d;
+  font-family: "Roboto-Medium", Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.responsive-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.responsive-section.is-intro {
+  max-width: 760px;
+  text-align: center;
+}
+
+.responsive-section.is-intro .responsive-rule {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.responsive-section.is-accent {
+  max-width: none;
+  padding-right: max(clamp(22px, 6vw, 56px), calc((100vw - 790px) / 2));
+  padding-left: max(clamp(22px, 6vw, 56px), calc((100vw - 790px) / 2));
+  color: #fff;
+  background: #b45a3e;
+}
+
+.responsive-section.is-accent h2,
+.responsive-section.is-accent h3,
+.responsive-section.is-accent .responsive-card-copy > strong {
+  color: #fff;
+}
+
+.responsive-section.is-accent .responsive-rule {
+  background: #fff;
+}
+
+.responsive-footer {
+  display: grid;
+  gap: 34px;
+  padding: 54px clamp(24px, 7vw, 64px) 110px;
+  color: #fff;
+  background: #af573b;
+}
+
+.responsive-footer strong {
+  display: block;
+  margin-bottom: 18px;
+  font-family: "Erstoria-Regular", Georgia, serif;
+  font-size: clamp(25px, 4.6vw, 34px);
+  font-weight: 400;
+  line-height: 1.12;
+}
+
+.responsive-footer a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  padding: 0 16px;
+  color: #ad573d;
+  background: #fff;
+  font-size: 13px;
+}
+
+.responsive-footer > span {
+  align-self: end;
+  font-family: "Erstoria-Regular", Georgia, serif;
+  font-size: 22px;
+  line-height: 0.9;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.responsive-footer small {
+  font-family: "BreathingPersonalUseOnly-Reg", "Segoe Script", cursive;
+  font-size: 18px;
+  text-transform: none;
+}
+
+.responsive-footer address {
+  align-self: end;
+  font-size: 13px;
+  font-style: normal;
+  line-height: 1.6;
+  text-align: right;
+  text-transform: uppercase;
+}
+
 @media (max-width: 980px) {
   .site-header {
     grid-template-columns: 1fr auto auto;
@@ -1916,7 +2404,314 @@ button:focus-visible {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
+  .exact-shell {
+    padding-top: 64px;
+  }
+
+  .mobile-responsive-controls {
+    display: block;
+  }
+
+  .mobile-responsive-controls .exact-header-overlay {
+    position: static;
+    height: 0;
+  }
+
+  .mobile-responsive-controls .home-booking-interaction,
+  .mobile-responsive-controls .reservation-interaction-layer {
+    position: static;
+  }
+
+  .mobile-responsive-controls .reservation-hit-area,
+  .mobile-responsive-controls .home-booking-live-values,
+  .mobile-responsive-controls .reservation-live-values,
+  .mobile-responsive-controls .reservation-cursor-mask,
+  .mobile-responsive-controls .reservation-adults-popover {
+    display: none;
+  }
+
+  .exact-canonical-header,
+  .exact-header-logo,
+  .exact-header-nav,
+  .exact-header-book {
+    display: none;
+  }
+
+  .mobile-exact-header {
+    position: fixed;
+    z-index: 60;
+    inset: 0 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 10px;
+    height: 64px;
+    padding: 7px 12px;
+    border-bottom: 1px solid rgba(174, 87, 60, 0.14);
+    background: rgba(249, 247, 243, 0.97);
+    box-shadow: 0 7px 24px rgba(82, 48, 37, 0.1);
+    backdrop-filter: blur(14px);
+    pointer-events: auto;
+  }
+
+  .mobile-header-logo {
+    width: 136px;
+    height: 50px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .mobile-header-logo img {
+    width: 136px;
+    height: 50px;
+    object-fit: contain;
+  }
+
+  .mobile-header-menu-button {
+    display: grid;
+    place-content: center;
+    gap: 6px;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid rgba(174, 87, 60, 0.35);
+    border-radius: 0;
+    color: #ae573c;
+    background: transparent;
+  }
+
+  .mobile-header-menu-button span {
+    display: block;
+    width: 16px;
+    height: 1px;
+    background: currentColor;
+  }
+
+  .mobile-header-book {
+    min-width: 88px;
+    height: 42px;
+    padding: 0 14px;
+    border: 0;
+    border-radius: 0;
+    color: #fff;
+    background: #b45a3e;
+    font-family: "Roboto-Medium", Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .mobile-header-menu {
+    position: absolute;
+    inset: 72px 12px auto;
+    display: grid;
+    padding: 8px;
+    border: 1px solid rgba(174, 87, 60, 0.14);
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 18px 50px rgba(82, 48, 37, 0.18);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 160ms ease, transform 160ms ease, visibility 160ms;
+  }
+
+  .mobile-header-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .mobile-header-menu a,
+  .mobile-header-menu button {
+    min-height: 44px;
+    padding: 0 14px;
+    border: 0;
+    border-radius: 10px;
+    color: #7d3c29;
+    background: transparent;
+    font-family: "Roboto-Medium", Arial, sans-serif;
+    font-size: 13px;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  .mobile-header-menu button.is-active {
+    background: #f5e7e1;
+  }
+
+  .mobile-booking-dock {
+    position: fixed;
+    z-index: 35;
+    left: 12px;
+    right: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 7px;
+    padding: 7px;
+    border: 1px solid rgba(174, 87, 60, 0.14);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 14px 42px rgba(82, 48, 37, 0.22);
+    backdrop-filter: blur(14px);
+    line-height: 1.2;
+    pointer-events: auto;
+    transition: opacity 160ms ease, transform 160ms ease, visibility 160ms;
+  }
+
+  .exact-shell.has-visible-footer .mobile-booking-dock {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(calc(100% + 24px));
+    pointer-events: none;
+  }
+
+  .mobile-booking-dock button {
+    min-width: 0;
+    padding: 6px 10px;
+    border: 0;
+    color: #5b4a44;
+    background: transparent;
+    text-align: left;
+  }
+
+  .mobile-booking-dock span,
+  .mobile-booking-dock strong {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mobile-booking-dock span {
+    margin-bottom: 3px;
+    color: #b45a3e;
+    font-family: "Roboto-Medium", Arial, sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+
+  .mobile-booking-dock strong {
+    font-family: "Roboto-Regular", Arial, sans-serif;
+    font-size: 13px;
+  }
+
+  .mobile-booking-dock a {
+    display: grid;
+    place-items: center;
+    min-height: 48px;
+    padding: 0 14px;
+    border-radius: 11px;
+    color: #fff;
+    background: #b45a3e;
+    font-family: "Roboto-Medium", Arial, sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    pointer-events: auto;
+  }
+
+  .reservation-popover-backdrop {
+    position: fixed;
+    background: rgba(49, 29, 23, 0.38);
+    backdrop-filter: blur(2px);
+  }
+
+  .reservation-live-picker {
+    position: fixed;
+    left: 12px !important;
+    top: 76px !important;
+    width: calc(100vw - 24px) !important;
+    height: auto !important;
+    max-height: calc(100dvh - 96px);
+    padding: 16px;
+    overflow: auto;
+    border-radius: 18px;
+    box-shadow: 0 24px 70px rgba(49, 29, 23, 0.28);
+  }
+
+  .reservation-live-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .reservation-live-header > div:first-child strong {
+    margin-bottom: 5px;
+    font-size: 15px;
+  }
+
+  .reservation-live-header > div:first-child span {
+    font-size: 11px;
+  }
+
+  .reservation-live-fields {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .reservation-live-fields button {
+    min-height: 50px;
+    padding: 8px 11px;
+  }
+
+  .reservation-live-fields strong,
+  .reservation-live-fields span {
+    font-size: 12px;
+  }
+
+  .reservation-live-close {
+    width: 34px;
+    height: 34px;
+    font-size: 24px;
+  }
+
+  .reservation-live-nav {
+    left: 16px;
+    right: 16px;
+    top: 116px;
+  }
+
+  .reservation-live-nav button {
+    width: 34px;
+    height: 34px;
+    font-size: 24px;
+  }
+
+  .reservation-live-months {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .reservation-live-month + .reservation-live-month {
+    display: none;
+  }
+
+  .reservation-live-month h3 {
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+
+  .reservation-live-weekdays {
+    margin-bottom: 8px;
+    font-size: 11px;
+  }
+
+  .reservation-live-grid {
+    row-gap: 3px;
+  }
+
+  .reservation-live-day,
+  .reservation-live-grid span {
+    height: 36px;
+    font-size: 12px;
+  }
+
   .site-header {
     padding: 12px 16px;
     gap: 12px;
@@ -1964,6 +2759,48 @@ button:focus-visible {
   .activities-list .balance-icon {
     width: 78px;
     height: 78px;
+  }
+}
+
+@media (min-width: 680px) and (max-width: 900px) {
+  .responsive-section:not(.is-cards, .is-gallery, .is-intro) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .responsive-section.is-reverse .responsive-media {
+    order: 2;
+  }
+
+  .responsive-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .responsive-footer {
+    grid-template-columns: 1fr auto 1fr;
+    padding-bottom: 110px;
+  }
+}
+
+/* Without mobile Illustrator artboards, preserve the source canvas instead of inventing a second design. */
+@media (max-width: 900px) {
+  .exact-shell {
+    padding-top: 0;
+  }
+
+  .exact-canonical-header,
+  .exact-header-logo,
+  .exact-header-nav {
+    display: block;
+  }
+
+  .exact-header-book {
+    display: grid;
+  }
+
+  .mobile-exact-header,
+  .mobile-booking-dock {
+    display: none;
   }
 }
 

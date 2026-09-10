@@ -11,9 +11,9 @@ Les six maquettes Adobe Illustrator sont l'autorite visuelle desktop a 1920 px :
 - `Meezan Website Chambres.ai`
 - `Meezan Website Gallerie.ai`
 
-Le site conserve les mesures Illustrator, les rasters de texte Illustrator et les crops de correction approuves. Les controles desktop comparent chaque pixel RGBA, sans echantillonnage.
+Le site conserve les mesures Illustrator, les textes vectoriels exportes en traces et les crops de correction approuves. Les controles desktop comparent chaque pixel RGBA, sans echantillonnage.
 
-Il n'existe pas de maquette Illustrator mobile ou tablette. Ces largeurs sont donc controlees pour l'absence de casse, de debordement et d'asset manquant, pas pour une parite avec une maquette inexistante.
+Il n'existe pas de maquette Illustrator mobile ou tablette. Le site conserve donc le canevas Adobe original et le redimensionne proportionnellement sous 1920 px, sans introduire de composition, composant ou comportement visuel non present dans les sources. Ces largeurs sont controlees pour l'absence de casse, de debordement, d'asset manquant et d'agrandissement raster.
 
 ## Fichiers a modifier
 
@@ -32,12 +32,12 @@ Il n'existe pas de maquette Illustrator mobile ou tablette. Ces largeurs sont do
 1. Rechercher la page et l'identifiant `text-XX` dans `src/data/siteContent.json`.
 2. Modifier `value` et, si necessaire, les proprietes de `style`.
 3. Ne pas changer `bounds` sans une nouvelle mesure Illustrator.
-4. Regenerer les rasters et exports Illustrator avec `npm run illustrator:export`.
+4. Regenerer les exports Illustrator puis lancer `npm run illustrator:sync` pour promouvoir les SVG, synchroniser les metriques et produire le manifeste v2.
 5. Produire et controler la candidate avec `npm run visual:candidate`.
 6. Approuver seulement apres revue avec `npm run visual:approve` puis `npm run assets:approve`.
 7. Terminer avec `npm run delivery:strict`.
 
-Le texte visible est rasterise par Adobe Illustrator. Un simple `npm run build` apres une modification de texte ne suffit pas.
+Le texte visible est exporte en traces SVG par Adobe Illustrator et double par une couche HTML selectionnable. Un simple `npm run build` apres une modification de texte ne suffit pas.
 
 ## Modifier une image de contenu
 
@@ -69,9 +69,14 @@ Modifier `seoContent` et `businessSchema` dans `src/data/pageConfig.js`. Les des
 
 ```powershell
 npm ci
+$env:MEEZAN_SOURCE_DIR = "C:\chemin\vers\les\sources\archivees"
 npm run illustrator:export
 npm run visual:candidate
 ```
+
+`MEEZAN_SOURCE_DIR` designe le dossier archive contenant les six `.ai`. Le manifeste ne stocke que leurs noms et hashes afin de rester portable entre Windows, macOS et les postes de livraison.
+
+`sync-illustrator-manifest.mjs` est l'unique producteur du manifeste v2. `illustrator:assets` conserve l'ancien export complet pour diagnostic, mais ecrit uniquement un rapport intermediaire dans `public/assets/illustrator-spec/`.
 
 Revoir obligatoirement :
 
@@ -104,7 +109,7 @@ Cette commande refuse la livraison si :
 - le build contient un chemin local absolu ;
 - le paquet de deploiement depasse 200 MiB ;
 - une erreur console, runtime, reseau, HTTP, image ou police apparait ;
-- une route deborde sur desktop, tablette ou mobile ;
+- une route deborde, casse la geometrie Illustrator ou agrandit un raster au-dela de sa definition native ;
 - la fidelite Illustrator depasse la politique approuvee ;
 - un seul pixel differe de la baseline navigateur approuvee.
 

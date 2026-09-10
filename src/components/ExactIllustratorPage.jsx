@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import siteContent from "../data/siteContent.json";
 import {
   businessSchema,
@@ -22,6 +22,13 @@ function normalizeText(value) {
 
 function cleanText(value) {
   return normalizeText(value).replace(/\s+/g, " ").trim();
+}
+
+function shouldKeepNativeSelectAll(event) {
+  return event.composedPath().some((node) => (
+    node instanceof HTMLElement
+    && (node.matches("input, textarea, select, [role='textbox']") || node.isContentEditable)
+  ));
 }
 
 function aiPx(value) {
@@ -57,11 +64,6 @@ function fontFamily(textFrame) {
   const name = textFrame.font?.name || textFrame.font?.family || "";
   const text = cleanText(textFrame.content);
   const size = Number(textFrame.size || 0);
-  const color = String(textFrame.fillColor?.hex || "").toUpperCase();
-  if (/meezane l'art de l[’']équilibre|meezane l'art de l[’']equilibre/i.test(text)) return "Roboto-Light";
-  if (color === "#FFFFFF" && /^(gallerie|nos chambres)$/i.test(text)) return "Roboto-Light";
-  if (/^parce que les plus beaux moments naissent quand la nature donne le rythme\.?$/i.test(text)) return "Roboto-Light";
-  if (/^(important|les expériences signature meezane|les experiences signature meezane|une destination, plusieurs expériences|une destination, plusieurs experiences)$/i.test(text)) return "Roboto-Light";
   if (/Breathing/i.test(name)) return "BreathingPersonalUseOnly-Reg";
   if (/AALMAGHRIBI/i.test(name)) return "AALMAGHRIBI";
   if (/SignPainter/i.test(name)) return "SignPainter-HouseScript";
@@ -110,6 +112,160 @@ function isBlogArticleBody(item) {
 
 const monthNames = ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"];
 const weekDays = ["L", "M", "M", "J", "V", "S", "D"];
+
+const responsivePageContent = {
+  home: {
+    hero: {
+      eyebrow: "Meezane",
+      title: "L'art de l'équilibre",
+      subtitle: "Un lieu confidentiel au coeur de la nature, où l'on vient ralentir, créer, célébrer et se reconnecter.",
+      image: "/assets/social/og-home.jpg",
+    },
+    sections: [
+      { kind: "intro", titleId: "text-44", bodyIds: ["text-43"] },
+      { titleId: "text-41", bodyIds: ["text-40"], image: "/assets/illustrator-driven/galerie-media-05-exact.png" },
+      {
+        kind: "cards",
+        titleId: "text-10",
+        bodyIds: ["text-12", "text-11"],
+        cards: [
+          { titleId: "text-06", bodyIds: ["text-05"] },
+          { titleId: "text-09" },
+          { titleId: "text-01" },
+          { titleId: "text-08" },
+          { titleId: "text-07" },
+        ],
+      },
+      { kind: "accent", titleId: "text-04", bodyIds: ["text-03"], imageId: "raster-04" },
+      { reverse: true, titleId: "text-27", bodyIds: ["text-26"], imageId: "raster-06" },
+      { titleId: "text-25", subtitleId: "text-20", bodyIds: ["text-24"], imageId: "raster-02" },
+      {
+        kind: "gallery",
+        titleId: "text-02",
+        cards: [
+          { imageId: "raster-01", title: "Les extérieurs" },
+          { imageId: "raster-02", title: "Les espaces de vie" },
+          { imageId: "raster-03", title: "La piscine" },
+        ],
+      },
+      { reverse: true, titleId: "text-23", subtitleId: "text-21", bodyIds: ["text-22", "text-19"], imageId: "raster-05", actionId: "text-14" },
+      { titleId: "text-17", bodyIds: ["text-18", "text-15", "text-16"], imageId: "raster-04" },
+    ],
+  },
+  experiences: {
+    hero: {
+      title: "Une destination, plusieurs expériences",
+      subtitle: "Chaque projet est unique. Chaque expérience est pensée sur mesure.",
+      image: "/assets/illustrator-driven/galerie-media-05-exact.png",
+    },
+    sections: [
+      {
+        kind: "cards",
+        cards: [
+          { titleId: "text-59", bodyIds: ["text-58"], imageId: "raster-06", actionId: "text-37" },
+          { titleId: "text-36", bodyIds: ["text-35"], imageId: "raster-05", actionId: "text-34" },
+          { titleId: "text-33", bodyIds: ["text-32"], imageId: "raster-04", actionId: "text-31" },
+          { titleId: "text-30", bodyIds: ["text-29"], imageId: "raster-03", actionId: "text-28" },
+          { titleId: "text-27", bodyIds: ["text-26"], imageId: "raster-02", actionId: "text-25" },
+          { titleId: "text-24", bodyIds: ["text-23", "text-22"], imageId: "raster-01", actionId: "text-21" },
+        ],
+      },
+      { kind: "accent", titleId: "text-50", subtitleId: "text-49", bodyIds: ["text-46"] },
+      { titleId: "text-52", subtitleId: "text-41", bodyIds: ["text-51"] },
+      { reverse: true, titleId: "text-45", subtitleId: "text-42", bodyIds: ["text-44", "text-40", "text-43"], imageId: "raster-07" },
+      {
+        kind: "cards",
+        titleId: "text-48",
+        subtitleId: "text-47",
+        cards: [
+          { titleId: "text-20", subtitleId: "text-18", bodyIds: ["text-19"] },
+          { titleId: "text-17", subtitleId: "text-15", bodyIds: ["text-16"] },
+          { titleId: "text-14", subtitleId: "text-12", bodyIds: ["text-13"] },
+          { titleId: "text-06", subtitleId: "text-04", bodyIds: ["text-05"] },
+          { titleId: "text-11", subtitleId: "text-07", bodyIds: ["text-08"] },
+        ],
+      },
+      { kind: "intro", titleId: "text-09", bodyIds: ["text-10"], actions: ["text-03", "text-02"] },
+    ],
+  },
+  reservation: {
+    hero: {
+      title: "Important",
+      subtitle: "Une demande de réservation peut être envoyée pour les dates souhaitées. Aucun paiement ne sera demandé.",
+      image: "/assets/illustrator-driven/galerie-media-05-exact.png",
+    },
+    sections: [
+      { titleId: "text-87", bodyIds: ["text-98"], imageId: "placed-03" },
+      {
+        kind: "cards",
+        title: "Préparer votre séjour",
+        cards: [
+          { titleId: "text-89", bodyIds: ["text-06", "text-12", "text-05", "text-07", "text-03", "text-04"] },
+          { titleId: "text-11", bodyIds: ["text-10", "text-02"] },
+          { titleId: "text-09", bodyIds: ["text-08", "text-01"] },
+          { title: "Tarif", bodyIds: ["text-84"], href: "mailto:hello@meezane.ma?subject=Reservation%20Meezane", actionLabel: "Demander une réservation" },
+        ],
+      },
+    ],
+  },
+  blog: {
+    hero: {
+      title: "Blog",
+      subtitle: "Actualités, inspirations et art de vivre.",
+      image: "/assets/illustrator-driven/blog-media-09-exact.png",
+    },
+    sections: [
+      {
+        kind: "cards",
+        cards: [
+          { titleId: "text-18", bodyIds: ["text-17"], metaIds: ["text-29", "text-28"], imageId: "placed-09" },
+          { titleId: "text-14", bodyIds: ["text-13"], metaIds: ["text-16", "text-15"], imageId: "raster-01" },
+          { titleId: "text-10", bodyIds: ["text-09"], metaIds: ["text-12", "text-11"], imageId: "placed-08" },
+          { titleId: "text-06", bodyIds: ["text-05"], metaIds: ["text-08", "text-07"], imageId: "placed-07" },
+          { titleId: "text-02", bodyIds: ["text-01"], metaIds: ["text-04", "text-03"], imageId: "placed-06" },
+        ],
+      },
+    ],
+  },
+  chambres: {
+    hero: {
+      title: "Nos Chambres",
+      subtitle: "Chaque espace raconte une histoire.",
+      image: "/assets/illustrator-driven/blog-media-09-exact.png",
+    },
+    sections: [
+      {
+        kind: "gallery",
+        cards: [
+          { titleId: "text-14", bodyIds: ["text-13"], imageId: "placed-10" },
+          { titleId: "text-09", bodyIds: ["text-12"], imageId: "placed-09" },
+          { titleId: "text-07", bodyIds: ["text-06"], imageId: "placed-11" },
+          { titleId: "text-11", bodyIds: ["text-05"], imageId: "placed-08" },
+          { titleId: "text-08", bodyIds: ["text-04"], imageId: "placed-05" },
+          { titleId: "text-10", bodyIds: ["text-03"], imageId: "placed-07" },
+          { titleId: "text-02", bodyIds: ["text-01"], imageId: "placed-06" },
+        ],
+      },
+    ],
+  },
+  galerie: {
+    hero: {
+      title: "Gallerie",
+      subtitle: "Chaque espace raconte une histoire.",
+      image: "/assets/illustrator-driven/galerie-media-05-exact.png",
+    },
+    sections: [
+      {
+        kind: "gallery",
+        cards: [
+          { titleId: "text-03", imageId: "placed-05" },
+          { titleId: "text-02", imageId: "placed-04" },
+          { titleId: "text-01", imageId: "placed-03" },
+        ],
+      },
+    ],
+  },
+};
 
 const exactArrowSpriteSize = 42;
 const exactArrowSprites = {
@@ -175,6 +331,10 @@ function isHeaderText(item) {
 }
 
 function HeaderOverlay({ page, onNavigate, onPrefetch }) {
+  function navigate(action) {
+    onNavigate(action);
+  }
+
   return (
     <div className="exact-header-overlay" aria-label="Navigation principale">
       <img
@@ -187,7 +347,7 @@ function HeaderOverlay({ page, onNavigate, onPrefetch }) {
         aria-hidden="true"
         draggable="false"
       />
-      <button className="exact-header-logo" type="button" aria-label="Retour a l'accueil" onPointerEnter={() => onPrefetch("home")} onFocus={() => onPrefetch("home")} onClick={() => onNavigate("home")} />
+      <button className="exact-header-logo" type="button" aria-label="Retour a l'accueil" onPointerEnter={() => onPrefetch("home")} onFocus={() => onPrefetch("home")} onClick={() => navigate("home")} />
       <nav className="exact-header-nav">
         {headerNavItems.map((item) => item.href ? (
           <a key={item.label} className="exact-header-link" href={item.href} style={{ left: `${item.left}cqw`, width: `${item.width}cqw` }}>{item.label}</a>
@@ -199,13 +359,13 @@ function HeaderOverlay({ page, onNavigate, onPrefetch }) {
             style={{ left: `${item.left}cqw`, width: `${item.width}cqw` }}
             onPointerEnter={() => onPrefetch(item.action)}
             onFocus={() => onPrefetch(item.action)}
-            onClick={() => onNavigate(item.action)}
+            onClick={() => navigate(item.action)}
           >
             {item.label}
           </button>
         ))}
       </nav>
-      <button className="exact-header-book" type="button" onPointerEnter={() => onPrefetch(headerBookAction.action)} onFocus={() => onPrefetch(headerBookAction.action)} onClick={() => onNavigate(headerBookAction.action)}>{headerBookAction.label}</button>
+      <button className="exact-header-book" type="button" onPointerEnter={() => onPrefetch(headerBookAction.action)} onFocus={() => onPrefetch(headerBookAction.action)} onClick={() => navigate(headerBookAction.action)}>{headerBookAction.label}</button>
     </div>
   );
 }
@@ -296,7 +456,7 @@ function SeoArticle({ page, textFrames }) {
 }
 
 function isBackdropMedia(item, artboard) {
-  return item.bounds.width >= artboard.width * 0.9 && item.bounds.height >= artboard.width;
+  return item.type !== "placed" && item.bounds.width >= artboard.width * 0.9 && item.bounds.height >= artboard.width;
 }
 
 function isHeroMedia(item, artboard) {
@@ -333,11 +493,11 @@ function BackgroundLayer({ src, title, artboard }) {
 function IllustratorTextLayer({ page, artboard }) {
   return (
     <img
-      src={`/assets/illustrator-text/${page}-text.png`}
+      src={`/assets/illustrator-text/${page}-text.svg`}
       data-illustrator-text-page={page}
       alt=""
       aria-hidden="true"
-      className="illustrator-text-raster-layer"
+      className="illustrator-text-vector-layer"
       width={artboard.width}
       height={artboard.height}
       loading="eager"
@@ -346,9 +506,37 @@ function IllustratorTextLayer({ page, artboard }) {
   );
 }
 
+function SelectableTextLayer({ item, artboard, page }) {
+  const isArea = /AREATEXT/i.test(item.kind || "");
+  const family = fontFamily(item);
+  const isHomeBalanceRubric = page === "home" && ["text-01", "text-06", "text-07", "text-08", "text-09"].includes(item.id);
+  const style = {
+    left: pct(item.bounds.x, artboard.width),
+    top: pct(item.bounds.y, artboard.height),
+    width: pct(item.bounds.width, artboard.width),
+    minHeight: pct(item.bounds.height, artboard.height),
+    fontFamily: family,
+    fontWeight: fontWeightForFamily(family),
+    fontSize: cqw(item.size, artboard.width),
+    lineHeight: item.leading ? cqw(item.leading, artboard.width) : "normal",
+    letterSpacing: `${Number(item.tracking || 0) / 1000}em`,
+    textAlign: textAlign(item.justification),
+    whiteSpace: isArea ? "pre-line" : "pre",
+  };
+
+  return (
+    <div
+      className={`selectable-text-layer${isHomeBalanceRubric ? " is-home-balance-rubric" : ""}`}
+      data-text-id={item.id}
+      style={style}
+    >
+      {transformText(item.content, item.capitalization)}
+    </div>
+  );
+}
+
 function heroMediaBox(page, item, artboard) {
   if (!isHeroMedia(item, artboard)) return null;
-  if (page === "experiences") return { hidden: true };
 
   return heroMediaBoxes[page] || null;
 }
@@ -368,10 +556,11 @@ function mediaOverrideBox(page, item, artboard) {
 }
 
 function MediaLayer({ item, artboard, page, carouselIndexes }) {
-  if (isBackdropMedia(item, artboard) || isHeroMedia(item, artboard)) return null;
+  if (isBackdropMedia(item, artboard)) return null;
 
   if (!item.exported || !item.src) return null;
   const override = mediaOverrideBox(page, item, artboard);
+  if (isHeroMedia(item, artboard) && !override) return null;
   if (override?.hidden) return null;
   const defaultSrc = mediaSrc(item, override?.src || item.src);
   const carouselSources = carouselSourcesFor(page, item, defaultSrc);
@@ -380,8 +569,6 @@ function MediaLayer({ item, artboard, page, carouselIndexes }) {
   const src = carouselSources?.[carouselIndex] || defaultSrc;
   const className = `${mediaClassName(item, artboard)}${carouselSources && carouselIndex ? " is-carousel-active" : ""}`;
   const bounds = override || item.bounds;
-  const loading = pageImageLoading(artboard);
-
   return (
     <img
       className={className}
@@ -397,8 +584,8 @@ function MediaLayer({ item, artboard, page, carouselIndexes }) {
       }}
       width={bounds.width}
       height={bounds.height}
-      loading={loading}
-      decoding={loading === "lazy" ? "async" : "auto"}
+      loading="eager"
+      decoding="async"
       aria-hidden="true"
       draggable="false"
     />
@@ -418,6 +605,7 @@ function ExactOverlayLayer({ overlay, artboard }) {
         top: pct(overlay.y, artboard.height),
         width: pct(overlay.width, artboard.width),
         height: pct(overlay.height, artboard.height),
+        zIndex: overlay.zIndex,
       }}
       width={overlay.width}
       height={overlay.height}
@@ -525,19 +713,141 @@ function ReservationLiveCalendarMonth({ monthDate, checkIn, checkOut, activeFiel
   );
 }
 
+function BookingCalendarPanel({
+  activeField,
+  artboard,
+  checkIn,
+  checkOut,
+  className = "",
+  displayMonth,
+  nights,
+  onClose,
+  onOpenField,
+  onSelectDate,
+  onShiftMonth,
+  style,
+}) {
+  const nightLabel = nights > 1 ? "nuits" : "nuit";
+
+  return (
+    <section className={`reservation-live-picker is-editing ${className}`.trim()} aria-label="Selection des dates" style={style}>
+      <header className="reservation-live-header">
+        <div><strong>{nights} {nightLabel}</strong><span>{formatShortDate(checkIn)} - {formatShortDate(checkOut)}</span></div>
+        <div className="reservation-live-fields">
+          <button type="button" className={activeField === "checkIn" ? "is-active" : ""} onClick={() => onOpenField("checkIn")}><strong>Check-in</strong><span>{formatDate(checkIn)}</span></button>
+          <button type="button" className={activeField === "checkOut" ? "is-active" : ""} onClick={() => onOpenField("checkOut")}><strong>Check-out</strong><span>{formatDate(checkOut)}</span></button>
+        </div>
+        <button type="button" className="reservation-live-close" aria-label="Fermer le calendrier" onClick={onClose}>×</button>
+      </header>
+      <div className="reservation-live-nav"><button type="button" aria-label="Mois precedent" onClick={() => onShiftMonth(-1)}>‹</button><button type="button" aria-label="Mois suivant" onClick={() => onShiftMonth(1)}>›</button></div>
+      <div className="reservation-live-months">
+        <ReservationLiveCalendarMonth monthDate={displayMonth} checkIn={checkIn} checkOut={checkOut} activeField={activeField} onSelectDate={onSelectDate} />
+        <ReservationLiveCalendarMonth monthDate={new Date(displayMonth.getFullYear(), displayMonth.getMonth() + 1, 1)} checkIn={checkIn} checkOut={checkOut} activeField={activeField} onSelectDate={onSelectDate} />
+      </div>
+    </section>
+  );
+}
+
+function formatHomeDate(date) {
+  return `${String(date.getDate()).padStart(2, "0")}/${monthNames[date.getMonth()]}`;
+}
+
+function HomeBookingWidget({ artboard }) {
+  const [checkIn, setCheckIn] = useState(() => new Date(2026, 5, 26));
+  const [checkOut, setCheckOut] = useState(() => new Date(2026, 5, 29));
+  const [activeField, setActiveField] = useState("checkIn");
+  const [displayMonth, setDisplayMonth] = useState(() => new Date(2026, 5, 1));
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const nights = nightsBetween(checkIn, checkOut);
+  const mailtoSubject = encodeURIComponent("Disponibilite Meezane");
+  const mailtoBody = encodeURIComponent(`Bonjour Meezane,\n\nJe souhaite verifier la disponibilite du ${formatDate(checkIn)} au ${formatDate(checkOut)} (${nights} nuit(s)).\n\nMerci.`);
+
+  function openDatePicker(field) {
+    setActiveField(field);
+    setPickerOpen(true);
+  }
+
+  function selectDate(date) {
+    setHasInteracted(true);
+    if (activeField === "checkIn") {
+      setCheckIn(date);
+      if (dateKey(date) >= dateKey(checkOut)) setCheckOut(addDays(date, 1));
+      setActiveField("checkOut");
+      return;
+    }
+    if (dateKey(date) <= dateKey(checkIn)) return;
+    setCheckOut(date);
+    setActiveField("checkIn");
+    setPickerOpen(false);
+  }
+
+  function shiftMonth(amount) {
+    setDisplayMonth((current) => new Date(current.getFullYear(), current.getMonth() + amount, 1));
+  }
+
+  return (
+    <div className="home-booking-interaction" aria-label="Reservation depuis la page d'accueil">
+      {pickerOpen ? <button className="reservation-popover-backdrop" type="button" aria-label="Fermer le calendrier" onClick={() => setPickerOpen(false)} /> : null}
+      <button className="reservation-hit-area" type="button" aria-label="Choisir la date d'arrivee" onClick={() => openDatePicker("checkIn")} style={{ left: pct(362, artboard.width), top: pct(900, artboard.height), width: pct(300, artboard.width), height: pct(180, artboard.height) }} />
+      <button className="reservation-hit-area" type="button" aria-label="Choisir la date de depart" onClick={() => openDatePicker("checkOut")} style={{ left: pct(662, artboard.width), top: pct(900, artboard.height), width: pct(300, artboard.width), height: pct(180, artboard.height) }} />
+      <a className="reservation-hit-area home-booking-submit" aria-label="Verifier la disponibilite" href={`mailto:hello@meezane.ma?subject=${mailtoSubject}&body=${mailtoBody}`} style={{ left: pct(1240, artboard.width), top: pct(920, artboard.height), width: pct(344, artboard.width), height: pct(150, artboard.height) }} />
+      {hasInteracted ? (
+        <div className="home-booking-live-values" aria-live="polite">
+          <span className="home-booking-value" style={{ left: pct(380, artboard.width), top: pct(965, artboard.height), width: pct(260, artboard.width), height: pct(100, artboard.height) }}>{formatHomeDate(checkIn)}</span>
+          <span className="home-booking-value" style={{ left: pct(680, artboard.width), top: pct(965, artboard.height), width: pct(260, artboard.width), height: pct(100, artboard.height) }}>{formatHomeDate(checkOut)}</span>
+          <span className="home-booking-value is-nights" style={{ left: pct(980, artboard.width), top: pct(965, artboard.height), width: pct(170, artboard.width), height: pct(100, artboard.height) }}>{String(nights).padStart(2, "0")}</span>
+        </div>
+      ) : null}
+      {pickerOpen ? (
+        <BookingCalendarPanel
+          activeField={activeField}
+          artboard={artboard}
+          checkIn={checkIn}
+          checkOut={checkOut}
+          className="home-live-picker"
+          displayMonth={displayMonth}
+          nights={nights}
+          onClose={() => setPickerOpen(false)}
+          onOpenField={openDatePicker}
+          onSelectDate={selectDate}
+          onShiftMonth={shiftMonth}
+          style={{ left: pct(362, artboard.width), top: pct(1090, artboard.height), width: pct(810, artboard.width), height: pct(421, artboard.height) }}
+        />
+      ) : null}
+    </div>
+  );
+}
+
+function HomeBalanceHover({ artboard }) {
+  return (
+    <div className="home-balance-interaction">
+      <img
+        className="home-balance-copy-mask"
+        src="/assets/illustrator-driven/home-balance-copy-mask-exact.png"
+        alt=""
+        aria-hidden="true"
+        style={{ left: pct(120, artboard.width), top: pct(4980, artboard.height), width: pct(320, artboard.width), height: pct(250, artboard.height) }}
+        width="320"
+        height="250"
+        draggable="false"
+      />
+    </div>
+  );
+}
+
 function ReservationBookingWidget({ artboard }) {
   const [checkIn, setCheckIn] = useState(() => new Date(2026, 6, 3));
   const [checkOut, setCheckOut] = useState(() => new Date(2026, 6, 7));
   const [activeField, setActiveField] = useState("checkIn");
   const [adults, setAdults] = useState(1);
   const [displayMonth, setDisplayMonth] = useState(() => new Date(2026, 6, 1));
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(true);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [adultsOpen, setAdultsOpen] = useState(false);
   const nights = nightsBetween(checkIn, checkOut);
   const nightLabel = nights > 1 ? "nuits" : "nuit";
   const totalPrice = nights * 900;
-  const showCalendarPanel = hasInteracted || pickerOpen;
   const mailtoSubject = encodeURIComponent("Reservation Meezane");
   const mailtoBody = encodeURIComponent(`Bonjour Meezane,\n\nJe souhaite reserver du ${formatDate(checkIn)} au ${formatDate(checkOut)} pour ${adults} adulte(s).\nTotal indicatif: ${totalPrice} DH (${nights} ${nightLabel}).\n\nMerci.`);
 
@@ -589,14 +899,22 @@ function ReservationBookingWidget({ artboard }) {
 
   return (
     <div className="reservation-interaction-layer" aria-label="Reservation interactive">
+      <img
+        className="reservation-calendar-closed-mask"
+        src="/assets/illustrator-driven/reservation-calendar-closed-mask-exact.png"
+        alt=""
+        aria-hidden="true"
+        style={{ left: pct(790, artboard.width), top: pct(3197, artboard.height), width: pct(775, artboard.width), height: pct(413, artboard.height) }}
+        width="775"
+        height="413"
+        draggable="false"
+      />
       <span className="reservation-cursor-mask" aria-hidden="true" style={{ left: pct(1352, artboard.width), top: pct(2940, artboard.height), width: pct(36, artboard.width), height: pct(48, artboard.height) }} />
       {pickerOpen || adultsOpen ? <button className="reservation-popover-backdrop" type="button" aria-label="Fermer le selecteur" onClick={closeSelectors} /> : null}
       <button className="reservation-hit-area" type="button" aria-label="Choisir la date d'arrivee" onClick={() => openDatePicker("checkIn")} style={{ left: pct(1254, artboard.width), top: pct(2937, artboard.height), width: pct(138, artboard.width), height: pct(70, artboard.height) }} />
       <button className="reservation-hit-area" type="button" aria-label="Choisir la date de depart" onClick={() => openDatePicker("checkOut")} style={{ left: pct(1396, artboard.width), top: pct(2937, artboard.height), width: pct(132, artboard.width), height: pct(70, artboard.height) }} />
       <button className="reservation-hit-area" type="button" aria-label="Changer le nombre d'adultes" onClick={() => { setAdultsOpen((open) => !open); setPickerOpen(false); setHasInteracted(true); }} style={{ left: pct(1254, artboard.width), top: pct(3007, artboard.height), width: pct(274, artboard.width), height: pct(62, artboard.height) }} />
       <a className="reservation-hit-area" aria-label="Envoyer la demande de reservation" href={`mailto:hello@meezane.ma?subject=${mailtoSubject}&body=${mailtoBody}`} style={{ left: pct(1251, artboard.width), top: pct(3092, artboard.height), width: pct(256, artboard.width), height: pct(111, artboard.height) }} />
-      <button className="reservation-hit-area" type="button" aria-label="Calendrier date d'arrivee" onClick={() => openDatePicker("checkIn")} style={{ left: pct(1208, artboard.width), top: pct(3248, artboard.height), width: pct(152, artboard.width), height: pct(70, artboard.height) }} />
-      <button className="reservation-hit-area" type="button" aria-label="Calendrier date de depart" onClick={() => openDatePicker("checkOut")} style={{ left: pct(1362, artboard.width), top: pct(3248, artboard.height), width: pct(152, artboard.width), height: pct(70, artboard.height) }} />
       {hasInteracted ? (
         <div className="reservation-live-values" aria-live="polite">
           <span className="reservation-live-price-row-mask" aria-hidden="true" style={{ left: pct(1244, artboard.width), top: pct(2815, artboard.height), width: pct(300, artboard.width), height: pct(92, artboard.height) }} />
@@ -617,22 +935,20 @@ function ReservationBookingWidget({ artboard }) {
           <button type="button" aria-label="Ajouter un adulte" onClick={() => changeAdults(1)}>+</button>
         </div>
       ) : null}
-      {showCalendarPanel ? (
-        <section className={`reservation-live-picker ${pickerOpen ? "is-editing" : "is-resolved"}`} aria-label="Selection des dates" style={{ left: pct(798, artboard.width), top: pct(3210, artboard.height), width: pct(748, artboard.width), height: pct(391, artboard.height) }}>
-          <header className="reservation-live-header">
-            <div><strong>{nights} {nightLabel}</strong><span>{formatShortDate(checkIn)} - {formatShortDate(checkOut)}</span></div>
-            <div className="reservation-live-fields">
-              <button type="button" className={activeField === "checkIn" ? "is-active" : ""} onClick={() => openDatePicker("checkIn")}><strong>Check-in</strong><span>{formatDate(checkIn)}</span></button>
-              <button type="button" className={activeField === "checkOut" ? "is-active" : ""} onClick={() => openDatePicker("checkOut")}><strong>Check-out</strong><span>{formatDate(checkOut)}</span></button>
-            </div>
-            {pickerOpen ? <button type="button" className="reservation-live-close" aria-label="Fermer le calendrier" onClick={() => setPickerOpen(false)}>×</button> : null}
-          </header>
-          <div className="reservation-live-nav"><button type="button" aria-label="Mois precedent" onClick={() => shiftMonth(-1)}>‹</button><button type="button" aria-label="Mois suivant" onClick={() => shiftMonth(1)}>›</button></div>
-          <div className="reservation-live-months">
-            <ReservationLiveCalendarMonth monthDate={displayMonth} checkIn={checkIn} checkOut={checkOut} activeField={activeField} onSelectDate={onSelectDate} />
-            <ReservationLiveCalendarMonth monthDate={new Date(displayMonth.getFullYear(), displayMonth.getMonth() + 1, 1)} checkIn={checkIn} checkOut={checkOut} activeField={activeField} onSelectDate={onSelectDate} />
-          </div>
-        </section>
+      {pickerOpen ? (
+        <BookingCalendarPanel
+          activeField={activeField}
+          artboard={artboard}
+          checkIn={checkIn}
+          checkOut={checkOut}
+          displayMonth={displayMonth}
+          nights={nights}
+          onClose={() => setPickerOpen(false)}
+          onOpenField={openDatePicker}
+          onSelectDate={onSelectDate}
+          onShiftMonth={shiftMonth}
+          style={{ left: pct(798, artboard.width), top: pct(3210, artboard.height), width: pct(748, artboard.width), height: pct(391, artboard.height) }}
+        />
       ) : null}
     </div>
   );
@@ -748,6 +1064,7 @@ function carouselSourcesFor(page, item, currentSrc) {
   const poolConfig = carouselSourcePools[page];
   if (!poolConfig) return null;
   if (page !== "home" && !/^placed-/i.test(item.id || "")) return null;
+  if (page !== "home" && Number(item.bounds?.y || 0) < 0) return null;
   const pool = Array.isArray(poolConfig) ? poolConfig : poolConfig[item.id];
   if (!pool?.length) return null;
   if (!Array.isArray(poolConfig) && pool[0] === currentSrc) return pool;
@@ -785,12 +1102,8 @@ function CarouselHitZones({ page, mediaItems, artboard, carouselIndexes, onCarou
       <span key={`carousel-${item.id}`}>
         <button className={`exact-hotspot exact-carousel-hotspot is-filled is-previous${active ? " is-carousel-active" : ""}`} type="button" aria-label="Image precedente" style={leftStyle} onMouseDown={(event) => event.preventDefault()} onClick={() => onCarouselStep(item.id, -1)} />
         <button className={`exact-hotspot exact-carousel-hotspot is-filled is-next${active ? " is-carousel-active" : ""}`} type="button" aria-label="Image suivante" style={rightStyle} onMouseDown={(event) => event.preventDefault()} onClick={() => onCarouselStep(item.id, 1)} />
-        {active ? (
-          <>
-            <ExactArrowSprite src={exactArrowSpriteSrc("filled", -1)} x={previousSpriteX} y={spriteY} artboard={artboard} />
-            <ExactArrowSprite src={exactArrowSpriteSrc("filled", 1)} x={nextSpriteX} y={spriteY} artboard={artboard} />
-          </>
-        ) : null}
+        <ExactArrowSprite src={exactArrowSpriteSrc("filled", -1)} x={previousSpriteX} y={spriteY} artboard={artboard} />
+        <ExactArrowSprite src={exactArrowSpriteSrc("filled", 1)} x={nextSpriteX} y={spriteY} artboard={artboard} />
       </span>
     );
   });
@@ -833,7 +1146,7 @@ function CustomArrowHotspots({ page, artboard, carouselIndexes, onCarouselStep }
             if (hotspot.type === "carouselGroup") hotspot.ids.forEach((id) => onCarouselStep(id, hotspot.direction));
           }}
         />
-        {active && hotspot.type !== "scroll" && hotspot.restoreSprite !== false ? (
+        {hotspot.type !== "scroll" ? (
           <ExactArrowSprite src={exactArrowSpriteSrc(spriteVariant, hotspot.direction)} x={Number(hotspot.x || 0) + 24} y={Number(hotspot.y || 0) + 24} artboard={artboard} />
         ) : null}
       </span>
@@ -841,8 +1154,175 @@ function CustomArrowHotspots({ page, artboard, carouselIndexes, onCarouselStep }
   });
 }
 
+function responsiveText(textMap, id, fallback = "") {
+  return id ? normalizeText(textMap.get(id)?.content || fallback).trim() : fallback;
+}
+
+function ResponsiveAction({ actionId, actionLabel, href, onNavigate, page, textMap }) {
+  const item = actionId ? textMap.get(actionId) : null;
+  const action = item ? textActionFor(page, item) : null;
+  const label = actionLabel || (item ? cleanText(item.content) : "En savoir plus");
+  const targetHref = href || action?.href;
+
+  if (targetHref) return <a className="responsive-action" href={targetHref}>{label}</a>;
+  if (!action?.action) return null;
+  return <button className="responsive-action" type="button" onClick={() => onNavigate(action.action)}>{label}</button>;
+}
+
+function ResponsiveMedia({ alt, artboard, carouselIndexes, image, imageId, mediaItems, onCarouselStep, page }) {
+  const item = imageId ? mediaItems.find((candidate) => candidate.id === imageId) : null;
+  const override = item ? mediaOverrideBox(page, item, artboard) : null;
+  const defaultSrc = item ? mediaSrc(item, override?.src || item.src) : image;
+  if (!defaultSrc) return null;
+
+  const sources = item ? carouselSourcesFor(page, item, defaultSrc) : null;
+  const carouselKey = item ? `${page}:${item.id}` : "";
+  const carouselIndex = sources?.length ? (carouselIndexes[carouselKey] || 0) : 0;
+  const src = sources?.[carouselIndex] || defaultSrc;
+  const eager = new URLSearchParams(window.location.search).has("visual-audit");
+
+  return (
+    <figure className="responsive-media">
+      <img src={src} alt={alt || "Meezane"} loading={eager ? "eager" : "lazy"} decoding={eager ? "auto" : "async"} />
+      {sources?.length > 1 ? (
+        <div className="responsive-media-controls">
+          <button type="button" aria-label="Image précédente" onClick={() => onCarouselStep(item.id, -1)}><img src={exactArrowSpriteSrc("filled", -1)} alt="" width="42" height="42" /></button>
+          <button type="button" aria-label="Image suivante" onClick={() => onCarouselStep(item.id, 1)}><img src={exactArrowSpriteSrc("filled", 1)} alt="" width="42" height="42" /></button>
+        </div>
+      ) : null}
+    </figure>
+  );
+}
+
+function ResponsiveSection({ artboard, carouselIndexes, mediaItems, onCarouselStep, onNavigate, page, section, sectionIndex, textMap }) {
+  const title = responsiveText(textMap, section.titleId, section.title || "");
+  const subtitle = responsiveText(textMap, section.subtitleId, section.subtitle || "");
+  const body = (section.bodyIds || []).map((id) => ({ id, value: responsiveText(textMap, id) })).filter((item) => item.value);
+  const kind = section.kind || "feature";
+  const classes = ["responsive-section", `is-${kind}`, section.reverse ? "is-reverse" : ""].filter(Boolean).join(" ");
+
+  if (section.cards) {
+    return (
+      <section className={classes}>
+        {title || subtitle || body.length ? (
+          <header className="responsive-section-heading">
+            {title ? <h2>{title}</h2> : null}
+            {subtitle ? <h3>{subtitle}</h3> : null}
+            {body.map((item) => <p key={item.id}>{item.value}</p>)}
+          </header>
+        ) : null}
+        <div className="responsive-card-grid">
+          {section.cards.map((card, cardIndex) => {
+            const cardTitle = responsiveText(textMap, card.titleId, card.title || "");
+            const cardSubtitle = responsiveText(textMap, card.subtitleId, card.subtitle || "");
+            const cardBody = (card.bodyIds || []).map((id) => ({ id, value: responsiveText(textMap, id) })).filter((item) => item.value);
+            const cardMeta = (card.metaIds || []).map((id) => responsiveText(textMap, id)).filter(Boolean);
+            return (
+              <article className={`responsive-card${card.image || card.imageId ? " has-media" : ""}`} key={`${card.titleId || card.imageId || "card"}-${cardIndex}`}>
+                <ResponsiveMedia
+                  alt={cardTitle}
+                  artboard={artboard}
+                  carouselIndexes={carouselIndexes}
+                  image={card.image}
+                  imageId={card.imageId}
+                  mediaItems={mediaItems}
+                  onCarouselStep={onCarouselStep}
+                  page={page}
+                />
+                <div className="responsive-card-copy">
+                  {cardTitle ? <h3>{cardTitle}</h3> : null}
+                  {cardSubtitle ? <strong>{cardSubtitle}</strong> : null}
+                  {cardBody.map((item) => <p key={item.id}>{item.value}</p>)}
+                  {cardMeta.length ? <p className="responsive-meta">{cardMeta.join(" · ")}</p> : null}
+                  <ResponsiveAction actionId={card.actionId} actionLabel={card.actionLabel} href={card.href} onNavigate={onNavigate} page={page} textMap={textMap} />
+                </div>
+              </article>
+            );
+          })}
+        </div>
+        {(section.actions || []).length ? (
+          <div className="responsive-actions">
+            {section.actions.map((actionId) => <ResponsiveAction key={actionId} actionId={actionId} onNavigate={onNavigate} page={page} textMap={textMap} />)}
+          </div>
+        ) : null}
+      </section>
+    );
+  }
+
+  return (
+    <section className={classes}>
+      <ResponsiveMedia
+        alt={title}
+        artboard={artboard}
+        carouselIndexes={carouselIndexes}
+        image={section.image}
+        imageId={section.imageId}
+        mediaItems={mediaItems}
+        onCarouselStep={onCarouselStep}
+        page={page}
+      />
+      <div className="responsive-section-copy">
+        <span className="responsive-rule" aria-hidden="true" />
+        {title ? <h2>{title}</h2> : null}
+        {subtitle ? <h3>{subtitle}</h3> : null}
+        {body.map((item) => <p key={item.id}>{item.value}</p>)}
+        {section.actionId || section.href ? <ResponsiveAction actionId={section.actionId} actionLabel={section.actionLabel} href={section.href} onNavigate={onNavigate} page={page} textMap={textMap} /> : null}
+        {(section.actions || []).length ? (
+          <div className="responsive-actions">
+            {section.actions.map((actionId) => <ResponsiveAction key={actionId} actionId={actionId} onNavigate={onNavigate} page={page} textMap={textMap} />)}
+          </div>
+        ) : null}
+      </div>
+    </section>
+  );
+}
+
+function ResponsiveEditorialPage({ artboard, carouselIndexes, mediaItems, onCarouselStep, onNavigate, page, rootRef, textFrames }) {
+  const content = responsivePageContent[page] || responsivePageContent.home;
+  const textMap = new Map(textFrames.map((item) => [item.id, item]));
+  const contentId = `responsive-content-${page}`;
+
+  return (
+    <div className={`responsive-page responsive-page-${page}`} ref={rootRef}>
+      <section className="responsive-hero" aria-labelledby={`responsive-title-${page}`}>
+        <img src={content.hero.image} alt="" width="1200" height="709" loading="eager" />
+        <div className="responsive-hero-shade" aria-hidden="true" />
+        <div className="responsive-hero-copy">
+          {content.hero.eyebrow ? <span>{content.hero.eyebrow}</span> : null}
+          <h1 id={`responsive-title-${page}`}>{content.hero.title}</h1>
+          <p>{content.hero.subtitle}</p>
+          <a href={`#${contentId}`} aria-label="Découvrir la page">↓</a>
+        </div>
+      </section>
+      <div className="responsive-content" id={contentId}>
+        <div className="responsive-brand-seal" aria-hidden="true"><span>م</span></div>
+        {content.sections.map((section, sectionIndex) => (
+          <ResponsiveSection
+            key={`${section.titleId || section.kind || "section"}-${sectionIndex}`}
+            artboard={artboard}
+            carouselIndexes={carouselIndexes}
+            mediaItems={mediaItems}
+            onCarouselStep={onCarouselStep}
+            onNavigate={onNavigate}
+            page={page}
+            section={section}
+            sectionIndex={sectionIndex}
+            textMap={textMap}
+          />
+        ))}
+      </div>
+      <footer className="responsive-footer">
+        <div><strong>Arrivez comme un invité,<br />repartez comme un ami.</strong><a href="mailto:hello@meezane.ma">hello@meezane.ma</a></div>
+        <span>Meezane<br /><small>Farmhouse</small></span>
+        <address>Bir Jdid<br />Casablanca-Settat<br />Morocco</address>
+      </footer>
+    </div>
+  );
+}
+
 export default function ExactIllustratorPage({ page, onNavigate, onPrefetch }) {
   const [carouselIndexes, setCarouselIndexes] = useState({});
+  const selectableTextRootRef = useRef(null);
   const fallback = getPageConfig(page);
 
   const pageData = siteContent.pages?.[page];
@@ -869,6 +1349,32 @@ export default function ExactIllustratorPage({ page, onNavigate, onPrefetch }) {
     aspectRatio: `${artboard.width} / ${artboard.height}`,
   };
 
+  useEffect(() => {
+    function handleSelectAll(event) {
+      const isPlainSelectAll = (
+        !event.defaultPrevented
+        && !event.altKey
+        && !event.shiftKey
+        && (event.ctrlKey || event.metaKey)
+        && event.key.toLowerCase() === "a"
+      );
+      if (!isPlainSelectAll || shouldKeepNativeSelectAll(event)) return;
+
+      const root = selectableTextRootRef.current;
+      const selection = window.getSelection();
+      if (!root || !selection) return;
+
+      const range = document.createRange();
+      range.selectNodeContents(root);
+      event.preventDefault();
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+
+    document.addEventListener("keydown", handleSelectAll);
+    return () => document.removeEventListener("keydown", handleSelectAll);
+  }, []);
+
   function stepCarousel(itemId, direction) {
     const item = mediaItems.find((candidate) => candidate.id === itemId);
     if (!item) return;
@@ -887,18 +1393,22 @@ export default function ExactIllustratorPage({ page, onNavigate, onPrefetch }) {
     <main className="exact-shell" aria-label={(seoContent[page] || seoContent.home).title}>
       <SeoHead page={page} />
       <SeoArticle page={page} textFrames={textFrames} />
-      <div
-        className="exact-canvas"
-        style={canvasStyle}
-      >
+      <div className="exact-canvas" style={canvasStyle}>
         <BackgroundLayer src={background} title={fallback.title} artboard={artboard} />
         {mediaItems.map((item) => (
           <MediaLayer key={`${page}:${item.id}`} item={item} artboard={artboard} page={page} carouselIndexes={carouselIndexes} />
         ))}
         <IllustratorTextLayer page={page} artboard={artboard} />
+        <div ref={selectableTextRootRef} className="selectable-text-root">
+          {textFrames.map((item) => (
+            <SelectableTextLayer key={`selectable-${item.id}`} item={item} artboard={artboard} page={page} />
+          ))}
+        </div>
         {(exactOverlays[page] || []).map((overlay) => (
           <ExactOverlayLayer key={overlay.src} overlay={overlay} artboard={artboard} />
         ))}
+        {page === "home" ? <HomeBalanceHover artboard={artboard} /> : null}
+        {page === "home" ? <HomeBookingWidget artboard={artboard} /> : null}
         {page === "reservation" ? <ReservationBookingWidget artboard={artboard} /> : null}
         {textFrames.map((item) => (
           <TextActionLayer key={`action-${item.id}`} page={page} item={item} artboard={artboard} onNavigate={onNavigate} onPrefetch={onPrefetch} />

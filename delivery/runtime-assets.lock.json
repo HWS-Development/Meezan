@@ -68,8 +68,13 @@
     },
     {
       "path": "/assets/illustrator-driven/blog-background.png",
-      "bytes": 13657887,
-      "sha256": "09dd1bb29c8c0fea4e8ef4e5828d402bfa252a0e2eb68d8f8ac3904e8526cb3d"
+      "bytes": 15589362,
+      "sha256": "fbf5b0d9563ae5ea4346541c8395580bfc50bbe8bac431878d90b68881f32939"
+    },
+    {
+      "path": "/assets/illustrator-driven/blog-hero-exact.png",
+      "bytes": 4691314,
+      "sha256": "7daaf0bd9904341ea2eca0f0fb7b5db51b3cd7b976d8dad4daf0d38411822636"
     },
     {
       "path": "/assets/illustrator-driven/blog-media-01-exact.png",
@@ -87,219 +92,209 @@
       "sha256": "b6775eab67cea37e7b6773f21cd573e69c77d1e954a686d1dbd689d113dececb"
     },
     {
-      "path": "/assets/illustrator-driven/blog-media-08.png",
-      "bytes": 5016,
-      "sha256": "ccd0f6beaf04384cd2c92d84ff9abfb7eaead5f0427ec7ebb751c429898c43ba"
-    },
-    {
       "path": "/assets/illustrator-driven/blog-media-09-exact.png",
       "bytes": 2047598,
       "sha256": "46d105287f2d50089add30ff7fa3c5877b2273c271d14a04d2df0b9a3db73e19"
     },
     {
       "path": "/assets/illustrator-driven/blog-meta-left-y2720-exact.png",
-      "bytes": 92717,
-      "sha256": "9aae4c332b8484d01e36fec4a6fcbfff5ed35a7df75b9662e5f6a76d72bba330"
+      "bytes": 92999,
+      "sha256": "44c1baa7cc981158744089697271fde0b4b53cf5d5e31de3d2b65179e79745fa"
     },
     {
       "path": "/assets/illustrator-driven/blog-meta-left-y4146-exact.png",
-      "bytes": 649,
-      "sha256": "8e695ee3411e351cb8f0b3a685514f8cb906ebbbd9047dcc4d92a38ba26c4efa"
+      "bytes": 622,
+      "sha256": "6a1c1a39d456bd8b256fa323d89b74d7734ae4298630d27d5bbed98d40fba43b"
     },
     {
       "path": "/assets/illustrator-driven/blog-meta-left-y5579-exact.png",
-      "bytes": 99422,
-      "sha256": "a7e09ddf6a98c9a3eeb634230b264e1a1a2bbe738d2848d163e66c99f47f0220"
+      "bytes": 99777,
+      "sha256": "db5201b89f5634c99d272e7186c351267ebdbf6ab6a3ef81b7e684307a5f0e6c"
     },
     {
       "path": "/assets/illustrator-driven/blog-meta-left-y6949-exact.png",
-      "bytes": 649,
-      "sha256": "8e695ee3411e351cb8f0b3a685514f8cb906ebbbd9047dcc4d92a38ba26c4efa"
+      "bytes": 622,
+      "sha256": "6a1c1a39d456bd8b256fa323d89b74d7734ae4298630d27d5bbed98d40fba43b"
     },
     {
       "path": "/assets/illustrator-driven/blog-meta-left-y8401-exact.png",
-      "bytes": 96632,
-      "sha256": "303c46b221994d35e83630bffce3e683add4323504660c9031dee654cf00fc38"
+      "bytes": 96980,
+      "sha256": "f40a9b8207873348f9e5186a76d01e0e57e624e15a7811400f7442f5e37b1cb3"
     },
     {
       "path": "/assets/illustrator-driven/blog-meta-mid-y2720-exact.png",
-      "bytes": 221334,
-      "sha256": "407795b165476355e65b31e1f1ea207e22e7698934fef18fd3b5ff13424f13aa"
+      "bytes": 222446,
+      "sha256": "1dfdf69ce0d4df0bdf4a696475dfd641f9b594d39d9eab5f72d073a705d7657d"
     },
     {
       "path": "/assets/illustrator-driven/blog-meta-mid-y4146-exact.png",
-      "bytes": 966,
-      "sha256": "a4a2c81b3c35814fbc2529b906030eb73f5d263e8796a3551c6280400e6abb59"
+      "bytes": 938,
+      "sha256": "94d591083b1a05c4497ff5d777dc13f8afd52930f702a6221021148401cd7dae"
     },
     {
       "path": "/assets/illustrator-driven/blog-meta-mid-y5579-exact.png",
-      "bytes": 210750,
-      "sha256": "74d80d5d456f0efbbb630d86f035882067d4e32b5d417573ea9000d8e9582084"
+      "bytes": 211752,
+      "sha256": "1d489e80b374703b57830a49e7a2a794dcb1c2c888c9a4b2ae361ac39646f326"
     },
     {
       "path": "/assets/illustrator-driven/blog-meta-mid-y6949-exact.png",
-      "bytes": 966,
-      "sha256": "a4a2c81b3c35814fbc2529b906030eb73f5d263e8796a3551c6280400e6abb59"
+      "bytes": 938,
+      "sha256": "94d591083b1a05c4497ff5d777dc13f8afd52930f702a6221021148401cd7dae"
     },
     {
       "path": "/assets/illustrator-driven/blog-meta-mid-y8401-exact.png",
-      "bytes": 211046,
-      "sha256": "240547234cf4b442749d6fd3f67d4699e06547d51c844ace6600b45d352e5b99"
+      "bytes": 212082,
+      "sha256": "9c11d4011f7fe3d647ef69caa8ea08ce6694d9c40351cb4d36e609f5292011ed"
     },
     {
       "path": "/assets/illustrator-driven/blog-meta-right-y2720-exact.png",
-      "bytes": 89429,
-      "sha256": "48a97adaef679ad2f942c6596fede32ce1add6bdc83de7cc3d19ac984368d516"
+      "bytes": 89695,
+      "sha256": "3f33de7e2b6ad00bba1e5544183f6d45bc816dab7f9aa29c9a0f1fa7864e261c"
     },
     {
       "path": "/assets/illustrator-driven/blog-meta-right-y4146-exact.png",
-      "bytes": 650,
-      "sha256": "959d67d797e90d7dea268cacdee66b33f102cf622e154959ad3183df38d47499"
+      "bytes": 624,
+      "sha256": "d2961e4b5d07f60fa1997086d31b3fb11161b348ee0d851bf5934eb945728e6c"
     },
     {
       "path": "/assets/illustrator-driven/blog-meta-right-y5579-exact.png",
-      "bytes": 84126,
-      "sha256": "5dcb05512e8f0387f6e46fcbb62b41a3dfbaf41d08142904d268d587ac84717a"
+      "bytes": 84529,
+      "sha256": "d1b87eccb04c100ffcf7964a09b19e1809e019174341b7caf732607f8f77e64e"
     },
     {
       "path": "/assets/illustrator-driven/blog-meta-right-y6949-exact.png",
-      "bytes": 650,
-      "sha256": "959d67d797e90d7dea268cacdee66b33f102cf622e154959ad3183df38d47499"
+      "bytes": 624,
+      "sha256": "d2961e4b5d07f60fa1997086d31b3fb11161b348ee0d851bf5934eb945728e6c"
     },
     {
       "path": "/assets/illustrator-driven/blog-meta-right-y8401-exact.png",
-      "bytes": 86422,
-      "sha256": "42ef61206e479ea7b764f2671f9a5642554e364d503c031954a05895a34238bb"
+      "bytes": 86842,
+      "sha256": "683bd66aadd21c3455b96b7f54b863271dd2b49e60c413aa4f9266b018b36c48"
     },
     {
       "path": "/assets/illustrator-driven/blog-meta-top-y2720-exact.png",
-      "bytes": 166528,
-      "sha256": "7fdc324895de9abce0fc41941bdc3bd2cd86ea29edd573d778478325e9327693"
+      "bytes": 65634,
+      "sha256": "8de68fd02ab81d285ef4bd2f6812a595114ed6451433b1b28a481ae6bee0f7f6"
     },
     {
       "path": "/assets/illustrator-driven/blog-meta-top-y4146-exact.png",
-      "bytes": 79669,
-      "sha256": "c185c0a19ae02048d6560cce2c9d3dc6765d3d22bca324ec2a0fcddd5a0d3d05"
+      "bytes": 79741,
+      "sha256": "0c7a1b8fa812f4436c196103958eea56fbf54976493dc15073331edd20dd616a"
     },
     {
       "path": "/assets/illustrator-driven/blog-meta-top-y5579-exact.png",
-      "bytes": 66575,
-      "sha256": "35f15c48d4f01d03e7ccba975ec7cfa91fe20eca21c8526554a2ea4e39b83d0d"
+      "bytes": 67020,
+      "sha256": "55bb071073075b1baa97630d0054abc1011b53c5848a73416b508082bb50370f"
     },
     {
       "path": "/assets/illustrator-driven/blog-meta-top-y6949-exact.png",
-      "bytes": 84029,
-      "sha256": "f85e79559e4f34d2fbbe7f2a20ae3b70bd53ef7629376789a72191a842de1fe2"
+      "bytes": 496,
+      "sha256": "ea998b2ab623b632126ceba5b59f178e9c0379c13838e5fa03a1cdbc92de4c80"
     },
     {
       "path": "/assets/illustrator-driven/blog-meta-top-y8401-exact.png",
-      "bytes": 129792,
-      "sha256": "5659e5fde64deeebcb78ae028a4b02fc0befae916efe07bdd10e1a3b4c3db6e9"
+      "bytes": 67236,
+      "sha256": "edb5c2d379519579af2a104f8a8ac803f6c6221d009470b5816b43356bdf4f39"
     },
     {
       "path": "/assets/illustrator-driven/blog-strip-y2880-exact.png",
-      "bytes": 260337,
-      "sha256": "ee3d04812b5e99dc2d37ceb520c1f92ceb44700f02fa4b77fc88818451cddbab"
-    },
-    {
-      "path": "/assets/illustrator-driven/blog-strip-y5280-exact.png",
-      "bytes": 280554,
-      "sha256": "cc32af14a0632c2e4e7bb5448567528e2cadab7df62273f85e273e76c0227f08"
+      "bytes": 261356,
+      "sha256": "7f77306bf192bc6ba735e93592e4fea5fe457cc2ffe8506b5c194c9c8d0259d2"
     },
     {
       "path": "/assets/illustrator-driven/blog-strip-y5760-exact.png",
-      "bytes": 205641,
-      "sha256": "e77f7445bb50c720e45596e3f3495f14afd730758a9ef68642a1a6fef7111c9b"
-    },
-    {
-      "path": "/assets/illustrator-driven/blog-strip-y8160-exact.png",
-      "bytes": 690490,
-      "sha256": "020af9b2e9c28214ec1ab03c13ce7de72ffce39a7135a153744d93d414dad9d3"
+      "bytes": 206000,
+      "sha256": "258fc874e9393318521d3d28e9ae6216c99038a94b213c73ba32e9bf7b8dcf00"
     },
     {
       "path": "/assets/illustrator-driven/blog-title-left-y1766-exact.png",
-      "bytes": 121995,
-      "sha256": "dda273212a87e922421f3dc5b4b9dacf2020fca230d24595420d886db054266d"
+      "bytes": 122355,
+      "sha256": "6b210fc14593d02b3f736ec9364ae4ee8ff7b6ff94f5801574a208c25d66419b"
     },
     {
       "path": "/assets/illustrator-driven/blog-title-left-y3136-exact.png",
-      "bytes": 793,
-      "sha256": "81dab4b2f5b01609ad33e816f590a4b25d025c1f767c00ee6e73f8680662cda3"
+      "bytes": 765,
+      "sha256": "f357a7ef9683dbb5b95e2ab5c1a07a2b1c6188c1e5a4fe0323fa1ee7001b9914"
     },
     {
       "path": "/assets/illustrator-driven/blog-title-left-y4625-exact.png",
-      "bytes": 122487,
-      "sha256": "c6f0df3763821965fe880da4306090d46a7b2f5e669d6314df9e4c3eef7d37b3"
+      "bytes": 122834,
+      "sha256": "c1cad16324f85d5abbf38c4c6da6dd243dd9c71efd75a1825a762fe20d3987d3"
     },
     {
       "path": "/assets/illustrator-driven/blog-title-left-y5995-exact.png",
-      "bytes": 793,
-      "sha256": "81dab4b2f5b01609ad33e816f590a4b25d025c1f767c00ee6e73f8680662cda3"
+      "bytes": 765,
+      "sha256": "f357a7ef9683dbb5b95e2ab5c1a07a2b1c6188c1e5a4fe0323fa1ee7001b9914"
     },
     {
       "path": "/assets/illustrator-driven/blog-title-left-y7447-exact.png",
-      "bytes": 116527,
-      "sha256": "2fb9fd8b2fa436cc206ef5259a1b54cbb3f5cf42ba96b96125a0807e89c9d6fe"
+      "bytes": 116988,
+      "sha256": "ad26ceae6fd0932cba8100c0aa128fb2f3eaffa19c30d2658ae86530db760048"
     },
     {
       "path": "/assets/illustrator-driven/blog-title-right-y1766-exact.png",
-      "bytes": 103206,
-      "sha256": "257a4fb8866e5fe55f2c65fbc7efc31cb947340994e8612307c7614f5fe8bc42"
+      "bytes": 103597,
+      "sha256": "f1b6a57a88057ca3f6a26dc85c8f54773aec9957f932d78c48368117bc73e868"
     },
     {
       "path": "/assets/illustrator-driven/blog-title-right-y3136-exact.png",
-      "bytes": 794,
-      "sha256": "03a737448b0d2fb2206099be5ffd72cff281ded95cb2112c11b700ab308a21b9"
+      "bytes": 768,
+      "sha256": "ef3dfd89d6a0f3c4a3ebb6927438e0e738f5bc748af386ba5f65dfdf16409d22"
     },
     {
       "path": "/assets/illustrator-driven/blog-title-right-y4625-exact.png",
-      "bytes": 104554,
-      "sha256": "7e79f2f068c510cc7707a54f5eb8b03d9bbe099c8da1cc8a95d5ce4c8f457d6a"
+      "bytes": 104973,
+      "sha256": "37cd38bec35aab583c319550851e908eeb29091c236470cbf814b720d63e61ff"
     },
     {
       "path": "/assets/illustrator-driven/blog-title-right-y5995-exact.png",
-      "bytes": 794,
-      "sha256": "03a737448b0d2fb2206099be5ffd72cff281ded95cb2112c11b700ab308a21b9"
+      "bytes": 768,
+      "sha256": "ef3dfd89d6a0f3c4a3ebb6927438e0e738f5bc748af386ba5f65dfdf16409d22"
     },
     {
       "path": "/assets/illustrator-driven/blog-title-right-y7447-exact.png",
-      "bytes": 106306,
-      "sha256": "a7b3129c52c44dd8b559c3e19de4e1010aefc21b8a860c7bd835f21316014579"
+      "bytes": 106452,
+      "sha256": "b039ed9b81852c43d45cc40b21e7c1bd4fa6051253c5445be4545bb4081df7e5"
     },
     {
       "path": "/assets/illustrator-driven/blog-title-top-y1766-exact.png",
-      "bytes": 173549,
-      "sha256": "c4887118b68966272085e2bb444739cea59d70da8521f54331737150fe16fab2"
+      "bytes": 174192,
+      "sha256": "b8b4874e453dc8e1907beba165bb247868db537d445accfab8ab787e9e31d0fd"
     },
     {
       "path": "/assets/illustrator-driven/blog-title-top-y3136-exact.png",
-      "bytes": 643,
-      "sha256": "1bdf21f74eb565a56b1bf98127d7a61685641b38ca9c010a3bd82da602433ac4"
+      "bytes": 609,
+      "sha256": "564dbf327703db922aa989b5c350a8c9838443ade1e335eb9728a6f0416d956a"
     },
     {
       "path": "/assets/illustrator-driven/blog-title-top-y4625-exact.png",
-      "bytes": 173952,
-      "sha256": "db8661eef56cefb3f4a87b334f2e1eee78e8e1df8cc2271716982dcfb64decf0"
+      "bytes": 174909,
+      "sha256": "6118fe2789e7fa84da368fdd932322ccee47d03ec3641fd515a834549815e636"
     },
     {
       "path": "/assets/illustrator-driven/blog-title-top-y5995-exact.png",
-      "bytes": 643,
-      "sha256": "1bdf21f74eb565a56b1bf98127d7a61685641b38ca9c010a3bd82da602433ac4"
+      "bytes": 609,
+      "sha256": "564dbf327703db922aa989b5c350a8c9838443ade1e335eb9728a6f0416d956a"
     },
     {
       "path": "/assets/illustrator-driven/blog-title-top-y7447-exact.png",
-      "bytes": 167019,
-      "sha256": "fecbd019cba43e8d0259bf9188f3506cf72bf8df073f82269952a6bc1ea9b514"
+      "bytes": 167694,
+      "sha256": "4b4d7652d9f2ee89724792e29b7aa02c461aeb5ecc5003fae509d5fdea29dfb2"
     },
     {
       "path": "/assets/illustrator-driven/blog-top-seal-exact.png",
-      "bytes": 313160,
-      "sha256": "5e7456292923f6d09a8a965c18dba8895ebbc7beef2290b803bdf459f0b9f9fd"
+      "bytes": 322338,
+      "sha256": "d310f5efa79558cac76cc56b943fe8422fc3940ddf496c4f4603a531c585e683"
     },
     {
       "path": "/assets/illustrator-driven/chambres-background.png",
-      "bytes": 15424186,
-      "sha256": "e651c8a10666b587c0846f8687b909f430b96d057559d7c23d04cbf7d9f93c37"
+      "bytes": 17545745,
+      "sha256": "8dbfae17a49db7403b0da1bf671a81b4a346b605f70d728a4088133a64fc1ba9"
+    },
+    {
+      "path": "/assets/illustrator-driven/chambres-hero-exact.png",
+      "bytes": 4692196,
+      "sha256": "334736ead22112d211c333a1eef42ad091c2b032dfab0d228b0c17e737da0799"
     },
     {
       "path": "/assets/illustrator-driven/chambres-media-05-exact.png",
@@ -338,68 +333,73 @@
     },
     {
       "path": "/assets/illustrator-driven/chambres-strip-y10800-exact.png",
-      "bytes": 350863,
-      "sha256": "8c1899a6a1dd2c5cd3e1c8ed51ad533cfd0fc5b536941814cd41d1974c8edd8d"
+      "bytes": 255736,
+      "sha256": "358131d23fb3c754727621f3ec5630ebf3b2c9cbb671a0338f7c97a28cfa662c"
     },
     {
       "path": "/assets/illustrator-driven/chambres-strip-y10920-exact.png",
-      "bytes": 350982,
-      "sha256": "51069ac114740148116e9784c03c6a27b16e84ef63e4f2c68b1d0a42fc5b2b6e"
+      "bytes": 352653,
+      "sha256": "d52d5caea4ad928545816d9fa3373180357667a475c6656832319bdae35590c7"
     },
     {
       "path": "/assets/illustrator-driven/chambres-strip-y1560-exact.png",
-      "bytes": 359955,
-      "sha256": "62942a5c4827a4e610a3bc8a039261447ea72f46fb16787c590e58b2b11edfe9"
+      "bytes": 361752,
+      "sha256": "aa49007747a38ea4459a466996c3c9c93c9daf8fc2ba00f34536788d7b478bb3"
     },
     {
       "path": "/assets/illustrator-driven/chambres-strip-y2640-exact.png",
-      "bytes": 577581,
-      "sha256": "3af2c302b0a4449d35c62d905d477f0f177925264ac6dc97b861b61a659bbcf6"
+      "bytes": 524394,
+      "sha256": "a31426409e925f124c79130ba152095b63f91181c2cb511615db82e2c8ecb757"
     },
     {
       "path": "/assets/illustrator-driven/chambres-strip-y4320-exact.png",
-      "bytes": 359432,
-      "sha256": "13a888bf7a8edd1c273804b999075f960a1c5ef3bee3691eb877200d15db5d5c"
+      "bytes": 360765,
+      "sha256": "d1b5b36c43ffaff4777cb3e4c000a5ac93decc8350c9beb6f49e4935d6a7e257"
     },
     {
       "path": "/assets/illustrator-driven/chambres-strip-y5400-exact.png",
-      "bytes": 591188,
-      "sha256": "ecaa9d1f45179ac7ad6e9d47b80fc32764b9620364cc3223304f16005c230b99"
+      "bytes": 593541,
+      "sha256": "65d6f521823bf658d484f28ea35d43700c9c38fef6538283e7c3ece725588aea"
     },
     {
       "path": "/assets/illustrator-driven/chambres-strip-y7080-exact.png",
-      "bytes": 344144,
-      "sha256": "ed33966f6fe160d550b984cdec856d75a5b018332988769615c2073d712369c0"
+      "bytes": 345679,
+      "sha256": "8cb12494e565cbc897b69ec02bf579b57ebdee29996953dbc4eea33a19b959bd"
     },
     {
       "path": "/assets/illustrator-driven/chambres-strip-y8160-exact.png",
-      "bytes": 349144,
-      "sha256": "2c27147c596db552a46814438295586d888e7c4870fd19b999f261083dd8392e"
+      "bytes": 350772,
+      "sha256": "4214bae8f79f2e283f8a6e0432f0e4d940d75f67ed751012642f78a3ab3cc359"
     },
     {
       "path": "/assets/illustrator-driven/chambres-strip-y8280-exact.png",
-      "bytes": 166135,
-      "sha256": "4d45ce7e846ed0bdb0f975d48668c4245563eded1d46c1e7e7a27ca11e1e1e35"
+      "bytes": 166569,
+      "sha256": "386d09e255551521207edc7db68ca66450b5118c94012a1cb0a3d7a1059d802c"
     },
     {
       "path": "/assets/illustrator-driven/chambres-strip-y9720-exact.png",
-      "bytes": 341487,
-      "sha256": "9bb76436c32a90dfe5dd7692bd971b6d969ec765af717ba6fd0a2f51d4662505"
+      "bytes": 342703,
+      "sha256": "840629f450088efe9e10ad9dc75850a819786878a29daad363938584838226a7"
     },
     {
       "path": "/assets/illustrator-driven/chambres-top-seal-exact.png",
-      "bytes": 313247,
-      "sha256": "dbc4664ec4e55ef3146337ea3002770dcab3c9b03fe5aa630bbe79419e6bfb51"
+      "bytes": 322499,
+      "sha256": "ace65498fbef2bdd9592b18ca747ded485d2dab3e1ff0a8c4b7aa8dd5fedeb75"
     },
     {
       "path": "/assets/illustrator-driven/experiences-background.png",
-      "bytes": 27619217,
-      "sha256": "6f3eccc051550f8b183678239ceea358e9447b89ac57ea0759cd5bcec47d34a1"
+      "bytes": 29059449,
+      "sha256": "47bbaea286e9e4d85f0d972f96cd0bb16ef0ede6b1b297075ce7ca1617019694"
     },
     {
       "path": "/assets/illustrator-driven/experiences-footer-mark-exact.png",
-      "bytes": 405014,
-      "sha256": "2023b9fb787ee7d3eb074ea21b0aa64dafd042d852d20829bf73aa286fed26bf"
+      "bytes": 415611,
+      "sha256": "77b7acaef4f15a16c9f782310859eefad1d1666201f8190d47d4fc73f4a25647"
+    },
+    {
+      "path": "/assets/illustrator-driven/experiences-hero-exact.png",
+      "bytes": 4544594,
+      "sha256": "9cfc578d154a71a8b0da191813d548f885fdb00d0895ad75b52f747412c225a9"
     },
     {
       "path": "/assets/illustrator-driven/experiences-media-01-exact.png",
@@ -438,103 +438,68 @@
     },
     {
       "path": "/assets/illustrator-driven/experiences-side-y2880-left-exact.png",
-      "bytes": 100425,
-      "sha256": "d4d31f7729e234125cdcdf4f5a8ee799152d27d6ab62813ce9a15738a1f8ff86"
+      "bytes": 90021,
+      "sha256": "b9db02d0164ceaf57d6545e97413ddc0a43e66af379992263218ea1fcddd73a8"
     },
     {
       "path": "/assets/illustrator-driven/experiences-side-y2880-right-exact.png",
-      "bytes": 46024,
-      "sha256": "956a81ca3b690b0438de10c1f7020819362f4d0e12cb9669f34ad0871a0c69cf"
+      "bytes": 46069,
+      "sha256": "3ee5a3fcafb36bce86b9c506d171b971defac9d4dd603783131d05278d40fd2f"
     },
     {
       "path": "/assets/illustrator-driven/experiences-side-y5760-left-exact.png",
-      "bytes": 46632,
-      "sha256": "1953d2bf5de2d1f24f51377f06425135eccfbb0b811e1ffac0ea1df90edb04fc"
+      "bytes": 46579,
+      "sha256": "95168cda583605c77c7b5063eb3aaa92498dc74d35438f92395e3148cbbe578f"
     },
     {
       "path": "/assets/illustrator-driven/experiences-side-y5760-right-exact.png",
-      "bytes": 89768,
-      "sha256": "bee7bd5431554e26c9172392f79f13113941f4fd87b87ae5354bc9e3bbb5e457"
+      "bytes": 82535,
+      "sha256": "c753a1a39d609bb37e4cb35762cc5e038935ccb82c1ad6b5f60952e7c9cf7f68"
     },
     {
       "path": "/assets/illustrator-driven/experiences-strip-y2520-exact.png",
-      "bytes": 350671,
-      "sha256": "29fa0624f5e804cb10734f144ee96cdc3295e84dd8573d7fa512e379515dacac"
+      "bytes": 352044,
+      "sha256": "fbfa88add6db43167169791955532ec2e98cdf64bb07fd4aa68ef0e4819a8d70"
     },
     {
       "path": "/assets/illustrator-driven/experiences-strip-y5280-exact.png",
-      "bytes": 344569,
-      "sha256": "a145ca8cac5132946b30f47c234ea27590bffe668c948f69fcf324efa5d60641"
+      "bytes": 346252,
+      "sha256": "ec78fd34588a488ede16232489e75bfbaaf6960676dbe3e193d19226fccdfb62"
     },
     {
       "path": "/assets/illustrator-driven/experiences-strip-y5400-exact.png",
-      "bytes": 335170,
-      "sha256": "558eff9be6c5f57a1269cb7f2fe5fc7a0504e08bb5ddc2dd1c0a69270e5192e8"
+      "bytes": 336526,
+      "sha256": "1055e6ba6512bd69d0ea0896292a7c44bc3aa0cada6ce348a6f927c465ed208f"
     },
     {
       "path": "/assets/illustrator-driven/experiences-strip-y5520-exact.png",
-      "bytes": 390727,
-      "sha256": "714f0efb22b2cd8be69f601a12b9f9ef426f8cba9eb2f8438c750a2a8d08aff8"
+      "bytes": 364153,
+      "sha256": "719e14f7450f7e3e52a64d8dcca857db347fc9cfd5a04c226bcd2d0bbef0494a"
     },
     {
       "path": "/assets/illustrator-driven/experiences-strip-y5640-exact.png",
-      "bytes": 314164,
-      "sha256": "5e059b4fe83862643b90de18dd89856700078f93436e9331ad24e5f49af00743"
+      "bytes": 288507,
+      "sha256": "fefc02b8827cce2e72e861ae7873c62e09fa47f00eac816e6b60bb9aa3cbe378"
+    },
+    {
+      "path": "/assets/illustrator-driven/experiences-terre-rule-exact.png",
+      "bytes": 23316,
+      "sha256": "df73fd0fb03837567c00dc802beae3ecd61b918299858694ae51c5ed41afcb21"
     },
     {
       "path": "/assets/illustrator-driven/experiences-top-seal-exact.png",
-      "bytes": 313160,
-      "sha256": "5e7456292923f6d09a8a965c18dba8895ebbc7beef2290b803bdf459f0b9f9fd"
+      "bytes": 322374,
+      "sha256": "9495e5453399c528b258b58ffbe8f3bc2143ee27cf9c8427f7187ef11f8fc755"
     },
     {
       "path": "/assets/illustrator-driven/galerie-background.png",
-      "bytes": 9750688,
-      "sha256": "bf9f3f7b79625885571e7999c54a4fe9912c138e755db23309cb48316b2ff186"
+      "bytes": 11355985,
+      "sha256": "bec386e9fd394c85de90e62d362f17661dd0bebb026c7d4173f92727d17eb3c1"
     },
     {
-      "path": "/assets/illustrator-driven/galerie-hero-bottom-y760-exact.png",
-      "bytes": 205996,
-      "sha256": "db91089008c27393235bdfd6e0a1c71414cd192919f3b58971b26f41b7e7869b"
-    },
-    {
-      "path": "/assets/illustrator-driven/galerie-hero-left-y480-exact.png",
-      "bytes": 153229,
-      "sha256": "0f39f53e140ba3f4e74820740fc82f1ef561782502f76fc8301b59ca38e26bf0"
-    },
-    {
-      "path": "/assets/illustrator-driven/galerie-hero-left-y600-exact.png",
-      "bytes": 112863,
-      "sha256": "92fa26ed3d17ebf2a9c4b6c01c9f5cd4c1119f05e4d0cf8a017378246f606746"
-    },
-    {
-      "path": "/assets/illustrator-driven/galerie-hero-mid-left-y480-exact.png",
-      "bytes": 86131,
-      "sha256": "c452b7befc1fd56f6383482976112d55902e85c00df2b17525627afbfcfe3a0a"
-    },
-    {
-      "path": "/assets/illustrator-driven/galerie-hero-mid-right-y480-exact.png",
-      "bytes": 96377,
-      "sha256": "32221b901a9dd2bfa951bb4d0a167241904bc08e9f39a6f3298b8136a5658643"
-    },
-    {
-      "path": "/assets/illustrator-driven/galerie-hero-mid-y600-exact.png",
-      "bytes": 142913,
-      "sha256": "f9cc9316a00ab17e0913c6a492b64c9493aa7fd96f45b62f923ed38e927cc23e"
-    },
-    {
-      "path": "/assets/illustrator-driven/galerie-hero-right-y480-exact.png",
-      "bytes": 137584,
-      "sha256": "ee52ad447061f82a77deaa61a7335b2ef0bdc98734f30cd6804ea7cce7626c1b"
-    },
-    {
-      "path": "/assets/illustrator-driven/galerie-hero-right-y600-exact.png",
-      "bytes": 96712,
-      "sha256": "9d10d3c405a5882f4b4873a67bca4497cc34eff08652ba69ae3fccc4a18a760b"
-    },
-    {
-      "path": "/assets/illustrator-driven/galerie-hero-top-y360-exact.png",
-      "bytes": 294130,
-      "sha256": "5c1a905a6fd0821fbec03e29612fa351a820ac6fbabc844265641a4bda060883"
+      "path": "/assets/illustrator-driven/galerie-hero-exact.png",
+      "bytes": 1591396,
+      "sha256": "5bd011bf679e50a12b307c79417d6776bc43cc2876138c98020f9190835b4fa8"
     },
     {
       "path": "/assets/illustrator-driven/galerie-media-03-exact.png",
@@ -553,73 +518,83 @@
     },
     {
       "path": "/assets/illustrator-driven/galerie-strip-y1560-exact.png",
-      "bytes": 359955,
-      "sha256": "62942a5c4827a4e610a3bc8a039261447ea72f46fb16787c590e58b2b11edfe9"
+      "bytes": 361752,
+      "sha256": "aa49007747a38ea4459a466996c3c9c93c9daf8fc2ba00f34536788d7b478bb3"
     },
     {
       "path": "/assets/illustrator-driven/galerie-strip-y1680-exact.png",
-      "bytes": 173259,
-      "sha256": "8584a468865859c820b40733c414158a5b5403055d6653ebbe381fced04ba97c"
+      "bytes": 173803,
+      "sha256": "ab1b1746e473521221dd326e927e7d0ae7c864402c427ae9d41b0803c3e84386"
     },
     {
       "path": "/assets/illustrator-driven/galerie-strip-y2640-exact.png",
-      "bytes": 632595,
-      "sha256": "20a86518e1adccc458ae1161ce9cd2f13fe8d4b1ead8b73ea3f846c740146e3c"
+      "bytes": 598522,
+      "sha256": "769940e0ec75b2182c787733c98dec4312a802d70963fdb18ad9ee7c0b78280b"
     },
     {
       "path": "/assets/illustrator-driven/galerie-strip-y3000-exact.png",
-      "bytes": 524,
-      "sha256": "7d97e8b73d207ab6b55a0b641e3ad6df009bfbf8c6119e20f76a2e2c171cfb83"
+      "bytes": 496,
+      "sha256": "e202a7a246534f34d56d45a05e03627de4b763a8c621e75b56b57b70e28fcefb"
     },
     {
       "path": "/assets/illustrator-driven/galerie-strip-y4200-exact.png",
-      "bytes": 360503,
-      "sha256": "2e41310ed6cb083c27e9101308257f96bd746ce3b784087d8cbd047b22c378f7"
+      "bytes": 362315,
+      "sha256": "4bd1e6dec8303576764882b7e4a815c1033c95166516a4217eb57dd623838874"
     },
     {
       "path": "/assets/illustrator-driven/galerie-strip-y5280-exact.png",
-      "bytes": 352783,
-      "sha256": "818d981230be3cee3e5da6840ce2fb234c1ed43dc0c656e26d529f79cea6679a"
+      "bytes": 275771,
+      "sha256": "04959f3e9be7339abe2f206cf64324b9c2a90609ad9895ab1940b0f819dda6d2"
     },
     {
       "path": "/assets/illustrator-driven/galerie-strip-y5400-exact.png",
-      "bytes": 350085,
-      "sha256": "d576ad0c2ab92ea43923008dace3425bd054eb2e54817703469d0be98b45eb30"
+      "bytes": 351474,
+      "sha256": "cc5181b7c62b409fac0446510170a9ab38a709afc4b76595f604e295b519b4f2"
     },
     {
       "path": "/assets/illustrator-driven/galerie-title-left-y1746-exact.png",
-      "bytes": 96161,
-      "sha256": "4782a1139e35f8d1e13c1fd776c4ddc4cfccec040e5eb1a332710c7f54eaee76"
+      "bytes": 96358,
+      "sha256": "cc3c7c4536c266be563f6ea1bf2771ff836874be0ea89eb66051e93a74062830"
     },
     {
       "path": "/assets/illustrator-driven/galerie-title-left-y3031-exact.png",
-      "bytes": 649,
-      "sha256": "8e695ee3411e351cb8f0b3a685514f8cb906ebbbd9047dcc4d92a38ba26c4efa"
+      "bytes": 622,
+      "sha256": "6a1c1a39d456bd8b256fa323d89b74d7734ae4298630d27d5bbed98d40fba43b"
     },
     {
       "path": "/assets/illustrator-driven/galerie-title-right-y1746-exact.png",
-      "bytes": 81814,
-      "sha256": "0bfd6a130939ba49fff70e2de506eb43f909bae925de37ba4a2ea486203baa8c"
+      "bytes": 82062,
+      "sha256": "4cbd7d2c66d746ac8cd13a12357058f74ae075d52e7c4e882fe3bdda2d25893f"
     },
     {
       "path": "/assets/illustrator-driven/galerie-title-right-y3031-exact.png",
-      "bytes": 650,
-      "sha256": "959d67d797e90d7dea268cacdee66b33f102cf622e154959ad3183df38d47499"
+      "bytes": 624,
+      "sha256": "d2961e4b5d07f60fa1997086d31b3fb11161b348ee0d851bf5934eb945728e6c"
     },
     {
       "path": "/assets/illustrator-driven/galerie-top-seal-exact.png",
-      "bytes": 313160,
-      "sha256": "5e7456292923f6d09a8a965c18dba8895ebbc7beef2290b803bdf459f0b9f9fd"
+      "bytes": 322374,
+      "sha256": "9495e5453399c528b258b58ffbe8f3bc2143ee27cf9c8427f7187ef11f8fc755"
     },
     {
       "path": "/assets/illustrator-driven/header-canonical-exact.png",
-      "bytes": 519814,
-      "sha256": "8264453c6d4b76ab82a5a39ea9307d4c12408158dce608f5d89a448e099a64ba"
+      "bytes": 522002,
+      "sha256": "d63903a1aeb72378c0f2edf010a474ead32f619f5710c45fa4f18d18a91c3399"
     },
     {
       "path": "/assets/illustrator-driven/home-background.png",
-      "bytes": 22554042,
-      "sha256": "6ca1ff41004f0731e05b73fe2703425a0ba04b79eb2d22cf5abb467e40085fd1"
+      "bytes": 23083374,
+      "sha256": "72b0567b29d422d97f7af72519ce60144cbcbd7e315dcd2a15f8d4e1a063d8d6"
+    },
+    {
+      "path": "/assets/illustrator-driven/home-balance-copy-mask-exact.png",
+      "bytes": 3880,
+      "sha256": "243726662c3d71631f622860b570b58ae483ab6a74f001e99c4546a47e5eb341"
+    },
+    {
+      "path": "/assets/illustrator-driven/home-hero-exact.png",
+      "bytes": 1100905,
+      "sha256": "a8d50614d80c5b18f550774c3a28f145d23fa9c9e23301050c73d60a4ed36bcf"
     },
     {
       "path": "/assets/illustrator-driven/home-media-01-exact.png",
@@ -658,113 +633,73 @@
     },
     {
       "path": "/assets/illustrator-driven/home-side-y2880-left-exact.png",
-      "bytes": 45499,
-      "sha256": "791705e72e5ac34e0200042000c9795e5fe1c278d34c38da13b82019e2fbbc83"
+      "bytes": 45468,
+      "sha256": "4ea4bb67e518a66de8c5a6c5889bb3e6d2b9611d4f199e5fbc102495e64152c0"
     },
     {
       "path": "/assets/illustrator-driven/home-side-y2880-right-exact.png",
-      "bytes": 46024,
-      "sha256": "956a81ca3b690b0438de10c1f7020819362f4d0e12cb9669f34ad0871a0c69cf"
+      "bytes": 46069,
+      "sha256": "3ee5a3fcafb36bce86b9c506d171b971defac9d4dd603783131d05278d40fd2f"
     },
     {
       "path": "/assets/illustrator-driven/home-side-y8280-left-exact.png",
-      "bytes": 47780,
-      "sha256": "d2c571a46d87d96034b588c0d017c18f8c38f5a8d282d8a2bba54030bb52d6c4"
+      "bytes": 47822,
+      "sha256": "f814eadaa94d54a4f64dafd6061eea448567d7175a178f73e73803f695b38a75"
     },
     {
       "path": "/assets/illustrator-driven/home-side-y8280-right-exact.png",
-      "bytes": 178449,
-      "sha256": "aafef9ab9a214690038ba9d8d6724bf4390bd59219c18abc3f1d528b8a434b82"
+      "bytes": 178843,
+      "sha256": "e1b23c77d935c5cfd3d1b6c1425ef32544f29e7395d339e7e4715879168ddf69"
     },
     {
       "path": "/assets/illustrator-driven/home-strip-y1320-exact.png",
-      "bytes": 152559,
-      "sha256": "52a5df3882caa8624a8bd0051927b1ee5d32bcae49f66cdfdd4a31045a5aa83a"
+      "bytes": 155134,
+      "sha256": "ace26a5f775aad4010726993594eb3967d16815df455ef16c563fdfa19013d48"
     },
     {
       "path": "/assets/illustrator-driven/home-strip-y2280-exact.png",
-      "bytes": 343246,
-      "sha256": "5a8f99478200a98c7d63553170554f3af9461e1d1de5635df99ac1e3896bc3fa"
+      "bytes": 344978,
+      "sha256": "a784d11b53285e1d6c38d05b4592ca76080d75e5201e4a692fe4d2b0304e8f92"
     },
     {
       "path": "/assets/illustrator-driven/home-strip-y7920-exact.png",
-      "bytes": 352299,
-      "sha256": "5a1981ab19d6d40ba04cf0e309ea3ff2b40d7a4a1f9af87a730646820f1ad374"
+      "bytes": 353810,
+      "sha256": "7391469713471cbe278f586d3b974a724c290aa122d205f771473e99cb0fd7cb"
     },
     {
       "path": "/assets/illustrator-driven/home-top-seal-exact.png",
-      "bytes": 196766,
-      "sha256": "5b10dc100f5094a37f6634f0683699fc7f41bb7fddac5112afdf2eef79670533"
+      "bytes": 176115,
+      "sha256": "82248af49bbeff32023eb9f3ad234800ea14601bc99ab344af55bb0131496221"
     },
     {
       "path": "/assets/illustrator-driven/reservation-background.png",
-      "bytes": 8168306,
-      "sha256": "c4e3f6180e818af6e3116eb23f5316f01e67a0aef6e3a6a15968b5de08bbe671"
+      "bytes": 9596027,
+      "sha256": "b54786f4732cd71cbc1f63dc3e56fb6416c228992a8ca1651d3a3d7237e10e6d"
     },
     {
-      "path": "/assets/illustrator-driven/reservation-calendar-exact.png",
-      "bytes": 113044,
-      "sha256": "b76fd12c15653078ad941524bebb94f416446569b6a4b2922a8aa843612eab20"
+      "path": "/assets/illustrator-driven/reservation-calendar-closed-mask-exact.png",
+      "bytes": 525323,
+      "sha256": "a777f7d87cc8f06598020ba64880467b655c0c013e0c6e0be8b95e1b80c5a504"
     },
     {
-      "path": "/assets/illustrator-driven/reservation-hero-bottom-y760-exact.png",
-      "bytes": 205791,
-      "sha256": "abf52bfecb3ca5c874186faa81d60b1f217f79b6b15ccbd19c93c804113d7b2e"
-    },
-    {
-      "path": "/assets/illustrator-driven/reservation-hero-left-y480-exact.png",
-      "bytes": 153078,
-      "sha256": "647e3c5539f1f0323c6b93e3e0989136dfb47f5054bf2b8b19a19c506b73667d"
-    },
-    {
-      "path": "/assets/illustrator-driven/reservation-hero-left-y600-exact.png",
-      "bytes": 112924,
-      "sha256": "96c06be7b53e458704bb8673129f33513eb996880dad33cd48439057f0683a3b"
-    },
-    {
-      "path": "/assets/illustrator-driven/reservation-hero-mid-left-y480-exact.png",
-      "bytes": 86100,
-      "sha256": "029970bdfd80b6490f4f713fd9d79332b4642b1ca4e7b8d07dec7d8806e64f47"
-    },
-    {
-      "path": "/assets/illustrator-driven/reservation-hero-mid-right-y480-exact.png",
-      "bytes": 96270,
-      "sha256": "4a75071e664aeec6445a120281be1895c66b9510704642b8d07f4ae72e7e37a6"
-    },
-    {
-      "path": "/assets/illustrator-driven/reservation-hero-mid-y600-exact.png",
-      "bytes": 142937,
-      "sha256": "e8b725f1dea47fa3094c64c700f59136d58e14d1f6fee9f5015519d39d6b412c"
-    },
-    {
-      "path": "/assets/illustrator-driven/reservation-hero-right-y480-exact.png",
-      "bytes": 137291,
-      "sha256": "ca24977ddd417e7ee29a541f22fc96a845ee03e97d8d082a349514085fc8df19"
-    },
-    {
-      "path": "/assets/illustrator-driven/reservation-hero-right-y600-exact.png",
-      "bytes": 96769,
-      "sha256": "bd24092ff0d54354afdb313f1342302238d8dd73a1850b4c91ffdd064bb3c271"
-    },
-    {
-      "path": "/assets/illustrator-driven/reservation-hero-top-y360-exact.png",
-      "bytes": 293711,
-      "sha256": "c4e6fe6124d77dba0042273c2275d592faf41d3e56b9379bb775e459a784de87"
+      "path": "/assets/illustrator-driven/reservation-hero-exact.png",
+      "bytes": 1591181,
+      "sha256": "8645189fd54124dda235c11742a55db6850e7736f8cc5537060b6a1bc02c7ce7"
     },
     {
       "path": "/assets/illustrator-driven/reservation-lower-left-y2880-exact.png",
-      "bytes": 45499,
-      "sha256": "791705e72e5ac34e0200042000c9795e5fe1c278d34c38da13b82019e2fbbc83"
+      "bytes": 45468,
+      "sha256": "4ea4bb67e518a66de8c5a6c5889bb3e6d2b9611d4f199e5fbc102495e64152c0"
     },
     {
       "path": "/assets/illustrator-driven/reservation-lower-mid-y2760-exact.png",
-      "bytes": 86834,
-      "sha256": "4cac073fdbd91ac52c592d3f26c66c7c91bcbcbd381bc2b0bf092bc005a8be8c"
+      "bytes": 87373,
+      "sha256": "93b4da19344358ff15c74e8351efa0aea1ab21d3088b514583b985f956631188"
     },
     {
       "path": "/assets/illustrator-driven/reservation-lower-right-y2760-exact.png",
-      "bytes": 89573,
-      "sha256": "9c5b9f64ab2db188166878ddb63a23088823d161034170bbf0e95993e0699302"
+      "bytes": 90057,
+      "sha256": "7d286a3751c8717c3cb0771e7a1fd9aed67bec0e37adb5105b6407f38bf31df1"
     },
     {
       "path": "/assets/illustrator-driven/reservation-media-03-exact.png",
@@ -773,48 +708,48 @@
     },
     {
       "path": "/assets/illustrator-driven/reservation-price-card-exact.png",
-      "bytes": 60205,
-      "sha256": "d6d635a0ef85ca99adc57bb4876b1372af571505fc35b8585179af1eea818c28"
+      "bytes": 59205,
+      "sha256": "4e0148e343169510d2d8d79a788dad5fe86f0fd1b9c8e7cf1fbd165d8d16e661"
     },
     {
       "path": "/assets/illustrator-driven/reservation-strip-y1560-exact.png",
-      "bytes": 359955,
-      "sha256": "62942a5c4827a4e610a3bc8a039261447ea72f46fb16787c590e58b2b11edfe9"
+      "bytes": 361752,
+      "sha256": "aa49007747a38ea4459a466996c3c9c93c9daf8fc2ba00f34536788d7b478bb3"
     },
     {
       "path": "/assets/illustrator-driven/reservation-top-seal-exact.png",
-      "bytes": 313264,
-      "sha256": "148c99bac5a51e95217718e442ef940630aaa1e52a7534e00bda0f338b0b3346"
+      "bytes": 322499,
+      "sha256": "ace65498fbef2bdd9592b18ca747ded485d2dab3e1ff0a8c4b7aa8dd5fedeb75"
     },
     {
-      "path": "/assets/illustrator-text/blog-text.png",
-      "bytes": 221150,
-      "sha256": "41ba76d92a956cde9307765f967e69d484a8861505b112f6061d620683e0a9bc"
+      "path": "/assets/illustrator-text/blog-text.svg",
+      "bytes": 3310254,
+      "sha256": "44f379d5e2c606680231ff1e2fc8028ea4b67e86bcffc9c46605ef6a67525ed7"
     },
     {
-      "path": "/assets/illustrator-text/chambres-text.png",
-      "bytes": 157079,
-      "sha256": "fe48807e36f747f035a8648075ff7d9df832fbc4042425a17acc0fd647a14314"
+      "path": "/assets/illustrator-text/chambres-text.svg",
+      "bytes": 1876746,
+      "sha256": "d5212b14bc1df7d8ebb656fc67c3504167ce21ee0d83d850c137c3f9ce923284"
     },
     {
-      "path": "/assets/illustrator-text/experiences-text.png",
-      "bytes": 543096,
-      "sha256": "93ced385dfa81100bd24fc0ce97fa19eb194356bdbe309753e1d179d7a774de2"
+      "path": "/assets/illustrator-text/experiences-text.svg",
+      "bytes": 7539534,
+      "sha256": "3b6f3864f3d4dbb711f0dbd1e2109f00d41ca304f1b52c20098c01ec9a291b10"
     },
     {
-      "path": "/assets/illustrator-text/galerie-text.png",
-      "bytes": 106227,
-      "sha256": "670b260f334d75a0c28f59211f83adb7eb078004fd947adc4a44f0938b0ecef9"
+      "path": "/assets/illustrator-text/galerie-text.svg",
+      "bytes": 1639525,
+      "sha256": "584c601b8a3b15f478432a65744612a7cf633a6552bd47f188e112974ad95869"
     },
     {
-      "path": "/assets/illustrator-text/home-text.png",
-      "bytes": 367266,
-      "sha256": "14d44691e45bd1ae10a0f08db4dd891badcab4789e1f879c1008606217ee0517"
+      "path": "/assets/illustrator-text/home-text.svg",
+      "bytes": 5016167,
+      "sha256": "9b525a48fc88cb47e2483d93b64aa0da4b2681567a01f4428b3ad4a9e7e4b729"
     },
     {
-      "path": "/assets/illustrator-text/reservation-text.png",
-      "bytes": 127679,
-      "sha256": "f4a8500aaadda5607dc9f655b4748c56d7e9a0ba86d9f7cbdded6da5c5e4ca3e"
+      "path": "/assets/illustrator-text/reservation-text.svg",
+      "bytes": 2254039,
+      "sha256": "bd230a9dc9bfc3cbb386b70991bddfa5abb2ee215515b9aa5e0aebf5b23416df"
     },
     {
       "path": "/assets/social/og-home.jpg",

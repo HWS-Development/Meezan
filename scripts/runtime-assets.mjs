@@ -44,7 +44,7 @@ export async function collectRuntimeAssets() {
     }
   }
 
-  for (const page of pageKeys) assets.add(`/assets/illustrator-text/${page}-text.png`);
+  for (const page of pageKeys) assets.add(`/assets/illustrator-text/${page}-text.svg`);
   return [...assets].sort();
 }
 
