@@ -92,6 +92,11 @@
       "sha256": "b6775eab67cea37e7b6773f21cd573e69c77d1e954a686d1dbd689d113dececb"
     },
     {
+      "path": "/assets/illustrator-driven/blog-media-08-exact.jpg",
+      "bytes": 350026,
+      "sha256": "cf130fb18bb0f07d6462d5dc2b181a3ec445093c05e0ac39608ffa039be93e35"
+    },
+    {
       "path": "/assets/illustrator-driven/blog-media-09-exact.png",
       "bytes": 2047598,
       "sha256": "46d105287f2d50089add30ff7fa3c5877b2273c271d14a04d2df0b9a3db73e19"
@@ -592,9 +597,9 @@
       "sha256": "243726662c3d71631f622860b570b58ae483ab6a74f001e99c4546a47e5eb341"
     },
     {
-      "path": "/assets/illustrator-driven/home-hero-exact.png",
-      "bytes": 1100905,
-      "sha256": "a8d50614d80c5b18f550774c3a28f145d23fa9c9e23301050c73d60a4ed36bcf"
+      "path": "/assets/illustrator-driven/home-hero-chrome-exact.png",
+      "bytes": 43559,
+      "sha256": "6901a8c1b1866c02b9986a264281b2262f1fc4e2b65554ddcf9e33cdbd4e5bb4"
     },
     {
       "path": "/assets/illustrator-driven/home-media-01-exact.png",
@@ -750,6 +755,11 @@
       "path": "/assets/illustrator-text/reservation-text.svg",
       "bytes": 2254039,
       "sha256": "bd230a9dc9bfc3cbb386b70991bddfa5abb2ee215515b9aa5e0aebf5b23416df"
+    },
+    {
+      "path": "/assets/images/home-hero-native.jpg",
+      "bytes": 3701391,
+      "sha256": "a8cefe3b65d76c6406f0e321b0c4e3bd90a27225d6b11cf77c419d66fc3b068e"
     },
     {
       "path": "/assets/social/og-home.jpg",

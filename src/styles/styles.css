@@ -189,6 +189,23 @@
   background: rgba(174, 87, 60, 0.22);
 }
 
+.selectable-text-line {
+  display: block;
+  width: 100%;
+  min-height: 1em;
+  white-space: pre;
+}
+
+.selectable-text-line.is-justified-line {
+  overflow: hidden;
+}
+
+.selectable-text-line::selection {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background: rgba(174, 87, 60, 0.22);
+}
+
 .exact-image {
   width: 100%;
   height: auto;
@@ -219,6 +236,28 @@
 .editable-media-layer.is-hero-media {
   z-index: 10;
   object-fit: cover;
+}
+
+.source-hero-frame {
+  position: absolute;
+  z-index: 10;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.source-hero-frame .editable-media-layer.is-source-photo {
+  z-index: auto;
+  max-width: none;
+}
+
+.home-hero-chrome-layer {
+  position: absolute;
+  z-index: 15;
+  display: block;
+  max-width: none;
+  pointer-events: none;
+  user-select: none;
 }
 
 .editable-media-layer.is-carousel-active {
@@ -314,8 +353,11 @@
 .home-balance-interaction {
   position: absolute;
   inset: 0;
-  z-index: 35;
   pointer-events: none;
+}
+
+.home-booking-interaction {
+  z-index: 35;
 }
 
 .home-booking-live-values {
@@ -358,7 +400,15 @@
   user-select: none;
 }
 
-.exact-canvas:has(.selectable-text-layer.is-home-balance-rubric:hover) .home-balance-copy-mask {
+.home-balance-trigger {
+  position: absolute;
+  z-index: 18;
+  pointer-events: auto;
+}
+
+.exact-canvas:has(.home-balance-trigger:hover) .home-balance-copy-mask,
+.exact-canvas:has(.selectable-text-layer.is-home-balance-trigger-text:hover) .home-balance-copy-mask,
+.exact-canvas:has(.selectable-text-layer.is-home-balance-copy-text:hover) .home-balance-copy-mask {
   opacity: 0;
 }
 

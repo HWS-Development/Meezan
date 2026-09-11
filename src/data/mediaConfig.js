@@ -1,5 +1,13 @@
 export const heroMediaBoxes = {
-  home: { x: 0, y: 190, width: 1920, height: 1130, src: "/assets/illustrator-driven/home-hero-exact.png" },
+  home: {
+    x: 0,
+    y: 189,
+    width: 1920,
+    height: 775,
+    // Native 5520x3680 image embedded in the PDF-compatible Illustrator source.
+    src: "/assets/images/home-hero-native.jpg",
+    sourceBounds: { x: -14, y: -129, width: 1957, height: 1304.667 },
+  },
   experiences: { x: 0, y: 190, width: 1920, height: 774, src: "/assets/illustrator-driven/experiences-hero-exact.png" },
   reservation: { x: 0, y: 190, width: 1920, height: 774, src: "/assets/illustrator-driven/reservation-hero-exact.png" },
   blog: { x: 0, y: 190, width: 1920, height: 774, src: "/assets/illustrator-driven/blog-hero-exact.png" },
@@ -32,7 +40,7 @@ export const exactMediaOverrides = {
     "raster-01": { x: 378, y: 3416, width: 1199, height: 701, src: "/assets/illustrator-driven/blog-media-01-exact.png" },
     "placed-06": { x: 378, y: 7663, width: 1200, height: 709, src: "/assets/illustrator-driven/blog-media-06-exact.png" },
     "placed-07": { x: 378, y: 6211, width: 1199, height: 709, src: "/assets/illustrator-driven/blog-media-07-exact.png" },
-    "placed-08": { x: 378, y: 4842, width: 1199, height: 709, src: "/assets/illustrator-driven/galerie-media-05-exact.png" },
+    "placed-08": { x: 378, y: 4842, width: 1199, height: 709, src: "/assets/illustrator-driven/blog-media-08-exact.jpg" },
     "placed-09": { x: 378, y: 1982, width: 1199, height: 709, src: "/assets/illustrator-driven/blog-media-09-exact.png" },
   },
   chambres: {

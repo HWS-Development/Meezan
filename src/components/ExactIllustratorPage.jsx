@@ -506,10 +506,24 @@ function IllustratorTextLayer({ page, artboard }) {
   );
 }
 
+function isJustifiedSelectionLine(justification, line) {
+  const fullJustification = /FULLJUSTIFY/i.test(justification || "");
+  return fullJustification && (!line.paragraphEnd || /LASTLINEFULL/i.test(justification || ""));
+}
+
+function selectionLineStyle(justification, line) {
+  if (isJustifiedSelectionLine(justification, line)) return { textAlign: "justify", textAlignLast: "justify" };
+  if (/LASTLINECENTER/i.test(justification || "")) return { textAlign: "center" };
+  if (/LASTLINERIGHT/i.test(justification || "")) return { textAlign: "right" };
+  return undefined;
+}
+
 function SelectableTextLayer({ item, artboard, page }) {
   const isArea = /AREATEXT/i.test(item.kind || "");
   const family = fontFamily(item);
-  const isHomeBalanceRubric = page === "home" && ["text-01", "text-06", "text-07", "text-08", "text-09"].includes(item.id);
+  const layoutLines = isArea && Array.isArray(item.layoutLines) ? item.layoutLines : null;
+  const isHomeBalanceTriggerText = page === "home" && ["text-01", "text-06", "text-07", "text-08", "text-09"].includes(item.id);
+  const isHomeBalanceCopyText = page === "home" && item.id === "text-05";
   const style = {
     left: pct(item.bounds.x, artboard.width),
     top: pct(item.bounds.y, artboard.height),
@@ -521,16 +535,25 @@ function SelectableTextLayer({ item, artboard, page }) {
     lineHeight: item.leading ? cqw(item.leading, artboard.width) : "normal",
     letterSpacing: `${Number(item.tracking || 0) / 1000}em`,
     textAlign: textAlign(item.justification),
-    whiteSpace: isArea ? "pre-line" : "pre",
+    whiteSpace: layoutLines ? "normal" : isArea ? "pre-line" : "pre",
   };
 
   return (
     <div
-      className={`selectable-text-layer${isHomeBalanceRubric ? " is-home-balance-rubric" : ""}`}
+      className={`selectable-text-layer${isHomeBalanceTriggerText ? " is-home-balance-trigger-text" : ""}${isHomeBalanceCopyText ? " is-home-balance-copy-text" : ""}`}
       data-text-id={item.id}
+      data-layout-line-count={layoutLines?.length}
       style={style}
     >
-      {transformText(item.content, item.capitalization)}
+      {layoutLines ? layoutLines.map((line, index) => (
+        <span
+          className={`selectable-text-line${isJustifiedSelectionLine(item.justification, line) ? " is-justified-line" : ""}`}
+          key={`${item.id}-line-${index}`}
+          style={selectionLineStyle(item.justification, line)}
+        >
+          {transformText(line.content, item.capitalization)}
+        </span>
+      )) : transformText(item.content, item.capitalization)}
     </div>
   );
 }
@@ -569,6 +592,39 @@ function MediaLayer({ item, artboard, page, carouselIndexes }) {
   const src = carouselSources?.[carouselIndex] || defaultSrc;
   const className = `${mediaClassName(item, artboard)}${carouselSources && carouselIndex ? " is-carousel-active" : ""}`;
   const bounds = override || item.bounds;
+  if (override?.sourceBounds) {
+    const source = override.sourceBounds;
+    return (
+      <div
+        className="source-hero-frame"
+        style={{
+          left: pct(bounds.x, artboard.width),
+          top: pct(bounds.y, artboard.height),
+          width: pct(bounds.width, artboard.width),
+          height: pct(bounds.height, artboard.height),
+        }}
+      >
+        <img
+          className={`${className} is-source-photo`}
+          src={src}
+          alt=""
+          style={{
+            left: pct(source.x - bounds.x, bounds.width),
+            top: pct(source.y - bounds.y, bounds.height),
+            width: pct(source.width, bounds.width),
+            height: pct(source.height, bounds.height),
+            objectFit: "fill",
+          }}
+          width={source.width}
+          height={source.height}
+          loading="eager"
+          decoding="async"
+          aria-hidden="true"
+          draggable="false"
+        />
+      </div>
+    );
+  }
   return (
     <img
       className={className}
@@ -587,6 +643,23 @@ function MediaLayer({ item, artboard, page, carouselIndexes }) {
       loading="eager"
       decoding="async"
       aria-hidden="true"
+      draggable="false"
+    />
+  );
+}
+
+function HomeHeroChrome({ artboard }) {
+  return (
+    <img
+      className="home-hero-chrome-layer"
+      src="/assets/illustrator-driven/home-hero-chrome-exact.png"
+      alt=""
+      aria-hidden="true"
+      style={{ left: 0, top: pct(189, artboard.height), width: "100%", height: pct(1131, artboard.height) }}
+      width="1920"
+      height="1131"
+      loading="eager"
+      decoding="async"
       draggable="false"
     />
   );
@@ -820,8 +893,28 @@ function HomeBookingWidget({ artboard }) {
 }
 
 function HomeBalanceHover({ artboard }) {
+  const triggers = [
+    { x: 119, y: 4510, width: 288, height: 710 },
+    { x: 451, y: 4510, width: 308, height: 450 },
+    { x: 800, y: 4510, width: 320, height: 450 },
+    { x: 1145, y: 4510, width: 240, height: 450 },
+    { x: 1418, y: 4510, width: 310, height: 450 },
+  ];
   return (
     <div className="home-balance-interaction">
+      {triggers.map((trigger, index) => (
+        <div
+          className="home-balance-trigger"
+          key={`home-balance-trigger-${index}`}
+          aria-hidden="true"
+          style={{
+            left: pct(trigger.x, artboard.width),
+            top: pct(trigger.y, artboard.height),
+            width: pct(trigger.width, artboard.width),
+            height: pct(trigger.height, artboard.height),
+          }}
+        />
+      ))}
       <img
         className="home-balance-copy-mask"
         src="/assets/illustrator-driven/home-balance-copy-mask-exact.png"
@@ -1338,6 +1431,7 @@ export default function ExactIllustratorPage({ page, onNavigate, onPrefetch }) {
       horizontalScale: item.style?.horizontalScale,
       verticalScale: item.style?.verticalScale,
       capitalization: item.style?.capitalization,
+      layoutLines: item.layoutLines,
       fillColor: { hex: item.style?.color || "#000000" },
       justification: item.style?.justification,
     }));
@@ -1398,6 +1492,7 @@ export default function ExactIllustratorPage({ page, onNavigate, onPrefetch }) {
         {mediaItems.map((item) => (
           <MediaLayer key={`${page}:${item.id}`} item={item} artboard={artboard} page={page} carouselIndexes={carouselIndexes} />
         ))}
+        {page === "home" ? <HomeHeroChrome artboard={artboard} /> : null}
         <IllustratorTextLayer page={page} artboard={artboard} />
         <div ref={selectableTextRootRef} className="selectable-text-root">
           {textFrames.map((item) => (

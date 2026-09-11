@@ -315,6 +315,31 @@ async function main() {
     }
     results.push({ expectedPath: "/chambres -> /blog SPA content", path: "blog vector + selectable copy" });
 
+    const blogSourceMedia = await evaluate(`(() => {
+      const image = [...document.querySelectorAll('.editable-media-layer')]
+        .find((element) => element.getAttribute('src') === '/assets/illustrator-driven/blog-media-08-exact.jpg');
+      const wrongGalleryImage = [...document.querySelectorAll('.editable-media-layer')]
+        .some((element) => element.getAttribute('src') === '/assets/illustrator-driven/galerie-media-05-exact.png');
+      if (!image) return { error: 'missing Illustrator Blog media 08' };
+      const rect = image.getBoundingClientRect();
+      return {
+        naturalWidth: image.naturalWidth,
+        naturalHeight: image.naturalHeight,
+        rect: { x: rect.x, y: rect.y, width: rect.width, height: rect.height },
+        wrongGalleryImage,
+      };
+    })()`);
+    if (blogSourceMedia.error || blogSourceMedia.wrongGalleryImage) {
+      throw new Error(`Blog source media failed: ${JSON.stringify(blogSourceMedia)}`);
+    }
+    if (blogSourceMedia.naturalWidth !== 1199 || blogSourceMedia.naturalHeight !== 709) {
+      throw new Error(`Blog source media was degraded: ${JSON.stringify(blogSourceMedia)}`);
+    }
+    if (Math.abs(blogSourceMedia.rect.x - 378) > 0.1 || Math.abs(blogSourceMedia.rect.y - 4842) > 0.1 || Math.abs(blogSourceMedia.rect.width - 1199) > 0.1 || Math.abs(blogSourceMedia.rect.height - 709) > 0.1) {
+      throw new Error(`Blog source media differs from Illustrator bounds: ${JSON.stringify(blogSourceMedia.rect)}`);
+    }
+    results.push({ expectedPath: "/blog Illustrator media 08", path: "source crop with exact bounds" });
+
     await evaluate(`(() => {
       window.getSelection()?.removeAllRanges();
       const input = document.createElement('input');
@@ -350,8 +375,9 @@ async function main() {
        const selection = window.getSelection();
       const range = selection?.rangeCount ? selection.getRangeAt(0) : null;
       const normalize = (text) => String(text || '').replace(/\\s+/g, ' ').trim();
-      const expectedText = normalize(root.textContent);
+      const expectedText = normalize(root.innerText);
       const selectedText = normalize(selection?.toString());
+      const compact = (text) => text.replace(/\\s+/g, '');
        const selectionForeground = getComputedStyle(selectable, '::selection').color;
       const canvasRect = canvas.getBoundingClientRect();
       const canvasSizedRects = range ? [...range.getClientRects()].filter((rect) => (
@@ -369,7 +395,7 @@ async function main() {
          selectableZIndex: Number(getComputedStyle(root).zIndex),
          vectorZIndex: Number(getComputedStyle(vector).zIndex),
         transparentSelectionForeground: selectionForeground === 'transparent' || selectionForeground === 'rgba(0, 0, 0, 0)',
-        exactText: selectedText === expectedText,
+        exactText: compact(selectedText) === compact(expectedText),
         exactBoundaries: Boolean(range)
           && range.startContainer === root
           && range.startOffset === 0
@@ -507,7 +533,7 @@ async function main() {
         const range = selection?.rangeCount ? selection.getRangeAt(0) : null;
         const normalize = (text) => String(text || '').replace(/\\s+/g, ' ').trim();
         const selectedText = normalize(selection?.toString());
-        const expectedText = normalize(root.textContent);
+        const expectedText = normalize(root.innerText);
         const compact = (text) => text.replace(/\\s+/g, '');
         let mismatch = 0;
         while (mismatch < selectedText.length && mismatch < expectedText.length && selectedText[mismatch] === expectedText[mismatch]) mismatch += 1;
@@ -541,6 +567,7 @@ async function main() {
       await go(route);
       const header = await evaluate(`(() => {
         const image = document.querySelector('.exact-canonical-header');
+        const hero = document.querySelector('.editable-media-layer.is-hero-media');
         const links = [...document.querySelectorAll('.exact-header-link')].map((el) => {
           const rect = el.getBoundingClientRect();
           return { label: el.textContent.trim(), left: rect.left, right: rect.right };
@@ -551,6 +578,8 @@ async function main() {
         return {
           naturalWidth: image.naturalWidth,
           naturalHeight: image.naturalHeight,
+          heroNaturalWidth: hero?.naturalWidth || 0,
+          heroNaturalHeight: hero?.naturalHeight || 0,
           width: rect.width,
           height: rect.height,
           overlaps,
@@ -560,8 +589,68 @@ async function main() {
       if (header.naturalWidth !== 1920 || header.naturalHeight !== 189) throw new Error(`${route}: wrong canonical header asset ${header.naturalWidth}x${header.naturalHeight}`);
       if (Math.abs(header.width - 1920) > 0.1 || Math.abs(header.height - 189) > 0.1) throw new Error(`${route}: wrong rendered header size ${header.width}x${header.height}`);
       if (header.overlaps.length) throw new Error(`${route}: overlapping header links ${JSON.stringify(header.overlaps)}`);
+      const expectedHeroSize = route === "/" ? [5520, 3680] : [3840, 1548];
+      if (header.heroNaturalWidth !== expectedHeroSize[0] || header.heroNaturalHeight !== expectedHeroSize[1]) {
+        throw new Error(`${route}: hero is not the high-density Adobe export ${header.heroNaturalWidth}x${header.heroNaturalHeight}`);
+      }
       results.push({ expectedPath: `${route} canonical header`, path: "1920x189" });
     }
+
+    await go("/");
+    const homeHero = await evaluate(`(() => {
+      const image = document.querySelector('.source-hero-frame .editable-media-layer.is-source-photo');
+      const frame = document.querySelector('.source-hero-frame');
+      const chrome = document.querySelector('.home-hero-chrome-layer');
+      if (!image || !frame || !chrome) return { error: 'missing source hero composition' };
+      const imageRect = image.getBoundingClientRect();
+      const frameRect = frame.getBoundingClientRect();
+      const chromeRect = chrome.getBoundingClientRect();
+      return {
+        src: image.getAttribute('src'),
+        naturalWidth: image.naturalWidth,
+        naturalHeight: image.naturalHeight,
+        imageRect: { x: imageRect.x, y: imageRect.y, width: imageRect.width, height: imageRect.height },
+        frameRect: { x: frameRect.x, y: frameRect.y, width: frameRect.width, height: frameRect.height },
+        chromeNatural: { width: chrome.naturalWidth, height: chrome.naturalHeight },
+        chromeRect: { x: chromeRect.x, y: chromeRect.y, width: chromeRect.width, height: chromeRect.height },
+      };
+    })()`);
+    if (homeHero.error) throw new Error(`Home hero failed: ${homeHero.error}`);
+    if (!homeHero.src.endsWith('/assets/images/home-hero-native.jpg')) throw new Error(`Home hero does not use the native Adobe photo: ${homeHero.src}`);
+    if (homeHero.naturalWidth !== 5520 || homeHero.naturalHeight !== 3680) throw new Error(`Home hero source was degraded: ${homeHero.naturalWidth}x${homeHero.naturalHeight}`);
+    if (homeHero.naturalWidth < homeHero.imageRect.width * 2 || homeHero.naturalHeight < homeHero.imageRect.height * 2) {
+      throw new Error(`Home hero source is not Retina-capable: ${JSON.stringify(homeHero)}`);
+    }
+    if (Math.abs(homeHero.imageRect.x + 14) > 0.1 || Math.abs(homeHero.imageRect.y + 129) > 0.1 || Math.abs(homeHero.imageRect.width - 1957) > 0.1 || Math.abs(homeHero.imageRect.height - 1304.667) > 0.1) {
+      throw new Error(`Home hero source bounds differ from Illustrator: ${JSON.stringify(homeHero.imageRect)}`);
+    }
+    if (Math.abs(homeHero.frameRect.y - 189) > 0.1 || Math.abs(homeHero.frameRect.width - 1920) > 0.1 || Math.abs(homeHero.frameRect.height - 775) > 0.1) {
+      throw new Error(`Home hero clipping frame differs from Illustrator: ${JSON.stringify(homeHero.frameRect)}`);
+    }
+    if (homeHero.chromeNatural.width !== 3840 || homeHero.chromeNatural.height !== 2262 || Math.abs(homeHero.chromeRect.y - 189) > 0.1) {
+      throw new Error(`Home hero chrome is invalid: ${JSON.stringify(homeHero)}`);
+    }
+    results.push({ expectedPath: "/ native Adobe hero", path: "5520x3680 source with exact bounds and chrome" });
+
+    const homeIntroComposition = await evaluate(`(() => {
+      const layer = document.querySelector('.selectable-text-layer[data-text-id="text-40"]');
+      if (!layer) return { error: 'missing Home intro selection layer' };
+      const lineElements = [...layer.querySelectorAll('.selectable-text-line')];
+      const lines = lineElements.map((line) => line.textContent);
+      const range = document.createRange();
+      range.selectNodeContents(lineElements[0]);
+      const rangeRect = range.getBoundingClientRect();
+      const layerRect = layer.getBoundingClientRect();
+      return { count: lines.length, lines, rangeWidth: rangeRect.width, layerWidth: layerRect.width };
+    })()`);
+    if (homeIntroComposition.error) throw new Error(`Home intro composition failed: ${homeIntroComposition.error}`);
+    if (homeIntroComposition.count !== 4 || homeIntroComposition.lines[0] !== 'À 45 minutes de Casablanca, Meezane s’étend sur ') {
+      throw new Error(`Home intro does not preserve Illustrator line composition: ${JSON.stringify(homeIntroComposition)}`);
+    }
+    if (Math.abs(homeIntroComposition.rangeWidth - homeIntroComposition.layerWidth) > 1) {
+      throw new Error(`Home intro selection does not span the justified Illustrator line: ${JSON.stringify(homeIntroComposition)}`);
+    }
+    results.push({ expectedPath: "/ selectable intro", path: "Illustrator-composed lines preserved" });
 
     results.push(await clickPointAndAssert("/chambres", 1095, 95, "/experiences"));
     results.push(await clickPointAndAssert("/blog", 830, 95, "/chambres"));
@@ -616,34 +705,49 @@ async function main() {
     await go("/");
     const balanceState = await evaluate(`(async () => {
       const mask = document.querySelector('.home-balance-copy-mask');
-      const rubrics = [...document.querySelectorAll('.selectable-text-layer.is-home-balance-rubric')];
-      const copyArea = document.querySelector('.home-balance-hit-area.is-copy-area');
+      const triggers = [...document.querySelectorAll('.home-balance-trigger')];
       const vector = document.querySelector('.illustrator-text-vector-layer');
       const copy = document.querySelector('.selectable-text-layer[data-text-id="text-05"]');
-      if (!mask || rubrics.length !== 5 || copyArea || !vector || !copy) return { error: 'invalid balance interaction structure' };
+      if (!mask || triggers.length !== 5 || !vector || !copy) return { error: 'invalid balance interaction structure' };
       if (mask.naturalWidth !== 320 || vector.naturalWidth !== 1920) return { error: 'balance visual assets did not load' };
       if (getComputedStyle(mask).opacity !== '1') return { error: 'balance copy visible initially' };
       window.scrollTo(0, 4400);
       await new Promise((resolve) => setTimeout(resolve, 50));
-      const rubricRect = rubrics[0].getBoundingClientRect();
+      const triggerRect = triggers[0].getBoundingClientRect();
+      const triggerPoints = triggers.map((trigger) => {
+        const rect = trigger.getBoundingClientRect();
+        return { x: rect.left + rect.width / 2, y: rect.top + 50 };
+      });
       const copyRect = copy.getBoundingClientRect();
       return {
-        rubricX: rubricRect.left + rubricRect.width / 2,
-        rubricY: rubricRect.top + rubricRect.height / 2,
+        triggerPoints,
+        cardX: triggerRect.left + 8,
+        cardY: triggerRect.top + triggerRect.height * 0.85,
         copyX: copyRect.left + copyRect.width / 2,
         copyY: copyRect.top + copyRect.height / 2,
-        rubricOnTop: document.elementFromPoint(rubricRect.left + rubricRect.width / 2, rubricRect.top + rubricRect.height / 2) === rubrics[0],
+        triggersOnTop: triggerPoints.every((point, index) => document.elementFromPoint(point.x, point.y) === triggers[index]),
+        cardOnTop: document.elementFromPoint(triggerRect.left + 8, triggerRect.top + triggerRect.height * 0.85) === triggers[0],
       };
     })()`);
-    if (balanceState.error || !balanceState.rubricOnTop) throw new Error(`Home balance setup failed: ${JSON.stringify(balanceState)}`);
-    await send("Input.dispatchMouseEvent", { type: "mouseMoved", x: balanceState.rubricX, y: balanceState.rubricY });
+    if (balanceState.error || !balanceState.triggersOnTop || !balanceState.cardOnTop) throw new Error(`Home balance setup failed: ${JSON.stringify(balanceState)}`);
+    for (const [index, point] of balanceState.triggerPoints.entries()) {
+      await send("Input.dispatchMouseEvent", { type: "mouseMoved", x: point.x, y: point.y });
+      await wait(180);
+      const triggerOpacity = await evaluate("getComputedStyle(document.querySelector('.home-balance-copy-mask')).opacity");
+      if (triggerOpacity !== "0") throw new Error(`Home balance copy did not reveal from rubric ${index + 1}: ${triggerOpacity}`);
+    }
+    await send("Input.dispatchMouseEvent", { type: "mouseMoved", x: balanceState.cardX, y: balanceState.cardY });
     await wait(180);
     const rubricOpacity = await evaluate("getComputedStyle(document.querySelector('.home-balance-copy-mask')).opacity");
-    if (rubricOpacity !== "0") throw new Error(`Home balance copy did not reveal from source rubric: ${rubricOpacity}`);
+    if (rubricOpacity !== "0") throw new Error(`Home balance copy did not reveal from the full card: ${rubricOpacity}`);
     await send("Input.dispatchMouseEvent", { type: "mouseMoved", x: balanceState.copyX, y: balanceState.copyY });
     await wait(180);
     const copyOpacity = await evaluate("getComputedStyle(document.querySelector('.home-balance-copy-mask')).opacity");
-    if (copyOpacity !== "1") throw new Error(`Home balance copy area incorrectly acts as a hover trigger: ${copyOpacity}`);
+    if (copyOpacity !== "0") throw new Error(`Home balance copy disappeared while the pointer entered it: ${copyOpacity}`);
+    await send("Input.dispatchMouseEvent", { type: "mouseMoved", x: 1000, y: 700 });
+    await wait(180);
+    const idleOpacity = await evaluate("getComputedStyle(document.querySelector('.home-balance-copy-mask')).opacity");
+    if (idleOpacity !== "1") throw new Error(`Home balance copy remained visible outside the five rubrics: ${idleOpacity}`);
 
     await send("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
     await go("/");
@@ -858,7 +962,7 @@ async function main() {
           const canvasRect = canvas?.getBoundingClientRect();
           const mobileHeaderVisible = mobileHeader && getComputedStyle(mobileHeader).display !== 'none';
           const headerRect = header?.getBoundingClientRect();
-          const densityDeficits = [...document.querySelectorAll('.editable-background-layer, .editable-media-layer, .editable-exact-overlay-layer')]
+          const densityDeficits = [...document.querySelectorAll('.editable-background-layer, .editable-media-layer, .editable-exact-overlay-layer, .home-hero-chrome-layer')]
             .filter((image) => image.complete && image.naturalWidth > 0)
             .map((image) => {
               const rect = image.getBoundingClientRect();
@@ -924,7 +1028,89 @@ async function main() {
         });
         await writeFile(path.join(process.env.MEEZAN_CAPTURE_DIR, `${page}.png`), Buffer.from(screenshot.data, "base64"));
       }
-      results.push({ expectedPath: "desktop captures", path: process.env.MEEZAN_CAPTURE_DIR });
+
+      await go("/?visual-audit=1");
+      const homeCalendarReady = await evaluate(`(async () => {
+        const checkIn = document.querySelector('[aria-label="Choisir la date d\\'arrivee"]');
+        if (!checkIn || document.querySelector('.home-live-picker')) return false;
+        checkIn.click();
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        return Boolean(document.querySelector('.home-live-picker'));
+      })()`);
+      if (!homeCalendarReady) throw new Error("Home calendar capture could not open the picker");
+      const homeCalendarScreenshot = await send("Page.captureScreenshot", {
+        format: "png",
+        fromSurface: true,
+        captureBeyondViewport: true,
+        clip: { x: 300, y: 850, width: 1320, height: 730, scale: 1 },
+      });
+      await writeFile(path.join(process.env.MEEZAN_CAPTURE_DIR, "home-calendar-open.png"), Buffer.from(homeCalendarScreenshot.data, "base64"));
+
+      await go("/reservation?visual-audit=1");
+      const reservationCalendarReady = await evaluate(`(async () => {
+        const checkIn = document.querySelector('[aria-label="Choisir la date d\\'arrivee"]');
+        if (!checkIn || document.querySelector('.reservation-live-picker')) return false;
+        checkIn.click();
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        return Boolean(document.querySelector('.reservation-live-picker'));
+      })()`);
+      if (!reservationCalendarReady) throw new Error("Reservation calendar capture could not open the picker");
+      const reservationCalendarScreenshot = await send("Page.captureScreenshot", {
+        format: "png",
+        fromSurface: true,
+        captureBeyondViewport: true,
+        clip: { x: 720, y: 2700, width: 960, height: 1000, scale: 1 },
+      });
+      await writeFile(path.join(process.env.MEEZAN_CAPTURE_DIR, "reservation-calendar-open.png"), Buffer.from(reservationCalendarScreenshot.data, "base64"));
+
+      await go("/?visual-audit=1");
+      const hoverPoint = await evaluate(`(() => {
+        window.scrollTo(0, 4400);
+        const rect = document.querySelector('.home-balance-trigger').getBoundingClientRect();
+        return { x: rect.left + 8, y: rect.top + rect.height * 0.85 };
+      })()`);
+      await send("Input.dispatchMouseEvent", { type: "mouseMoved", x: hoverPoint.x, y: hoverPoint.y });
+      await wait(180);
+      const hoverOpacity = await evaluate("getComputedStyle(document.querySelector('.home-balance-copy-mask')).opacity");
+      if (hoverOpacity !== "0") throw new Error(`Home balance capture is not in its revealed state: ${hoverOpacity}`);
+      const hoverScreenshot = await send("Page.captureScreenshot", {
+        format: "png",
+        fromSurface: true,
+        captureBeyondViewport: true,
+        clip: { x: 0, y: 4400, width: 1920, height: 900, scale: 1 },
+      });
+      await writeFile(path.join(process.env.MEEZAN_CAPTURE_DIR, "home-balance-hover.png"), Buffer.from(hoverScreenshot.data, "base64"));
+
+      await evaluate(`(() => {
+        window.scrollTo(0, 2800);
+        const line = document.querySelector('.selectable-text-layer[data-text-id="text-40"] .selectable-text-line');
+        const range = document.createRange();
+        range.selectNodeContents(line);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+      })()`);
+      const selectionScreenshot = await send("Page.captureScreenshot", {
+        format: "png",
+        fromSurface: true,
+        captureBeyondViewport: true,
+        clip: { x: 250, y: 2860, width: 750, height: 420, scale: 1 },
+      });
+      await writeFile(path.join(process.env.MEEZAN_CAPTURE_DIR, "home-intro-selection.png"), Buffer.from(selectionScreenshot.data, "base64"));
+
+      await send("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
+      for (const [page, dimensions] of Object.entries(capturePages)) {
+        await go(`${dimensions.path}?visual-audit=1`);
+        const mobileHeight = Math.ceil(dimensions.height * 390 / 1920);
+        const screenshot = await send("Page.captureScreenshot", {
+          format: "png",
+          fromSurface: true,
+          captureBeyondViewport: true,
+          clip: { x: 0, y: 0, width: 390, height: mobileHeight, scale: 1 },
+        });
+        await writeFile(path.join(process.env.MEEZAN_CAPTURE_DIR, `${page}-mobile-390.png`), Buffer.from(screenshot.data, "base64"));
+      }
+      results.push({ expectedPath: "desktop, interaction, and mobile captures", path: process.env.MEEZAN_CAPTURE_DIR });
     }
 
     const runtimeFailures = events.flatMap((event) => {

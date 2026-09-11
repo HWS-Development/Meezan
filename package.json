@@ -20,6 +20,7 @@
     "illustrator:sync": "npm run illustrator:text:promote && npm run illustrator:text:sync && npm run illustrator:manifest",
     "illustrator:text:sync": "node scripts/sync-illustrator-text-metrics.mjs",
     "illustrator:text:promote": "node scripts/promote-illustrator-text-vectors.mjs",
+    "illustrator:crop": "swift scripts/export-illustrator-crop.swift",
     "illustrator:export": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/export-illustrator-source.ps1",
     "visual:reference": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/export-visual-reference.ps1",
     "visual:reference:promote": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/export-visual-reference.ps1 -PromoteExactCrops",

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-09T21:57:50.000Z",
+  "generatedAt": "2026-09-11T00:37:48.000Z",
   "illustratorVersion": "30.8.1",
   "geometryAuthority": "Text SVGs exported directly by Adobe Illustrator with all text converted to outlined paths.",
   "pages": {
@@ -13,7 +13,7 @@
         "width": 1920,
         "height": 12229
       },
-      "auditSha256": "ad72b2dc216412cf7109ffebddeadf58d18f06157d77284b810db556d0971d4a",
+      "auditSha256": "226d267e0186e281d53d3dfa2b4c7764882842ce5458b023c8941da06c6e2473",
       "objectCountsByType": {
         "TextFrame": 85,
         "PlacedItem": 10,
@@ -79,7 +79,7 @@
         "width": 1920,
         "height": 16004
       },
-      "auditSha256": "758091b68f2d5b901c64f33060dc6d16695d64785625f8daef6f532d44bc0471",
+      "auditSha256": "f6b08355dd29b309fb10a220485ed243ab9f4c64dc6c2d755b3cedb616c626fc",
       "objectCountsByType": {
         "TextFrame": 104,
         "PlacedItem": 9,
@@ -145,7 +145,7 @@
         "width": 1920,
         "height": 4074
       },
-      "auditSha256": "49966d88e5feb99166d925aa2861c179b8497ef3f14b19e0f413cbd4641dbeb2",
+      "auditSha256": "4a6a026619538359197dd33357553405b4184d48f4fa9903450c6bfe76d3f812",
       "objectCountsByType": {
         "TextFrame": 98,
         "PlacedItem": 2,
@@ -201,7 +201,7 @@
         "width": 1920,
         "height": 9235
       },
-      "auditSha256": "da57d68cfb29a510d88931fac24258a228ee3323e493d23036131efceb4b8c0b",
+      "auditSha256": "42abc9baf06408872d7dee6d468ec9288c0bcf25fe1324d29bebe835d6f0af9e",
       "objectCountsByType": {
         "TextFrame": 29,
         "PlacedItem": 5,
@@ -242,7 +242,7 @@
         "width": 1920,
         "height": 11568
       },
-      "auditSha256": "be4b565e6518e3147ca7bc7e3c1c5168d776b7bf358ec01d67e56549e5def96d",
+      "auditSha256": "f58c7503009de2308adafe2db4bd43e7252e228e7430dc5001470ba80fafe5a9",
       "objectCountsByType": {
         "TextFrame": 23,
         "PlacedItem": 8,
@@ -283,7 +283,7 @@
         "width": 1920,
         "height": 6098
       },
-      "auditSha256": "e505371c576bf17e286d66bc655ecdea85096260c0caccac26c3a657240beb95",
+      "auditSha256": "25ffbbbd96aabbe9a28d11e514025feb566374be8b1a507da57ef3c293197725",
       "objectCountsByType": {
         "TextFrame": 12,
         "PlacedItem": 4,

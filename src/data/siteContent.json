@@ -146,7 +146,13 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#AE573C",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Changer d’horizon",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-05",
@@ -179,7 +185,17 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#AE573C",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "• Excursion plage ou océan",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Possibilité de cours de surf ",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-06",
@@ -212,7 +228,17 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "L’Échappée ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Océan",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-07",
@@ -245,7 +271,13 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#AE573C",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Explorer, comprendre, ressentir",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-08",
@@ -278,7 +310,21 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#AE573C",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "• Visite d’El Jadida (Patrimoine à l’UNESCO)",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Découverte de Casablanca, sa mosquée ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Hassan II, son quartier historique ",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-09",
@@ -311,7 +357,17 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Et si vous veniez trouver ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "votre équilibre ?",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-10",
@@ -344,7 +400,21 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#AE573C",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Séjour, retraite ou événement sur mesure",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Meezane vous ouvre ses portes.",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-11",
@@ -377,7 +447,17 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Mémoire & ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Culture",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-12",
@@ -410,7 +490,13 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#AE573C",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Comprendre, cueillir, cuisiner",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-13",
@@ -443,7 +529,33 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Une expérience vivante :",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "• Initiation au jardinage / permaculture",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Récolte de produits (en fonction des dispo) ",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Cours de cuisine marocaine",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Dégustation collective",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-14",
@@ -476,7 +588,17 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Du Jardin à ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "l’Assiette",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-15",
@@ -509,7 +631,13 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#AE573C",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Créer, toucher, ralentir",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-16",
@@ -542,7 +670,29 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Une immersion artisanale :",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "• Atelier poterie",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Découverte des matières",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Création d’un objet",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-17",
@@ -575,7 +725,17 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Terre &",
+              "paragraphEnd": true
+            },
+            {
+              "content": "Mains",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-18",
@@ -608,7 +768,13 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#AE573C",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Se reconnecter, s’aligner, respirer",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-19",
@@ -641,7 +807,33 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Une expérience pensée comme un retour à soi :",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "• Séance de yoga ou méditation",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Respiration guidée",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Moment de silence dans la nature",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Infusion ou collation healthy",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-20",
@@ -674,7 +866,17 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Le Rituel ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Meezane",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-21",
@@ -773,7 +975,21 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Un lieu d’inspiration et de création.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Pour artistes, collectifs et esprits créatifs.",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-24",
@@ -806,7 +1022,17 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Résidences ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "artistiques",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-25",
@@ -872,7 +1098,25 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Fiançailles, mariages, anniversaires, moments de ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "vie.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Meezane devient le décor d’instants inoubliables.",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-27",
@@ -905,7 +1149,17 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Événements & ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "célébrations",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-28",
@@ -971,7 +1225,25 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Des moments joyeux, libres et créatifs en pleine ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "nature.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Animations, jeux, activités sur mesure.",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-30",
@@ -1004,7 +1276,17 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Anniversaires ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "enfants",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-31",
@@ -1070,7 +1352,25 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Team buildings, workshops, séminaires…",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Un cadre naturel pour créer du lien, prendre du recul ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "et stimuler la créativité.",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-33",
@@ -1103,7 +1403,17 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Journées ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "corporate",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-34",
@@ -1169,7 +1479,29 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Yoga, méditation, pratiques spirituelles ou ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "holistiques.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Meezane est conçu pour accueillir des retraites ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "immersives et profondes.",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-36",
@@ -1202,7 +1534,17 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Retraites ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "bien-être",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-37",
@@ -1334,7 +1676,21 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Cuisine traditionnelle marocaine",
+              "paragraphEnd": true
+            },
+            {
+              "content": "Options healthy et équilibrées",
+              "paragraphEnd": true
+            },
+            {
+              "content": "Plats gourmands à partager",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-41",
@@ -1367,7 +1723,17 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#AE573C",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Un équilibre aussi dans la manière ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "de construire",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-42",
@@ -1400,7 +1766,13 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#AE573C",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "L’équilibre dans l’assiette aussi ",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-43",
@@ -1433,7 +1805,21 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Pensés pour les séjours en groupe, retraites bien-être ou ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "événements, nos repas allient plaisir, simplicité et convivialité, ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "pour satisfaire petits et grands.",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-44",
@@ -1466,7 +1852,33 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "À Meezane, la cuisine fait partie intégrante de l’expérience.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Nous proposons une cuisine maison, préparée avec soin, à partir ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "de produits frais et de saison.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Nos menus s’adaptent à vos envies et à votre séjour :",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-45",
@@ -1499,7 +1911,13 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "FOOD",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-46",
@@ -1532,7 +1950,61 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#FFFFFF",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Meezane ne se limite pas à l’espace.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Grâce à Feat. Agency, nous pouvons concevoir, ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "produire et orchestrer l’ensemble de votre événement :",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "• Direction artistique",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Scénographie",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Production & logistique",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Expériences immersives",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Contenus & branding",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Un seul interlocuteur.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "Une expérience fluide, maîtrisée de A à Z.",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-47",
@@ -1697,7 +2169,41 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Meezane a été pensé avec une approche consciente :",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "• Réutilisation & restauration de matériaux",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Mobilier avec histoire",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Énergie partiellement renouvelable",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Respect du rythme naturel du lieu",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Un équilibre entre esthétique, confort et responsabilité.",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-52",
@@ -1730,7 +2236,17 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "ENGAGEMENT ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "& ÉQUILIBRE",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-53",
@@ -1928,7 +2444,29 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Un refuge pour ralentir, respirer et profiter de la ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "nature.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Séjours entre amis ou en famille, dans un cadre ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "paisible et inspirant.",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-59",
@@ -1961,7 +2499,17 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Tourisme",
+              "paragraphEnd": true
+            },
+            {
+              "content": "& séjours",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-60",
@@ -2423,7 +2971,45 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#FFFFFF",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Meezane n’est pas seulement un lieu où l’on vient.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "C’est un lieu que l’on ressent.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Un espace où l’on peut :",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Ralentir sans culpabilité",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Créer sans contrainte",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Célébrer avec sens",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Se reconnecter profondément",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-04",
@@ -2489,7 +3075,37 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "•Dans son sens premier, ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Meezane est la balance.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "•La mesure exacte.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "•La justesse.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "•Un rappel que tout, dans la ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "vie, cherche son point ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "d’équilibre.",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-06",
@@ -2819,7 +3435,25 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Retraites bien-être",
+              "paragraphEnd": true
+            },
+            {
+              "content": "Résidences artistiques",
+              "paragraphEnd": true
+            },
+            {
+              "content": "Séminaires & workshops",
+              "paragraphEnd": true
+            },
+            {
+              "content": "Cérémonies & célébrations",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-16",
@@ -2852,7 +3486,17 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#AE573C",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Parce que les plus beaux moments naissent quand la ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "nature donne le rythme.",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-17",
@@ -2885,7 +3529,17 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#AE573C",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Some spaces are built.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "Others are felt.",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-18",
@@ -2918,7 +3572,41 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Notre Shala de 140 m² a été imaginé comme un véritable ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "sanctuaire :",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "un espace où l’on se retrouve pour respirer, créer, célébrer, ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "réfléchir et se reconnecter.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Ouvert sur la nature, baigné de lumière et surplombant ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "l’étang, il s’adapte à toutes les intentions :",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-19",
@@ -2951,7 +3639,33 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "7 suites avec salles de bain privatives",
+              "paragraphEnd": true
+            },
+            {
+              "content": "Literie haut de gamme",
+              "paragraphEnd": true
+            },
+            {
+              "content": "Espaces de vie lumineux & chaleureux",
+              "paragraphEnd": true
+            },
+            {
+              "content": "Piscine en U & lounges extérieurs",
+              "paragraphEnd": true
+            },
+            {
+              "content": "Cabanes indépendantes",
+              "paragraphEnd": true
+            },
+            {
+              "content": "Nature omniprésente (étang, permaculture, petit bois)",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-20",
@@ -2984,7 +3698,13 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#AE573C",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Un sanctuaire de déconnexion",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-21",
@@ -3017,7 +3737,17 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#AE573C",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Des espaces pensés pour accueillir, ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "sans jamais envahir",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-22",
@@ -3050,7 +3780,17 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Meezane accueille jusqu’à 20 personnes dans une configuration ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "intime et modulable :",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-23",
@@ -3083,7 +3823,13 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "LES ESPACES",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-24",
@@ -3116,7 +3862,41 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Ici, chaque détail devient une expérience :",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Le silence qui apaise",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• La lumière qui évolue",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Le vent dans les arbres",
+              "paragraphEnd": true
+            },
+            {
+              "content": "• Les moments partagés",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Meezane n’est pas un simple lieu.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "C’est une respiration.",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-25",
@@ -3149,7 +3929,17 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "L’EXPÉRIENCE ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "MEEZANE ",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-26",
@@ -3182,7 +3972,45 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Parce que l’équilibre n’est jamais figé.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "Il se cherche, se perd, se retrouve.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "Meezane est là pour ça.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "Pas pour vous dire quoi faire.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "Mais pour vous offrir l’espace de redevenir aligné.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Meezane n’impose rien. Il laisse place.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "À vous de retrouver votre équilibre.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-27",
@@ -3215,7 +4043,21 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Vivre son ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "propre ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "Meezane",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-28",
@@ -3644,7 +4486,25 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "À 45 minutes de Casablanca, Meezane s’étend sur ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "un hectare de nature vivante.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "Ici, le temps ralentit. Les espaces respirent.",
+              "paragraphEnd": true
+            },
+            {
+              "content": "",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-41",
@@ -3677,7 +4537,33 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Un ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "sanctuaire ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "discret, ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "proche de ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "tout, loin du ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "bruit.",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-42",
@@ -6937,7 +7823,13 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AD573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "chambre name",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-88",
@@ -7430,7 +8322,17 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Meezane vous fera revivre la mémoire de cette belle demeure ou le Rez de chaussé servait encore d'entrepôt de grain, épices et autres ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "marchandises. Dans ces temps ou  Mogador était un des ports les plus importants du Maroc.",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-02",
@@ -7463,7 +8365,13 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "meezane - Le charme Envoutant",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-03",
@@ -7562,7 +8470,17 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Meezane vous fera revivre la mémoire de cette belle demeure ou le Rez de chaussé servait encore d'entrepôt de grain, épices et autres ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "marchandises. Dans ces temps ou  Mogador était un des ports les plus importants du Maroc.",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-06",
@@ -7595,7 +8513,13 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "meezane - Le charme Envoutant",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-07",
@@ -7694,7 +8618,17 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Meezane vous fera revivre la mémoire de cette belle demeure ou le Rez de chaussé servait encore d'entrepôt de grain, épices et autres ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "marchandises. Dans ces temps ou  Mogador était un des ports les plus importants du Maroc.",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-10",
@@ -7727,7 +8661,13 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "meezane - Le charme Envoutant",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-11",
@@ -7826,7 +8766,17 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Le Centre de Colonisation de Bir-Djedid Saint-Hubert Les premières automobiles qui affrontèrent le parcours Casablanca-Mazagan, ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "empruntaient la piste côtière qui passe par Dar-Bou-Azza",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-14",
@@ -7859,7 +8809,17 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "il était une fois Bir Jdid -",
+              "paragraphEnd": true
+            },
+            {
+              "content": "Par Brahim BATTAH",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-15",
@@ -7958,7 +8918,17 @@
             "capitalization": "FontCapsOption.NORMALCAPS",
             "color": "#000000",
             "justification": "Justification.FULLJUSTIFYLASTLINELEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "Meezane vous fera revivre la mémoire de cette belle demeure ou le Rez de chaussé servait encore d'entrepôt de grain, épices et autres ",
+              "paragraphEnd": false
+            },
+            {
+              "content": "marchandises. Dans ces temps ou  Mogador était un des ports les plus importants du Maroc.",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-18",
@@ -7991,7 +8961,13 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.LEFT"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "meezane - Le charme Envoutant",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-19",
@@ -8637,7 +9613,13 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AD573C",
             "justification": "Justification.CENTER"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "zineb",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-03",
@@ -8802,7 +9784,13 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AD573C",
             "justification": "Justification.CENTER"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "lyn",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-08",
@@ -8835,7 +9823,13 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AD573C",
             "justification": "Justification.CENTER"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "léna",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-09",
@@ -8868,7 +9862,13 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AD573C",
             "justification": "Justification.CENTER"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "FATNA",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-10",
@@ -8901,7 +9901,13 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AD573C",
             "justification": "Justification.CENTER"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "hiba",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-11",
@@ -8934,7 +9940,13 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AD573C",
             "justification": "Justification.CENTER"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "mey",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-12",
@@ -9033,7 +10045,13 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AD573C",
             "justification": "Justification.CENTER"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "malika",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-15",
@@ -9620,7 +10638,13 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.CENTER"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "chambres",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-02",
@@ -9653,7 +10677,13 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.CENTER"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "espace interieur",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-03",
@@ -9686,7 +10716,13 @@
             "capitalization": "FontCapsOption.ALLCAPS",
             "color": "#AE573C",
             "justification": "Justification.CENTER"
-          }
+          },
+          "layoutLines": [
+            {
+              "content": "espace exterieur",
+              "paragraphEnd": true
+            }
+          ]
         },
         {
           "id": "text-04",

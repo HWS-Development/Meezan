@@ -118,10 +118,14 @@ for (const [page, pageContent] of Object.entries(siteContent.pages || {})) {
 
   for (const item of items) {
     const frame = assignments.get(item);
-    item.value = frame.content;
     item.kind = frame.kind;
     item.bounds = boundsFrom(frame);
     item.style = styleFrom(frame, item.style);
+    if (/AREATEXT/i.test(item.kind) && normalizedText(item.value) === normalizedText(frame.content) && Array.isArray(frame.lines)) {
+      item.layoutLines = frame.lines;
+    } else {
+      delete item.layoutLines;
+    }
   }
   summary.push({ page, frames: items.length, exactMatches, changedTextMatches: items.length - exactMatches });
 }

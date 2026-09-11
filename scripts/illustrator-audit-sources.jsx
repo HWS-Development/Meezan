@@ -175,6 +175,43 @@
     return runs;
   }
 
+  function textLines(frame) {
+    var source = String(frame.contents);
+    var cursor = 0;
+    var result = [];
+    for (var index = 0; index < frame.lines.length; index += 1) {
+      var content = String(frame.lines[index].contents);
+      var start = content ? source.indexOf(content, cursor) : cursor;
+      if (start < cursor) start = cursor;
+      var end = start + content.length;
+      var paragraphEnd = end >= source.length || source.charAt(end) === "\r" || source.charAt(end) === "\n";
+      result.push({ content: content, paragraphEnd: paragraphEnd });
+      cursor = end;
+      while (source.charAt(cursor) === "\r" || source.charAt(cursor) === "\n") cursor += 1;
+    }
+    return result;
+  }
+
+  function replaceTextKeepingCenter(frame, content) {
+    var sourceBounds = frame.geometricBounds;
+    var sourceCenter = (sourceBounds[0] + sourceBounds[2]) / 2;
+    frame.contents = content;
+    var correctedBounds = frame.geometricBounds;
+    var correctedCenter = (correctedBounds[0] + correctedBounds[2]) / 2;
+    frame.translate(sourceCenter - correctedCenter, 0);
+  }
+
+  function applyApprovedCopyCorrections(document, page) {
+    if (page !== "blog") return;
+    for (var index = 0; index < document.textFrames.length; index += 1) {
+      var frame = document.textFrames[index];
+      if (frame.contents === "Nos Chambres") replaceTextKeepingCenter(frame, "Blog");
+      if (frame.contents === "Chaque espace raconte une histoire.") {
+        replaceTextKeepingCenter(frame, "Actualit\u00E9s, inspirations et art de vivre.");
+      }
+    }
+  }
+
   function layerPath(item) {
     var names = [];
     var current = item.layer;
@@ -207,6 +244,7 @@
       visibleBounds: visible,
       opacity: round(frame.opacity),
       rotation: round(frame.rotate),
+      lines: textLines(frame),
       runs: textRuns(frame)
     };
   }
@@ -268,6 +306,7 @@
       var document = app.open(file);
       try {
         document.artboards.setActiveArtboardIndex(0);
+        applyApprovedCopyCorrections(document, page);
         var rect = document.artboards[0].artboardRect;
         var artboard = {
           left: round(rect[0]),
