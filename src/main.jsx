@@ -8,3 +8,5 @@ createRoot(document.getElementById("root")).render(
     <App />
   </React.StrictMode>,
 );
+
+import '@hws/cookie-consent';
